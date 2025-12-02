@@ -145,15 +145,15 @@ export default function JobPostForm({ onJobPosted }) {
       </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Job Title *</label>
+          <label className="block text-gray-700 font-semibold mb-2">Email *</label>
           <input
             type="text"
-            name="job_title"
-            value={formData.job_title}
+            name="email"
+            value={formData.email}
             onChange={handleInputChange}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-            placeholder="e.g., Senior Software Engineer"
+            placeholder="e.g. example@gmail.com"
           />
         </div>
 
