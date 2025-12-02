@@ -4,6 +4,7 @@ import { supabase } from './lib/supabase.js';
 import JobCard from './components/JobCard.jsx';
 import JobPostForm from './components/JobPostForm.jsx';
 import Footer from './components/Footer.jsx';
+import puv from './puv.png';
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -42,7 +43,7 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="bg-sky-500 p-2 rounded-lg">
-                <Briefcase className="w-8 h-8 text-white" />
+                <img src={puv} alt="pattusali" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Pattusali Upadhi Vedhika</h1>

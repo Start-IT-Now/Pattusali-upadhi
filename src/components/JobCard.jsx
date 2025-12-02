@@ -61,7 +61,7 @@ export default function JobCard({ job }) {
         </div>
 
         {/* Application End Date */}
-        {job.application_end_date && (
+        {job.end_date && (
           <div className="flex items-center text-brown">
             <CalendarClock className="w-4 h-4 mr-2 text-terracotta" />
             <span>Apply by {formatDate(job.end_date)}</span>
