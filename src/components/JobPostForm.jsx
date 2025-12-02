@@ -10,6 +10,7 @@ export default function JobPostForm({ onJobPosted }) {
     experience: '',
     name: '',
     email: '',
+    end_date: '',
     description: '',
   });
   const [skills, setSkills] = useState([]);
@@ -68,6 +69,7 @@ export default function JobPostForm({ onJobPosted }) {
         experience: '',
         name: '',
         email: '',
+        end_date: '',
         description: '',
       });
       setSkills([]);
@@ -212,6 +214,19 @@ export default function JobPostForm({ onJobPosted }) {
           ))}
         </div>
       </div>
+
+      <div className="flex flex-col gap-1">
+  <label className="text-sm font-medium text-brown">Application End Date</label>
+  <input
+    type="date"
+    className="border border-gold rounded-md p-2 text-brown"
+    value={formData.end_date}
+    onChange={(e) =>
+      setFormData({ ...formData,end_date: e.target.value })
+    }
+  />
+</div>
+
 
       <div className="mb-6">
         <label className="block text-gray-700 font-semibold mb-2">Job Description *</label>

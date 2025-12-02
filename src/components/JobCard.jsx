@@ -64,7 +64,7 @@ export default function JobCard({ job }) {
         {job.application_end_date && (
           <div className="flex items-center text-brown">
             <CalendarClock className="w-4 h-4 mr-2 text-terracotta" />
-            <span>Apply by {formatDate(job.application_end_date)}</span>
+            <span>Apply by {formatDate(job.end_date)}</span>
           </div>
         )}
       </div>
@@ -91,7 +91,7 @@ export default function JobCard({ job }) {
       <div className="flex justify-end">
         <button
           type="button"
-          className="px-5 py-2 bg-terracotta text-white rounded-full text-sm font-semibold shadow hover:bg-[#cc654d] transition"
+          className="px-5 py-2 bg-[#cc654d] text-white rounded-full text-sm font-semibold shadow hover:bg-[#cc654d] transition"
         >
           Apply
         </button>
