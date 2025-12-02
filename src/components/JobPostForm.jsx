@@ -8,6 +8,7 @@ export default function JobPostForm({ onJobPosted }) {
     company_name: '',
     location: '',
     experience: '',
+    email: '',
     description: '',
   });
   const [skills, setSkills] = useState([]);
@@ -64,6 +65,7 @@ export default function JobPostForm({ onJobPosted }) {
         company_name: '',
         location: '',
         experience: '',
+        email: '',
         description: '',
       });
       setSkills([]);
@@ -141,6 +143,19 @@ export default function JobPostForm({ onJobPosted }) {
           </select>
         </div>
       </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Job Title *</label>
+          <input
+            type="text"
+            name="job_title"
+            value={formData.job_title}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+            placeholder="e.g., Senior Software Engineer"
+          />
+        </div>
 
       <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Skills *</label>

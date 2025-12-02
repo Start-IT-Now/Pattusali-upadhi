@@ -31,6 +31,11 @@ export default function JobCard({ job }) {
         </div>
 
         <div className="flex items-center text-brown">
+          <Briefcase className="w-4 h-4 mr-2 text-terracotta" />
+          <span>{job.email}</span>
+        </div>
+
+        <div className="flex items-center text-brown">
           <Calendar className="w-4 h-4 mr-2 text-terracotta" />
           <span>Posted on {formatDate(job.created_at)}</span>
         </div>
