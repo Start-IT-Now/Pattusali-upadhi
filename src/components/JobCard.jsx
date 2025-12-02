@@ -32,6 +32,11 @@ export default function JobCard({ job }) {
 
         <div className="flex items-center text-brown">
           <Briefcase className="w-4 h-4 mr-2 text-terracotta" />
+          <span>{job.name}</span>
+        </div>
+
+        <div className="flex items-center text-brown">
+          <Briefcase className="w-4 h-4 mr-2 text-terracotta" />
           <span>{job.email}</span>
         </div>
 

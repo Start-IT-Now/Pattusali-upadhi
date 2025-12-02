@@ -8,6 +8,7 @@ export default function JobPostForm({ onJobPosted }) {
     company_name: '',
     location: '',
     experience: '',
+    name: '',
     email: '',
     description: '',
   });
@@ -65,6 +66,7 @@ export default function JobPostForm({ onJobPosted }) {
         company_name: '',
         location: '',
         experience: '',
+        name: '',
         email: '',
         description: '',
       });
@@ -144,6 +146,7 @@ export default function JobPostForm({ onJobPosted }) {
         </div>
       </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Email *</label>
           <input
@@ -155,6 +158,20 @@ export default function JobPostForm({ onJobPosted }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent"
             placeholder="e.g. example@gmail.com"
           />
+        </div>
+
+                <div>
+          <label className="block text-gray-700 font-semibold mb-2">Name *</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+            placeholder="e.g. Ram"
+          />
+        </div>
         </div>
 
       <div className="mb-4">
