@@ -139,11 +139,12 @@ function App() {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-                {filteredJobs.map((job) => (
-                  <JobCard key={job.id} job={job} />
-                ))}
-              </div>
+<div className="flex flex-col gap-4">
+  {jobs.map((job) => (
+    <JobCard key={job.id} job={job} />
+  ))}
+</div>
+
             )}
           </>
         )}

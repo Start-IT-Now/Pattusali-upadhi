@@ -4,7 +4,7 @@ import {
   Calendar,
   Mail,
   User,
-  CalendarClock
+  CalendarClock,
 } from "lucide-react";
 
 export default function JobCard({ job }) {
@@ -21,9 +21,9 @@ export default function JobCard({ job }) {
   const skills = Array.isArray(job.skills) ? job.skills : [];
 
   return (
-   <div className="bg-white rounded-2xl shadow-sm border border-brown/10 px-6 py-5 hover:shadow-md transition-shadow">
-      {/* Main horizontal layout */}
-      <div className="flex items-stretch gap-6">
+    <div className="bg-white rounded-2xl shadow-sm border border-brown/10 px-6 py-5 hover:shadow-md transition-shadow">
+      {/* Main layout: column on mobile, row on larger screens */}
+      <div className="flex flex-col sm:flex-row sm:items-stretch sm:justify-between gap-6">
         {/* LEFT: Job details */}
         <div className="flex-1 flex flex-col gap-3">
           {/* Title + company */}
@@ -99,7 +99,7 @@ export default function JobCard({ job }) {
         </div>
 
         {/* RIGHT: Apply button */}
-        <div className="flex items-center">
+        <div className="flex sm:items-center sm:justify-center">
           <button
             type="button"
             className="px-8 py-3 rounded-full bg-terracotta text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors"
