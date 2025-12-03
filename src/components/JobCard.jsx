@@ -64,11 +64,6 @@ export default function JobCard({ job }) {
           </div>
           </div>
 
-          {/* Description */}
-          <p className="text-sm text-brown/90 line-clamp-2">
-            {job.description}
-          </p>
-
           {/* Skills */}
           {skills.length > 0 && (
             <div className="flex flex-wrap gap-2">
@@ -89,20 +84,26 @@ export default function JobCard({ job }) {
               <Calendar className="w-4 h-4 text-terracotta" />
               <span>Posted on {formatDate(job.created_at)}</span>
             </div>
-            {job.application_end_date && (
+
+            {job.end_date && (
               <div className="flex items-center gap-1.5">
                 <CalendarClock className="w-4 h-4 text-terracotta" />
-                <span>Apply by {formatDate(job.application_end_date)}</span>
+                <span>Apply by {formatDate(job.end_date)}</span>
               </div>
             )}
           </div>
         </div>
 
+         {/* Description */}
+          <p className="text-sm text-brown/90 line-clamp-2">
+            {job.description}
+          </p>
+
         {/* RIGHT: Apply button */}
         <div className="flex sm:items-center sm:justify-center">
           <button
             type="button"
-            className="px-8 py-3 rounded-full bg-terracotta text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors"
+            className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors"
           >
             Apply
           </button>
