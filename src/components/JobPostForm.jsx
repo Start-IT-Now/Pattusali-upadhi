@@ -176,6 +176,7 @@ export default function JobPostForm({ onJobPosted }) {
         </div>
         </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
       <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">Skills *</label>
         <div className="flex gap-2 mb-2">
@@ -226,7 +227,7 @@ export default function JobPostForm({ onJobPosted }) {
     }
   />
 </div>
-
+</div>
 
       <div className="mb-6">
         <label className="block text-gray-700 font-semibold mb-2">Job Description *</label>

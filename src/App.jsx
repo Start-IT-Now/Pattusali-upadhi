@@ -37,7 +37,7 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-white">
+  <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white">
       <header className="bg-white shadow-sm border-b-2 border-brown-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
@@ -49,14 +49,53 @@ function App() {
         />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Pattusali Upadhi Vedhika</h1>
-                <p className="text-sm text-sky-600">Find your dream job today</p>
+                <p className="text-sm text-[#cc654d]">Find your dream Opportunity today</p>
               </div>
             </div>
+
+                       <div className="flex justify-end">
+        <button
+          type="button"
+          className="px-5 py-1.5 border border-amber-500 text-amber rounded-full font-medium hover:bg-amber-50 transition"
+        >
+          Guidance
+        </button>
+      </div>
+
+                  <div className="flex justify-end">
+        <button
+          type="button"
+          className="px-5 py-1.5 border border-amber-500 text-amber rounded-full font-medium hover:bg-amber-50 transition"
+        >
+          Need Training
+        </button>
+      </div>
+
+                             <div className="flex justify-end">
+        <button
+          type="button"
+          className="px-5 py-1.5 border border-amber-500 text-amber rounded-full font-medium hover:bg-amber-50 transition"
+        >
+          Access Company
+        </button>
+      </div>
+
+
+                             <div className="flex justify-end">
+        <button
+          type="button"
+          className="px-5 py-1.5 border border-amber-500 text-amber rounded-full font-medium hover:bg-amber-50 transition"
+        >
+          Contact
+        </button>
+      </div>
+
+
             <button
               onClick={() => setShowPostForm(!showPostForm)}
               className="bg-[#cc654d] text-white rounded-full px-6 py-3 rounded-lg font-semibold hover:bg-sky-600 transition-colors"
             >
-              {showPostForm ? 'View Jobs' : 'Post a Job'}
+              {showPostForm ? 'View Jobs' : 'Voulnteer'}
             </button>
           </div>
         </div>
