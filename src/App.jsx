@@ -4,13 +4,15 @@ import { supabase } from "./lib/supabase.js";
 import JobCard from "./components/JobCard.jsx";
 import JobPostForm from "./components/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";
+import VolunteerAuth from "./components/VolunteerAuth.jsx";
 import puv from "./puv.png";
 
 function App() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showPostForm, setShowPostForm] = useState(false);
+  const [view, setView] = useState("jobs"); // 'jobs' | 'auth' | 'postForm'
   const [searchTerm, setSearchTerm] = useState("");
+  const [volunteer, setVolunteer] = useState(null); // logged-in volunteer
 
   const fetchJobs = async () => {
     setLoading(true);
@@ -40,6 +42,20 @@ function App() {
     );
   });
 
+  // When user clicks Volunteer button
+  const handleVolunteerClick = () => {
+    if (volunteer) {
+      setView("postForm");
+    } else {
+      setView("auth");
+    }
+  };
+
+  const handleAuthSuccess = (volunteerData) => {
+    setVolunteer(volunteerData);
+    setView("postForm");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white">
       {/* HEADER */}
@@ -63,43 +79,35 @@ function App() {
               </div>
             </div>
 
-            {/* Right side: small buttons + volunteer */}
+            {/* Right side */}
             <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
               {/* Small pill buttons */}
               <div className="flex flex-wrap gap-2 justify-start md:justify-end">
-                <button
-                  type="button"
-                  className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition"
-                >
+                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
                   Guidance
                 </button>
-                <button
-                  type="button"
-                  className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition"
-                >
+                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
                   Need Training
                 </button>
-                <button
-                  type="button"
-                  className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition"
-                >
+                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
                   Access Company
                 </button>
-                <button
-                  type="button"
-                  className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition"
-                >
+                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
                   Contact
                 </button>
               </div>
 
-              {/* Volunteer / View Jobs button */}
+              {/* Volunteer button */}
               <div className="flex justify-start md:justify-end">
                 <button
-                  onClick={() => setShowPostForm(!showPostForm)}
+                  onClick={handleVolunteerClick}
                   className="bg-[#cc654d] text-white rounded-full px-6 py-2 sm:py-3 font-semibold hover:bg-sky-600 transition-colors"
                 >
-                  {showPostForm ? "View Jobs" : "Volunteer"}
+                  {volunteer
+                    ? "Post a Job"
+                    : view === "auth" || view === "postForm"
+                    ? "Volunteer"
+                    : "Volunteer"}
                 </button>
               </div>
             </div>
@@ -109,16 +117,21 @@ function App() {
 
       {/* MAIN */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {showPostForm ? (
+        {view === "auth" ? (
+          <VolunteerAuth
+            onSuccess={handleAuthSuccess}
+            onCancel={() => setView("jobs")}
+          />
+        ) : view === "postForm" ? (
           <JobPostForm
             onJobPosted={() => {
               fetchJobs();
-              setShowPostForm(false);
+              setView("jobs");
             }}
           />
         ) : (
           <>
-            {/* Search bar */}
+            {/* Search */}
             <div className="mb-6 sm:mb-8">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -132,7 +145,7 @@ function App() {
               </div>
             </div>
 
-            {/* Header above list */}
+            {/* Jobs header */}
             <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 {searchTerm
@@ -172,7 +185,6 @@ function App() {
         )}
       </main>
 
-      {/* FOOTER */}
       <div className="mt-8 w-full">
         <Footer />
       </div>
