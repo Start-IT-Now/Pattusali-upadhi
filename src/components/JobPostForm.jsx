@@ -191,7 +191,7 @@ export default function JobPostForm({ onJobPosted }) {
           <button
             type="button"
             onClick={addSkill}
-            className="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-sky-600 transition-colors flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
             Add
