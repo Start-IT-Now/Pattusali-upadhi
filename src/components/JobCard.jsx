@@ -29,7 +29,7 @@ export default function JobCard({ job }) {
       </div>
 
       {/* Job Meta Details */}
-      <div className="space-y-2 mb-4">
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Location */}
         <div className="flex items-center text-brown">
           <MapPin className="w-4 h-4 mr-2 text-terracotta" />
@@ -41,7 +41,9 @@ export default function JobCard({ job }) {
           <Briefcase className="w-4 h-4 mr-2 text-terracotta" />
           <span>{job.experience}</span>
         </div>
+        </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Name */}
         <div className="flex items-center text-brown">
           <User className="w-4 h-4 mr-2 text-terracotta" />
@@ -53,7 +55,9 @@ export default function JobCard({ job }) {
           <Mail className="w-4 h-4 mr-2 text-terracotta" />
           <span>{job.email || "—"}</span>
         </div>
+        </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Posted Date */}
         <div className="flex items-center text-brown">
           <Calendar className="w-4 h-4 mr-2 text-terracotta" />

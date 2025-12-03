@@ -38,13 +38,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 to-white">
-      <header className="bg-white shadow-sm border-b-2 border-sky-500">
+      <header className="bg-white shadow-sm border-b-2 border-brown-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-sky-500 p-2 rounded-lg">
-                <img src={puv} alt="pattusali" />
-              </div>
+ <img
+          src={puv}
+          alt="Pattusalli Upadi Vedika Logo"
+          className="h-16 md:h-20 lg:h-24"
+        />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Pattusali Upadhi Vedhika</h1>
                 <p className="text-sm text-sky-600">Find your dream job today</p>
@@ -52,7 +54,7 @@ function App() {
             </div>
             <button
               onClick={() => setShowPostForm(!showPostForm)}
-              className="bg-sky-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-sky-600 transition-colors"
+              className="bg-[#cc654d] text-white rounded-full px-6 py-3 rounded-lg font-semibold hover:bg-sky-600 transition-colors"
             >
               {showPostForm ? 'View Jobs' : 'Post a Job'}
             </button>

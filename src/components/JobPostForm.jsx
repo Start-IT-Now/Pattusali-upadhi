@@ -162,7 +162,7 @@ export default function JobPostForm({ onJobPosted }) {
           />
         </div>
 
-                <div>
+          <div>
           <label className="block text-gray-700 font-semibold mb-2">Name *</label>
           <input
             type="text"
