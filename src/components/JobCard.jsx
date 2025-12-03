@@ -46,7 +46,6 @@ export default function JobCard({ job }) {
               <MapPin className="w-4 h-4 text-terracotta" />
               <span>{job.location}</span>
             </div>
-          </div>
 
           {/* Contact row */}
           <div className="flex flex-wrap gap-4 text-sm text-brown">
@@ -62,6 +61,7 @@ export default function JobCard({ job }) {
                 <span>{job.email}</span>
               </div>
             )}
+          </div>
           </div>
 
           {/* Description */}
