@@ -92,12 +92,12 @@ export default function JobCard({ job }) {
               </div>
             )}
           </div>
-        </div>
-
-         {/* Description */}
+                  {/* Description */}
           <p className="text-sm text-brown/90 line-clamp-2">
             {job.description}
           </p>
+        </div>
+
 
         {/* RIGHT: Apply button */}
         <div className="flex sm:items-center sm:justify-center">
