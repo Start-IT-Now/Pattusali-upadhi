@@ -19,7 +19,8 @@ export default function JobCard({ job }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-l-4 border-terracotta">
+  <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow flex gap-6 border border-slate-200">
+
       {/* Job Title + Company */}
       <div className="flex justify-between items-start mb-4">
         <div>
