@@ -18,88 +18,95 @@ export default function JobCard({ job }) {
     });
   };
 
+  const skills = Array.isArray(job.skills) ? job.skills : [];
+
   return (
-  <div className="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow flex gap-6 border border-slate-200">
-
-      {/* Job Title + Company */}
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <h3 className="text-xl font-bold text-brown mb-1">{job.job_title}</h3>
-          <p className="text-lg text-terracotta font-semibold">{job.company_name}</p>
-        </div>
-      </div>
-
-      {/* Job Meta Details */}
-     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {/* Location */}
-        <div className="flex items-center text-brown">
-          <MapPin className="w-4 h-4 mr-2 text-terracotta" />
-          <span>{job.location}</span>
-        </div>
-
-        {/* Experience */}
-        <div className="flex items-center text-brown">
-          <Briefcase className="w-4 h-4 mr-2 text-terracotta" />
-          <span>{job.experience}</span>
-        </div>
-        </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {/* Name */}
-        <div className="flex items-center text-brown">
-          <User className="w-4 h-4 mr-2 text-terracotta" />
-          <span>{job.name || "—"}</span>
-        </div>
-
-        {/* Email */}
-        <div className="flex items-center text-brown">
-          <Mail className="w-4 h-4 mr-2 text-terracotta" />
-          <span>{job.email || "—"}</span>
-        </div>
-        </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        {/* Posted Date */}
-        <div className="flex items-center text-brown">
-          <Calendar className="w-4 h-4 mr-2 text-terracotta" />
-          <span>Posted on {formatDate(job.created_at)}</span>
-        </div>
-
-        {/* Application End Date */}
-        {job.end_date && (
-          <div className="flex items-center text-brown">
-            <CalendarClock className="w-4 h-4 mr-2 text-terracotta" />
-            <span>Apply by {formatDate(job.end_date)}</span>
+    <div className="bg-white rounded-2xl shadow-sm border border-brown/10 px-6 py-5 hover:shadow-md transition-shadow">
+      {/* Main horizontal layout */}
+      <div className="flex items-stretch gap-6">
+        {/* LEFT: Job details */}
+        <div className="flex-1 flex flex-col gap-3">
+          {/* Title + company */}
+          <div>
+            <h3 className="text-lg font-bold text-brown leading-snug">
+              {job.job_title}
+            </h3>
+            <p className="text-sm font-semibold text-terracotta mt-0.5">
+              {job.company_name}
+            </p>
           </div>
-        )}
-      </div>
 
-      {/* Skills */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {Array.isArray(job.skills) &&
-          job.skills.map((skill, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-sand text-brown rounded-full text-sm font-medium border border-gold"
-            >
-              {skill}
-            </span>
-          ))}
-      </div>
+          {/* Meta row: experience + location */}
+          <div className="flex flex-wrap gap-4 text-sm text-brown">
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-4 h-4 text-terracotta" />
+              <span>{job.experience}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-terracotta" />
+              <span>{job.location}</span>
+            </div>
+          </div>
 
-      {/* Description */}
-      <div className="mb-4">
-        <p className="text-brown line-clamp-3">{job.description}</p>
-      </div>
+          {/* Contact row */}
+          <div className="flex flex-wrap gap-4 text-sm text-brown">
+            {job.name && (
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-terracotta" />
+                <span>{job.name}</span>
+              </div>
+            )}
+            {job.email && (
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-terracotta" />
+                <span>{job.email}</span>
+              </div>
+            )}
+          </div>
 
-      {/* Apply Button (No Functionality Yet) */}
-      <div className="flex justify-end">
-        <button
-          type="button"
-          className="px-5 py-2 bg-[#cc654d] text-white rounded-full text-sm font-semibold shadow hover:bg-[#cc654d] transition"
-        >
-          Apply
-        </button>
+          {/* Description */}
+          <p className="text-sm text-brown/90 line-clamp-2">
+            {job.description}
+          </p>
+
+          {/* Skills */}
+          {skills.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-sand text-brown rounded-full text-xs font-medium border border-gold"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Dates */}
+          <div className="flex flex-wrap gap-4 text-xs text-brown/70 mt-1">
+            <div className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-terracotta" />
+              <span>Posted on {formatDate(job.created_at)}</span>
+            </div>
+            {job.application_end_date && (
+              <div className="flex items-center gap-1.5">
+                <CalendarClock className="w-4 h-4 text-terracotta" />
+                <span>Apply by {formatDate(job.application_end_date)}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* RIGHT: Apply button */}
+        <div className="flex items-center">
+          <button
+            type="button"
+            className="px-8 py-3 rounded-full bg-terracotta text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors"
+          >
+            Apply
+          </button>
+        </div>
       </div>
     </div>
   );
