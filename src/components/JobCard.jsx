@@ -21,7 +21,7 @@ export default function JobCard({ job }) {
   const skills = Array.isArray(job.skills) ? job.skills : [];
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-brown/10 px-6 py-5 hover:shadow-md transition-shadow">
+   <div className="bg-white rounded-2xl shadow-sm border border-brown/10 px-6 py-5 hover:shadow-md transition-shadow">
       {/* Main horizontal layout */}
       <div className="flex items-stretch gap-6">
         {/* LEFT: Job details */}
