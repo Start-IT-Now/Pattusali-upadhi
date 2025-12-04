@@ -86,13 +86,13 @@ function App() {
                 <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
                   Guidance
                 </button>
-                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
+                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
                   Need Training
                 </button>
-                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
+                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
                   Access Company
                 </button>
-                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
+                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
                   Contact
                 </button>
               </div>
