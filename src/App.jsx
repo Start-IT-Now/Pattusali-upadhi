@@ -83,7 +83,7 @@ function App() {
             <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
               {/* Small pill buttons */}
               <div className="flex flex-wrap gap-2 justify-start md:justify-end">
-                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
+                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
                   Guidance
                 </button>
                 <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
