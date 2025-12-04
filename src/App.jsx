@@ -73,7 +73,7 @@ function App() {
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
                   Pattusali Upadhi Vedhika
                 </h1>
-                <p className="text-sm text-[#cc654d]">
+                <p className="text-m text-[#cc654d]">
                   Find your dream Opportunity today
                 </p>
               </div>
@@ -83,16 +83,16 @@ function App() {
             <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
               {/* Small pill buttons */}
               <div className="flex flex-wrap gap-2 justify-start md:justify-end">
-                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
+                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
                   Guidance
                 </button>
-                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
+                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
                   Need Training
                 </button>
-                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
+                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
                   Access Company
                 </button>
-                <button className="px-5 py-1.5 border border-amber-500 text-amber-700 rounded-full font-medium hover:bg-amber-50 transition">
+                <button className="px-5 py-1.5 border border-amber-500 bg-amber text-amber-700 rounded-full font-medium hover:bg-amber transition">
                   Contact
                 </button>
               </div>
