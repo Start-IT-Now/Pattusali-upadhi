@@ -57,7 +57,7 @@ function App() {
      <div
     className="min-h-screen"
     style={{
-      backgroundColor: "#rgba(230, 222, 248, 1)",
+      backgroundColor: "#rgba(202, 188, 234, 1)",
     }}
   >
 
