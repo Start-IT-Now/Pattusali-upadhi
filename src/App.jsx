@@ -69,10 +69,10 @@ function App() {
                 className="h-16 md:h-20 lg:h-24 w-auto"
               />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-3xl font-bold text-gray-900 leading-tight">
                   Pattusali Upadhi Vedhika
                 </h1>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-[#6C46CF] font-semibold">
                   Find your dream Opportunity today
                 </p>
               </div>
