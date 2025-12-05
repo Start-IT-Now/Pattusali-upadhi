@@ -54,12 +54,7 @@ function App() {
   };
 
   return (
-     <div
-    className="min-h-screen"
-    style={{
-      backgroundColor: "#rgba(202, 188, 234, 1)",
-    }}
-  >
+     <div className="min-h-screen bg-[#F7F3FF]">
 
       {/* HEADER */}
       <header className="bg-white shadow border-b border-purple-200">
@@ -109,7 +104,7 @@ function App() {
       </header>
 
       {/* MAIN */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
         {view === "auth" ? (
           <VolunteerAuth
             onSuccess={handleAuthSuccess}
