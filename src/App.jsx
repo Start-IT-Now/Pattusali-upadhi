@@ -93,7 +93,7 @@ function App() {
               {/* Volunteer */}
               <button
                 onClick={handleVolunteerClick}
-                className="px-6 py-2 rounded-full bg-[#6C46CF] text-white font-semibold shadow hover:bg-[#5935B5]"
+                className="px-6 py-2 rounded-full bg-[#12806A] text-white font-semibold shadow hover:bg-[#0F6B58]"
               >
                 {volunteer ? "Post a Job" : "Volunteer"}
               </button>

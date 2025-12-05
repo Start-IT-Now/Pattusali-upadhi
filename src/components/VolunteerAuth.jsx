@@ -73,7 +73,7 @@ export default function VolunteerAuth({ onSuccess, onCancel }) {
           }}
           className={`flex-1 py-2 text-sm font-semibold ${
             mode === "login"
-              ? "text-[#cc654d] border-b-2 border-[#cc654d]"
+              ? "text-[#0F6B58] border-b-2 border-[#cc654d]"
               : "text-gray-500"
           }`}
         >
@@ -87,7 +87,7 @@ export default function VolunteerAuth({ onSuccess, onCancel }) {
           }}
           className={`flex-1 py-2 text-sm font-semibold ${
             mode === "signup"
-              ? "text-[#cc654d] border-b-2 border-[#cc654d]"
+              ? "text-[#0F6B58] border-b-2 border-[#cc654d]"
               : "text-gray-500"
           }`}
         >
@@ -159,7 +159,7 @@ export default function VolunteerAuth({ onSuccess, onCancel }) {
           <button
             type="submit"
             disabled={loading}
-            className="px-5 py-2 rounded-full bg-[#cc654d] text-white text-sm font-semibold hover:bg-sky-600 transition disabled:opacity-60"
+            className="px-5 py-2 rounded-full bg-[#0F6B58] text-white text-sm font-semibold hover:bg-sky-600 transition disabled:opacity-60"
           >
             {loading
               ? mode === "login"
