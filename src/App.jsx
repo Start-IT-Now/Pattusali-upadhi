@@ -6,6 +6,7 @@ import JobPostForm from "./components/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";
 import VolunteerAuth from "./components/VolunteerAuth.jsx";
 import puv from "./puv.png";
+import { color } from "framer-motion";
 
 function App() {
   const [jobs, setJobs] = useState([]);
@@ -54,7 +55,7 @@ function App() {
   };
 
   return (
-     <div className="min-h-screen bg-[#F7F3FF]">
+     <div className="min-h-screen bg-[#b7aad3ff]">
 
       {/* HEADER */}
       <header className="bg-white shadow border-b border-purple-200">
