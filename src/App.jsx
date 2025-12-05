@@ -10,9 +10,9 @@ import puv from "./puv.png";
 function App() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState("jobs"); // 'jobs' | 'auth' | 'postForm'
+  const [view, setView] = useState("jobs");
   const [searchTerm, setSearchTerm] = useState("");
-  const [volunteer, setVolunteer] = useState(null); // logged-in volunteer
+  const [volunteer, setVolunteer] = useState(null);
 
   const fetchJobs = async () => {
     setLoading(true);
@@ -34,91 +34,76 @@ function App() {
   const filteredJobs = jobs.filter((job) => {
     const term = searchTerm.toLowerCase();
     const skills = Array.isArray(job.skills) ? job.skills : [];
+
     return (
       job.job_title.toLowerCase().includes(term) ||
       job.company_name.toLowerCase().includes(term) ||
       job.location.toLowerCase().includes(term) ||
-      skills.some((skill) => skill.toLowerCase().includes(term))
+      skills.some((s) => s.toLowerCase().includes(term))
     );
   });
 
-  // When user clicks Volunteer button
   const handleVolunteerClick = () => {
-    if (volunteer) {
-      setView("postForm");
-    } else {
-      setView("auth");
-    }
+    if (volunteer) setView("postForm");
+    else setView("auth");
   };
 
-  const handleAuthSuccess = (volunteerData) => {
-    setVolunteer(volunteerData);
+  const handleAuthSuccess = (userData) => {
+    setVolunteer(userData);
     setView("postForm");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white">
+    <div className="min-h-screen bg-[#F7F3FF]">
       {/* HEADER */}
-      <header className="bg-violet-100 shadow-sm border-b-2 border-brown-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <header className="bg-white shadow border-b border-purple-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            {/* Logo + title */}
+            
+            {/* Logo + Title */}
             <div className="flex items-center gap-3">
-              <div className="h-14 w-14 rounded-lg bg-yellow-600 flex items-center justify-center text-white font-semibold shadow-soft">
               <img
                 src={puv}
-                alt="Pattusalli Upadi Vedika Logo"
-                className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto"
+                alt="Logo"
+                className="h-16 md:h-20 lg:h-24 w-auto"
               />
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-brand-purple">
+                <h1 className="text-3xl font-bold text-gray-900">
                   Pattusali Upadhi Vedhika
                 </h1>
-                <p className="text-m text-slate-500">
+                <p className="text-sm text-gray-600">
                   Find your dream Opportunity today
                 </p>
               </div>
-              </div>
             </div>
 
-            {/* Right side */}
-            <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
-              {/* Small pill buttons */}
-              <div className="flex flex-wrap gap-2 justify-start md:justify-end">
-                <button className="px-8 py-3 rounded-full bg-brand-purple text-white font-semibold text-sm shadow-soft hover:translate-y-[1px] transition">
-                  Guidance
-                </button>
-                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
-                  Need Training
-                </button>
-                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
-                  Access Company
-                </button>
-                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
-                  Contact
-                </button>
-              </div>
+            {/* Purple Buttons */}
+            <div className="flex flex-wrap gap-3">
+              {["Guidance", "Need Training", "Access Company", "Contact"].map(
+                (label) => (
+                  <button
+                    key={label}
+                    className="px-6 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold shadow hover:bg-[#5935B5] transition"
+                  >
+                    {label}
+                  </button>
+                )
+              )}
 
-              {/* Volunteer button */}
-              <div className="flex justify-start md:justify-end">
-                <button
-                  onClick={handleVolunteerClick}
-                  className="bg-[#cc654d] text-white rounded-full px-6 py-2 sm:py-3 font-semibold hover:bg-sky-600 transition-colors"
-                >
-                  {volunteer
-                    ? "Post a Job"
-                    : view === "auth" || view === "postForm"
-                    ? "Volunteer"
-                    : "Volunteer"}
-                </button>
-              </div>
+              {/* Volunteer */}
+              <button
+                onClick={handleVolunteerClick}
+                className="px-6 py-2 rounded-full bg-[#6C46CF] text-white font-semibold shadow hover:bg-[#5935B5]"
+              >
+                {volunteer ? "Post a Job" : "Volunteer"}
+              </button>
             </div>
           </div>
         </div>
       </header>
 
       {/* MAIN */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {view === "auth" ? (
           <VolunteerAuth
             onSuccess={handleAuthSuccess}
@@ -133,8 +118,8 @@ function App() {
           />
         ) : (
           <>
-            {/* Search */}
-            <div className="mb-6 sm:mb-8">
+            {/* Search Bar */}
+            <div className="mb-6">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
@@ -142,42 +127,34 @@ function App() {
                   placeholder="Search by job title, company, location, or skills..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 sm:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent shadow-sm text-sm sm:text-base"
+                  className="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-300 shadow focus:ring-2 focus:ring-purple-400"
                 />
               </div>
             </div>
 
-            {/* Jobs header */}
-            <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-                {searchTerm
-                  ? `Search Results (${filteredJobs.length})`
-                  : `All Jobs (${jobs.length})`}
-              </h2>
-            </div>
+            {/* Job Count */}
+            <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+              {searchTerm
+                ? `Search Results (${filteredJobs.length})`
+                : `All Jobs (${jobs.length})`}
+            </h2>
 
-            {/* Job list */}
+            {/* Job List */}
             {loading ? (
-              <div className="text-center py-12">
-                <div className="inline-block animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-sky-500"></div>
-                <p className="mt-4 text-gray-600 text-sm sm:text-base">
-                  Loading jobs...
-                </p>
+              <div className="text-center py-14">
+                <div className="animate-spin h-12 w-12 border-b-2 border-purple-600 rounded-full mx-auto"></div>
+                <p className="mt-3 text-gray-600">Loading jobs...</p>
               </div>
             ) : filteredJobs.length === 0 ? (
-              <div className="text-center py-10 sm:py-12 bg-white rounded-lg shadow-md">
-                <Briefcase className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-                  No jobs found
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base">
-                  {searchTerm
-                    ? "Try adjusting your search terms"
-                    : "Be the first to post a job!"}
+              <div className="text-center py-12 bg-white shadow rounded-xl">
+                <Briefcase className="w-14 h-14 text-gray-400 mx-auto" />
+                <p className="text-xl mt-3 font-semibold">No jobs found</p>
+                <p className="text-gray-600">
+                  {searchTerm ? "Try different keywords" : "Be the first to post a job!"}
                 </p>
               </div>
             ) : (
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-5">
                 {filteredJobs.map((job) => (
                   <JobCard key={job.id} job={job} />
                 ))}
@@ -187,9 +164,8 @@ function App() {
         )}
       </main>
 
-      <div className="mt-8 w-full">
-        <Footer />
-      </div>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }
