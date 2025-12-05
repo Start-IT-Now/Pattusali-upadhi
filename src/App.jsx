@@ -59,23 +59,25 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-white">
       {/* HEADER */}
-      <header className="bg-white shadow-sm border-b-2 border-brown-500">
+      <header className="bg-violet-100 shadow-sm border-b-2 border-brown-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             {/* Logo + title */}
             <div className="flex items-center gap-3">
+              <div className="h-14 w-14 rounded-lg bg-yellow-600 flex items-center justify-center text-white font-semibold shadow-soft">
               <img
                 src={puv}
                 alt="Pattusalli Upadi Vedika Logo"
                 className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto"
               />
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                <h1 className="text-2xl sm:text-3xl font-bold text-brand-purple">
                   Pattusali Upadhi Vedhika
                 </h1>
-                <p className="text-m text-[#cc654d]">
+                <p className="text-m text-slate-500">
                   Find your dream Opportunity today
                 </p>
+              </div>
               </div>
             </div>
 
@@ -83,7 +85,7 @@ function App() {
             <div className="flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-4">
               {/* Small pill buttons */}
               <div className="flex flex-wrap gap-2 justify-start md:justify-end">
-                <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
+                <button className="px-8 py-3 rounded-full bg-brand-purple text-white font-semibold text-sm shadow-soft hover:translate-y-[1px] transition">
                   Guidance
                 </button>
                 <button className="px-8 py-3 rounded-full bg-amber-500 text-white font-semibold text-sm shadow-md hover:bg-[#cc654d] transition-colors">
