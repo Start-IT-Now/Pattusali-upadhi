@@ -49,8 +49,6 @@ export default function JobCard({ job }) {
                 <span>{job.location}</span>
               </div>
             )}
-          </div>
-          </div>
 
           {/* HR NAME + EMAIL */}
           <div className="flex flex-wrap gap-4 text-sm text-gray-700">
@@ -67,6 +65,8 @@ export default function JobCard({ job }) {
                 <span>{job.email}</span>
               </div>
             )}
+          </div>
+          </div>
           </div>
 
           {/* SKILLS */}
