@@ -54,7 +54,13 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen color:bg-#F7F3FF">
+     <div
+    className="min-h-screen"
+    style={{
+      backgroundColor: "#rgba(230, 222, 248, 1)",
+    }}
+  >
+
       {/* HEADER */}
       <header className="bg-white shadow border-b border-purple-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
