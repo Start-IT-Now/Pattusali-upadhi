@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Search } from "lucide-react";
-import { supabase } from "./lib/supabase.js";
+import supabase  from "./lib/supabase.js";
 import JobCard from "./components/JobCard.jsx";
 import JobPostForm from "./components/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";

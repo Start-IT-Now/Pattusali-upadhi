@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
-import { supabase } from "../lib/supabase";
+import supabase  from "../lib/supabase.js";
 
 export default function JobPostForm({ onJobPosted, onCancel }) {
   const [formData, setFormData] = useState({
