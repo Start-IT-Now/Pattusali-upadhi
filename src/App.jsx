@@ -198,11 +198,13 @@ export default function App() {
                 <div className="bg-white rounded-2xl p-8 text-center shadow">No jobs found</div>
               ) : (
                 <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {jobs.map((job) => (
-                      <JobCard key={job.id} job={job} />
-                    ))}
-                  </div>
+  {/* single column list (one horizontal card per row) */}
+<div className="flex flex-col gap-6">
+  {jobs.map((job) => (
+    <JobCard key={job.id} job={job} />
+  ))}
+</div>
+
 
                   {/* Pagination */}
                   <div className="flex items-center justify-between mt-6">
