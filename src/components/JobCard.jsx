@@ -31,6 +31,7 @@ export default function JobCard({ job }) {
 
   return (
     <div className="relative bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:shadow-lg transition">
+
       {/* Heart (favorite) */}
       <button className="absolute top-4 right-4 p-1.5 rounded-full bg-white shadow-sm">
         <Heart className="w-5 h-5 text-gray-300" />
@@ -39,12 +40,15 @@ export default function JobCard({ job }) {
       <div className="flex flex-col sm:flex-row gap-4">
         {/* Left: avatar + main content */}
         <div className="flex items-start gap-4 w-full">
+          
+          {/* Company Initial */}
           <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-700 shrink-0">
             {job.company_name?.charAt(0) || "C"}
           </div>
 
           <div className="flex-1 min-w-0">
-            {/* Title + company */}
+
+            {/* Company Name + Job Title */}
             <div className="flex items-start justify-between gap-2">
               <div>
                 <div className="text-sm font-medium text-gray-500">{job.company_name}</div>
@@ -56,16 +60,37 @@ export default function JobCard({ job }) {
 
             {/* Description */}
             {job.description && (
-              <p className="text-sm text-gray-600 mt-1 line-clamp-2">{job.description}</p>
+              <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                {job.description}
+              </p>
             )}
 
-            {/* Chips */}
+            {/* NEW: Company Type + Industry Chips */}
+            <div className="flex flex-wrap gap-2 mt-3">
+              {job.company_type && (
+                <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100">
+                  {job.company_type}
+                </span>
+              )}
+              
+              {job.industry && (
+                <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                  {job.industry}
+                </span>
+              )}
+            </div>
+
+            {/* Skill Chips */}
             {skills.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-3">
                 {skills.slice(0, 5).map((s, i) => (
                   <span
                     key={i}
-                    className={`px-2 py-1 rounded-full text-xs font-medium ${chipColors[i % chipColors.length]} border ${i % 2 === 0 ? "border-transparent" : "border-gray-100"}`}
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      chipColors[i % chipColors.length]
+                    } border ${
+                      i % 2 === 0 ? "border-transparent" : "border-gray-100"
+                    }`}
                   >
                     {s}
                   </span>
@@ -73,8 +98,9 @@ export default function JobCard({ job }) {
               </div>
             )}
 
-            {/* Meta row: experience, location, posted */}
+            {/* Meta: Experience, Location, Posted On */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mt-3">
+
               {job.experience && (
                 <div className="flex items-center gap-2">
                   <Briefcase className="w-4 h-4 text-purple-600" />
@@ -91,11 +117,13 @@ export default function JobCard({ job }) {
 
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-gray-400" />
-                <span className="text-xs text-gray-500">Posted {formatDate(job.created_at)}</span>
+                <span className="text-xs text-gray-500">
+                  Posted {formatDate(job.created_at)}
+                </span>
               </div>
             </div>
 
-            {/* HR name + email (smaller row) */}
+            {/* HR Contact */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-700 mt-3">
               {job.name && (
                 <div className="flex items-center gap-2">
@@ -103,6 +131,7 @@ export default function JobCard({ job }) {
                   <span>{job.name}</span>
                 </div>
               )}
+
               {job.email && (
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-gray-400" />
@@ -112,17 +141,17 @@ export default function JobCard({ job }) {
             </div>
           </div>
 
-        {/* Right: actions */}
-        <div className="flex flex-col justify-center items-center sm:items-end gap-3 min-w-[120px]">
-          <button className="px-4 py-2 rounded-md bg-[#6C46CF] text-white text-sm font-semibold shadow-sm hover:bg-[#5935B5]">
-            Apply Now
-          </button>
-          <button className="px-4 py-2 rounded-md bg-white border border-gray-200 text-sm hover:shadow-sm">
-            View Details
-          </button>
+          {/* Right: Actions */}
+          <div className="flex flex-col justify-center items-center sm:items-end gap-3 min-w-[120px]">
+            <button className="px-4 py-2 rounded-md bg-[#6C46CF] text-white text-sm font-semibold shadow-sm hover:bg-[#5935B5]">
+              Apply Now
+            </button>
+            <button className="px-4 py-2 rounded-md bg-white border border-gray-200 text-sm hover:shadow-sm">
+              View Details
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
