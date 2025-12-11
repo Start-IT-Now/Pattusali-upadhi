@@ -111,7 +111,6 @@ export default function JobCard({ job }) {
               )}
             </div>
           </div>
-        </div>
 
         {/* Right: actions */}
         <div className="flex flex-col justify-center items-center sm:items-end gap-3 min-w-[120px]">
@@ -123,6 +122,7 @@ export default function JobCard({ job }) {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
