@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
-import { supabase } from "../lib/supabase.js";
+import { supabase } from "../lib/supabase";
 
 export default function JobPostForm({ onJobPosted, onCancel }) {
   const [formData, setFormData] = useState({
@@ -8,12 +8,12 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     company_name: "",
     location: "",
     experience: "",
+    company_type: "",
+    industry: "",
     name: "",
     email: "",
     end_date: "",
     description: "",
-    company_type: "",   
-    industry: "",       
   });
 
   const [skills, setSkills] = useState([]);
@@ -21,33 +21,20 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(null);
 
-  const COMPANY_TYPES = [
-    "Startup",
-    "Foreign MNC",
-    "Indian MNC",
-    "Corporate",
-    "Others",
-  ];
-
-  const INDUSTRIES = [
-    "Financial Services",
-    "Insurance",
-    "Marketing",
-    "Information & Technology",
-  ];
-
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const addSkill = () => {
-    const s = currentSkill.trim();
-    if (s && !skills.includes(s)) setSkills([...skills, s]);
+    if (!currentSkill.trim()) return;
+    if (!skills.includes(currentSkill.trim())) {
+      setSkills([...skills, currentSkill.trim()]);
+    }
     setCurrentSkill("");
   };
 
-  const removeSkill = (skill) => {
-    setSkills(skills.filter((x) => x !== skill));
+  const removeSkill = (skillToRemove) => {
+    setSkills(skills.filter((s) => s !== skillToRemove));
   };
 
   const handleSubmit = async (e) => {
@@ -71,45 +58,43 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     setIsSubmitting(false);
 
     if (error) {
-      setMessage({ type: "error", text: "Failed to post job. Please try again." });
-      return;
+      setMessage({
+        type: "error",
+        text: "Failed to post job. Please try again.",
+      });
+    } else {
+      setMessage({ type: "success", text: "Job posted successfully!" });
+      setFormData({
+        job_title: "",
+        company_name: "",
+        location: "",
+        experience: "",
+        company_type: "",
+        industry: "",
+        name: "",
+        email: "",
+        end_date: "",
+        description: "",
+      });
+      setSkills([]);
+      if (onJobPosted) onJobPosted();
+      setTimeout(() => setMessage(null), 3000);
     }
-
-    setMessage({ type: "success", text: "Job posted successfully!" });
-
-    setFormData({
-      job_title: "",
-      company_name: "",
-      location: "",
-      experience: "",
-      name: "",
-      email: "",
-      end_date: "",
-      description: "",
-      company_type: "",
-      industry: "",
-    });
-
-    setSkills([]);
-
-    if (onJobPosted) onJobPosted();
-
-    setTimeout(() => setMessage(null), 3000);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 sm:p-8 mb-8"
+      className="bg-white rounded-3xl shadow-md border border-gray-100 p-8"
     >
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Post a New Job</h2>
+      <div className="flex justify-between items-start mb-6">
+        <h2 className="text-3xl font-bold text-gray-900">Post a New Job</h2>
+
         {onCancel && (
           <button
             type="button"
-            className="text-sm text-gray-500 hover:text-gray-700"
             onClick={onCancel}
+            className="text-sm text-gray-600 hover:text-gray-800"
           >
             Cancel
           </button>
@@ -118,175 +103,181 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
 
       {message && (
         <div
-          className={`mt-4 mb-4 p-4 rounded-lg ${
+          className={`p-4 mb-4 rounded-lg ${
             message.type === "success"
-              ? "bg-green-50 text-green-700"
-              : "bg-red-50 text-red-700"
+              ? "bg-emerald-50 text-emerald-700"
+              : "bg-rose-50 text-rose-700"
           }`}
         >
           {message.text}
         </div>
       )}
 
-      {/* Row 1 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      {/* Two Column Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* LEFT SIDE */}
+        <div className="flex flex-col gap-6">
 
-        {/* Job Title */}
-        <div>
-          <label className="font-semibold text-gray-700">Job Title *</label>
-          <input
-            type="text"
-            name="job_title"
-            value={formData.job_title}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-            placeholder="e.g. Senior Software Engineer"
-          />
-        </div>
+          <div>
+            <label className="font-semibold text-gray-900">Job Title *</label>
+            <input
+              type="text"
+              name="job_title"
+              placeholder="e.g. Senior Software Engir"
+              value={formData.job_title}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none"
+            />
+          </div>
 
-        {/* Company Name */}
-        <div>
-          <label className="font-semibold text-gray-700">Company Name *</label>
-          <input
-            type="text"
-            name="company_name"
-            value={formData.company_name}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-            placeholder="e.g. Infosys"
-          />
-        </div>
+          <div>
+            <label className="font-semibold text-gray-900">Location *</label>
+            <input
+              type="text"
+              name="location"
+              placeholder="e.g. Hyderabad"
+              value={formData.location}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none"
+            />
+          </div>
 
-        {/* Location */}
-        <div>
-          <label className="font-semibold text-gray-700">Location *</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-            placeholder="e.g. Hyderabad"
-          />
-        </div>
-
-        {/* Experience */}
-        <div>
-          <label className="font-semibold text-gray-700">Experience *</label>
-          <select
-            name="experience"
-            value={formData.experience}
-            onChange={handleInputChange}
-            className="input-field"
-            required
-          >
-            <option value="">Select experience</option>
-            <option value="0-1 years">0-1 years</option>
-            <option value="1-3 years">1-3 years</option>
-            <option value="3-5 years">3-5 years</option>
-            <option value="5-7 years">5-7 years</option>
-            <option value="7-10 years">7-10 years</option>
-            <option value="10+ years">10+ years</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Row 2 — NEW: Company Type + Industry */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-
-        {/* Company Type */}
-        <div>
-          <label className="font-semibold text-gray-700">Company Type *</label>
-          <select
-            name="company_type"
-            value={formData.company_type}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-          >
-            <option value="">Select type</option>
-            {COMPANY_TYPES.map((type) => (
-              <option key={type} value={type}>{type}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Industry */}
-        <div>
-          <label className="font-semibold text-gray-700">Industry *</label>
-          <select
-            name="industry"
-            value={formData.industry}
-            onChange={handleInputChange}
-            required
-            className="input-field"
-          >
-            <option value="">Select industry</option>
-            {INDUSTRIES.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Skills */}
-      <div className="mb-6">
-        <label className="font-semibold text-gray-700">Skills *</label>
-
-        <div className="flex gap-2 mb-2">
-          <input
-            type="text"
-            value={currentSkill}
-            onChange={(e) => setCurrentSkill(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSkill())}
-            className="input-field flex-1"
-            placeholder="Add a skill"
-          />
-          <button
-            type="button"
-            onClick={addSkill}
-            className="px-4 py-2 bg-[#6C46CF] text-white rounded-lg hover:bg-[#5935B5]"
-          >
-            <Plus className="w-4 h-4" />
-          </button>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {skills.map((skill) => (
-            <span
-              key={skill}
-              className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full flex items-center gap-2"
+          <div>
+            <label className="font-semibold text-gray-900">Company Type *</label>
+            <select
+              name="company_type"
+              value={formData.company_type}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
             >
-              {skill}
-              <button onClick={() => removeSkill(skill)}>
-                <X className="w-4 h-4 text-purple-700" />
+              <option value="">Select type</option>
+              <option value="Startup">Startup</option>
+              <option value="Foreign MNC">Foreign MNC</option>
+              <option value="Indian MNC">Indian MNC</option>
+              <option value="Corporate">Corporate</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          {/* Skills */}
+          <div>
+            <label className="font-semibold text-gray-900">Skills *</label>
+
+            <div className="flex items-center gap-2 mt-1">
+              <input
+                type="text"
+                placeholder="Add a skill"
+                value={currentSkill}
+                onChange={(e) => setCurrentSkill(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSkill())}
+                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none"
+              />
+              <button
+                type="button"
+                onClick={addSkill}
+                className="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center hover:bg-purple-700"
+              >
+                <Plus className="w-5 h-5" />
               </button>
-            </span>
-          ))}
+            </div>
+
+            {/* Skills Chips */}
+            <div className="flex flex-wrap gap-2 mt-2">
+              {skills.map((skill, idx) => (
+                <span
+                  key={idx}
+                  className="flex items-center gap-1 px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-sm"
+                >
+                  {skill}
+                  <X
+                    className="w-4 h-4 cursor-pointer"
+                    onClick={() => removeSkill(skill)}
+                  />
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="flex flex-col gap-6">
+
+          <div>
+            <label className="font-semibold text-gray-900">Company Name *</label>
+            <input
+              type="text"
+              name="company_name"
+              placeholder="e.g. Infosys"
+              value={formData.company_name}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold text-gray-900">Experience *</label>
+            <select
+              name="experience"
+              value={formData.experience}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
+            >
+              <option value="">Select experience</option>
+              <option value="0-1 years">0-1 years (Fresher)</option>
+              <option value="1-3 years">1-3 years</option>
+              <option value="3-5 years">3-5 years</option>
+              <option value="5-7 years">5-7 years</option>
+              <option value="7-10 years">7-10 years</option>
+              <option value="10+ years">10+ years</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="font-semibold text-gray-900">Industry *</label>
+            <select
+              name="industry"
+              value={formData.industry}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
+            >
+              <option value="">Select industry</option>
+              <option value="Information & Technology">Information & Technology</option>
+              <option value="Financial Services">Financial Services</option>
+              <option value="Insurance">Insurance</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Hardware & Networking">Hardware & Networking</option>
+            </select>
+          </div>
+
         </div>
       </div>
 
       {/* Description */}
-      <div className="mb-6">
-        <label className="font-semibold text-gray-700">Job Description *</label>
+      <div className="mt-8">
+        <label className="font-semibold text-gray-900">Job Description *</label>
         <textarea
           name="description"
           rows={5}
           value={formData.description}
           onChange={handleInputChange}
-          className="input-field"
           required
+          className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
         ></textarea>
       </div>
 
-      {/* Submit */}
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-[#6C46CF] text-white py-3 rounded-lg hover:bg-[#5935B5]"
+        className="w-full mt-8 bg-purple-600 text-white py-3 rounded-lg text-lg font-medium hover:bg-purple-700 transition disabled:bg-gray-400"
       >
         {isSubmitting ? "Posting..." : "Post Job"}
       </button>
