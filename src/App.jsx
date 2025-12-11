@@ -230,12 +230,11 @@ export default function App() {
                   </div>
                 </>
               )}
-
-              <Footer />
             </section>
-          </div>
+          </div>  
         )}
       </main>
+        <Footer />
     </div>
   );
 }

@@ -61,11 +61,6 @@ export default function JobCard({ job }) {
             </div>
           </div>
 
-          {/* description + chips */}
-          {job.description && (
-            <p className="text-sm text-gray-600 mt-2 line-clamp-2">{job.description}</p>
-          )}
-
           <div className="flex flex-wrap gap-2 mt-3">
             {job.company_type && (
               <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100">
@@ -78,15 +73,6 @@ export default function JobCard({ job }) {
               </span>
             )}
 
-            {skills.slice(0, 4).map((s, i) => (
-              <span
-                key={i}
-                className={`px-2 py-1 rounded-full text-xs font-medium ${chipColors[i % chipColors.length]} border ${i % 2 === 0 ? "border-transparent" : "border-gray-100"}`}
-              >
-                {s}
-              </span>
-            ))}
-          </div>
 
           {/* bottom meta row */}
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-600">
@@ -114,7 +100,24 @@ export default function JobCard({ job }) {
               {job.name && <User className="w-4 h-4 text-gray-400" />}
               {job.email && <Mail className="w-4 h-4 text-gray-400" />}
               <span className="truncate max-w-[240px] text-sm text-gray-700">{job.name ? job.name : job.email ?? ""}</span>
+
             </div>
+
+                        {skills.slice(0, 4).map((s, i) => (
+              <span
+                key={i}
+                className={`px-2 py-1 rounded-full text-xs font-medium ${chipColors[i % chipColors.length]} border ${i % 2 === 0 ? "border-transparent" : "border-gray-100"}`}
+              >
+                {s}
+              </span>
+            ))}
+
+                                   {/* description + chips */}
+          {job.description && (
+            <p className="text-sm text-gray-600 mt-2 line-clamp-2">{job.description}</p>
+          )}
+
+          </div>
           </div>
         </div>
 

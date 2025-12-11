@@ -60,16 +60,17 @@ export default function FilterSidebar({ filters = {}, setFilters = () => {} }) {
         <h5 className="text-sm font-medium mb-2">Location</h5>
         <div className="space-y-2">
           {LOCATIONS.map((loc) => {
-            const active = filters.location === loc;
+            const checked = Array.isArray(filters.location) && filters.location.includes(c);
             return (
-              <button
-                key={loc}
-                onClick={() => toggleLocation(loc)}
-                type="button"
-                className={`w-full text-left px-3 py-2 rounded-md text-sm ${active ? "bg-purple-50 text-purple-700" : "hover:bg-gray-50"}`}
-              >
-                {loc}
-              </button>
+                <label key={loc} className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggleArrayFilter("location", loc)}
+                  className="w-4 h-4 text-purple-600"
+                />
+                <span>{loc}</span>
+              </label>
             );
           })}
         </div>
