@@ -60,7 +60,7 @@ export default function FilterSidebar({ filters = {}, setFilters = () => {} }) {
         <h5 className="text-sm font-medium mb-2">Location</h5>
         <div className="space-y-2">
           {LOCATIONS.map((loc) => {
-            const checked = Array.isArray(filters.location) && filters.location.includes(c);
+            const checked = Array.isArray(filters.location) && filters.location.includes(loc);
             return (
                 <label key={loc} className="flex items-center gap-2 text-sm">
                 <input

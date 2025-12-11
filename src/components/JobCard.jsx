@@ -112,14 +112,15 @@ export default function JobCard({ job }) {
               </span>
             ))}
 
-                                   {/* description + chips */}
+          </div>
+          </div>
+                                             {/* description + chips */}
           {job.description && (
             <p className="text-sm text-gray-600 mt-2 line-clamp-2">{job.description}</p>
           )}
-
-          </div>
-          </div>
         </div>
+
+        
 
         {/* RIGHT (mobile: shown inline below) */}
         <div className="flex flex-col items-end gap-3 md:hidden ml-2">
