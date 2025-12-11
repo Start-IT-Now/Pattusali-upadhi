@@ -201,6 +201,27 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
               ))}
             </div>
           </div>
+{/* Application End Date */}
+<div>
+  <label className="block text-gray-700 font-semibold mb-2">
+    Application End Date
+  </label>
+
+  <input
+    type="date"
+    name="end_date"
+    value={formData.end_date}
+    onChange={(e) =>
+      setFormData({ ...formData, end_date: e.target.value })
+    }
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg 
+           focus:ring-2 focus:ring-purple-300 focus:border-transparent"
+  />
+
+  <p className="text-xs text-gray-500 mt-1">
+    Optional — leave empty to keep job open.
+  </p>
+</div>
 
         </div>
 
