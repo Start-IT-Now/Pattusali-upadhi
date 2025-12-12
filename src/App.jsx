@@ -235,19 +235,12 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer />
-      
-      {/* Job Details Modal */}
-      <JobCard 
-  key={jobs.id} 
-  job={{ ...jobs, onView: setSelectedJob }} 
-/>
+<Footer />
 
-
-      {/* Job Details Modal */}
-      {selectedJob && (
-        <JobDetails job={selectedJob} onClose={() => setSelectedJob(null)} />
-      )}
+{/* Job Details Modal (render when a job is selected) */}
+{selectedJob && (
+  <JobDetails job={selectedJob} onClose={() => setSelectedJob(null)} />
+)}
     </div>
   );
 }

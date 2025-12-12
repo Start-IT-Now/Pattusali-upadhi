@@ -51,9 +51,13 @@ export default function JobCard({ job, onView }) {
                 <button className="px-3 py-1 rounded-md bg-[#6C46CF] text-white text-sm font-semibold shadow-sm hover:bg-[#5935B5]">
                   Apply
                 </button>
-                <button className="px-3 py-1 rounded-md bg-white border border-gray-200 text-sm hover:shadow-sm">
-                  View
-                </button>
+<button
+  onClick={() => onView && onView(job)}
+  className="px-3 py-1 rounded-md bg-white border border-gray-200 text-sm hover:shadow-sm"
+>
+  View Details
+</button>
+
               </div>
               <button className="p-2 rounded-full bg-white shadow-sm">
                 <Heart className="w-5 h-5 text-gray-300" />
@@ -118,9 +122,7 @@ export default function JobCard({ job, onView }) {
           {job.description && (
             <p className="text-sm text-gray-600 mt-2 line-clamp-2">{job.description}</p>
           )}
-        </div>
-
-        
+        </div>    
 
         {/* RIGHT (mobile: shown inline below) */}
         <div className="flex flex-col items-end gap-3 md:hidden ml-2">
