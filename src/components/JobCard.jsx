@@ -65,18 +65,29 @@ export default function JobCard({ job, onView }) {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 mt-3">
-            {job.company_type && (
-              <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100">
-                {job.company_type}
-              </span>
-            )}
-            {job.industry && (
-              <span className="px-2 py-1 rounded-full text-xs font-medium bg-sky-50 text-sky-700 border border-sky-100">
-                {job.industry}
-              </span>
-            )}
+        {/* CHIPS */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {job.company_type && (
+            <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm font-medium">
+              {job.company_type}
+            </span>
+          )}
 
+          {job.industry && (
+            <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
+              {job.industry}
+            </span>
+          )}
+
+          {job.skills?.map((skill, i) => (
+            <span
+              key={i}
+              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
 
           {/* bottom meta row */}
           <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-600">
@@ -106,17 +117,6 @@ export default function JobCard({ job, onView }) {
               <span className="truncate max-w-[240px] text-sm text-gray-700">{job.name ? job.name : job.email ?? ""}</span>
 
             </div>
-
-                        {skills.slice(0, 4).map((s, i) => (
-              <span
-                key={i}
-                className={`px-2 py-1 rounded-full text-xs font-medium ${chipColors[i % chipColors.length]} border ${i % 2 === 0 ? "border-transparent" : "border-gray-100"}`}
-              >
-                {s}
-              </span>
-            ))}
-
-          </div>
 
           {/* RIGHT (mobile: shown inline below) */}
           <div className="flex flex-col items-end gap-3 md:hidden ml-2">
