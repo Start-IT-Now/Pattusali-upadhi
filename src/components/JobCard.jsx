@@ -8,7 +8,7 @@ import {
   Heart,
 } from "lucide-react";
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, onView }) {
   const formatDate = (dateString) => {
     if (!dateString) return "—";
     const d = new Date(dateString);
