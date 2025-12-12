@@ -236,6 +236,13 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+      X
+      {/* Job Details Modal */}
+      <JobCard 
+  key={job.id} 
+  job={{ ...jobs, onView: setSelectedJob }} 
+/>
+
 
       {/* Job Details Modal */}
       {selectedJob && (
