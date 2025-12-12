@@ -1,11 +1,13 @@
+// src/App.jsx
 import { useState, useEffect, useCallback } from "react";
 import { Search } from "lucide-react";
-import supabase  from "./lib/supabase.js";
+import  supabase  from "./lib/supabase.js"; 
 import JobCard from "./components/JobCard.jsx";
 import JobPostForm from "./components/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";
 import VolunteerAuth from "./components/VolunteerAuth.jsx";
 import Filterbar from "./components/FilterBar.jsx";
+import JobDetails from "./components/JobDetails.jsx";
 import puv from "./puv.png";
 
 export default function App() {
@@ -14,6 +16,7 @@ export default function App() {
   const [view, setView] = useState("jobs");
   const [searchTerm, setSearchTerm] = useState("");
   const [volunteer, setVolunteer] = useState(null);
+  const [selectedJob, setSelectedJob] = useState(null);
 
   // filters (same shape as FilterSidebar)
   const [filters, setFilters] = useState({
@@ -46,9 +49,7 @@ export default function App() {
         // 1) text search across job_title, company_name, location (server-side)
         const term = (search || "").trim();
         if (term) {
-          // PostgREST 'or' expression: fields separated by comma, each using ilike
-          // Example: or=(job_title.ilike.%term%,company_name.ilike.%term%,location.ilike.%term%)
-          const escaped = term.replace(/%/g, "\\%").replace(/,/g, "\\,"); // mild escaping
+          const escaped = term.replace(/%/g, "\\%").replace(/,/g, "\\,");
           const orExpr = `job_title.ilike.%${escaped}%,company_name.ilike.%${escaped}%,location.ilike.%${escaped}%`;
           query = query.or(orExpr);
         }
@@ -60,7 +61,6 @@ export default function App() {
 
         // 3) companyType filter (multi) - expects a string column `company_type`
         if (Array.isArray(filters.companyType) && filters.companyType.length > 0) {
-          // use .in for simple string columns
           query = query.in("company_type", filters.companyType);
         }
 
@@ -69,7 +69,6 @@ export default function App() {
           query = query.in("industry", filters.industry);
         }
 
-        // Run query
         const { data, error, count } = await query;
 
         if (error) {
@@ -78,7 +77,6 @@ export default function App() {
           setTotal(0);
         } else {
           setJobs(Array.isArray(data) ? data : []);
-          // count should be an integer when { count: 'exact' } used
           setTotal(typeof count === "number" ? count : 0);
         }
       } catch (err) {
@@ -94,12 +92,11 @@ export default function App() {
 
   // fetch initial + whenever page/search/filters change
   useEffect(() => {
-    // reset to page 1 when search or filters change
     setPage(1);
     fetchJobs({ page: 1, pageSize, search: searchTerm, filters });
   }, [fetchJobs, searchTerm, filters]); // eslint-disable-line
 
-  // fetch when page changes (but not when page reset above triggers)
+  // fetch when page changes
   useEffect(() => {
     fetchJobs({ page, pageSize, search: searchTerm, filters });
   }, [page]); // eslint-disable-line
@@ -121,7 +118,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F7F3FF] text-gray-900">
-      {/* Header (unchanged) */}
+      {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -154,7 +151,6 @@ export default function App() {
         ) : view === "postForm" ? (
           <JobPostForm
             onJobPosted={() => {
-              // refresh list when a job is posted (stay on current page)
               fetchJobs({ page, pageSize, search: searchTerm, filters });
               setView("jobs");
             }}
@@ -188,7 +184,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Grid of cards */}
+              {/* Job list */}
               {loading ? (
                 <div className="py-20 text-center">
                   <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600" />
@@ -198,13 +194,16 @@ export default function App() {
                 <div className="bg-white rounded-2xl p-8 text-center shadow">No jobs found</div>
               ) : (
                 <>
-  {/* single column list (one horizontal card per row) */}
-<div className="flex flex-col gap-6">
-  {jobs.map((job) => (
-    <JobCard key={job.id} job={job} />
-  ))}
-</div>
-
+                  {/* single column list (one horizontal card per row) */}
+                  <div className="flex flex-col gap-6">
+                    {jobs.map((job) => (
+                      <JobCard
+                        key={job.id}
+                        job={job}
+                        onView={() => setSelectedJob(job)}  // <-- pass callback
+                      />
+                    ))}
+                  </div>
 
                   {/* Pagination */}
                   <div className="flex items-center justify-between mt-6">
@@ -231,10 +230,17 @@ export default function App() {
                 </>
               )}
             </section>
-          </div>  
+          </div>
         )}
       </main>
-        <Footer />
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Job Details Modal */}
+      {selectedJob && (
+        <JobDetails job={selectedJob} onClose={() => setSelectedJob(null)} />
+      )}
     </div>
   );
 }

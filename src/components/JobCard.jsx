@@ -128,9 +128,14 @@ export default function JobCard({ job }) {
             <button className="px-3 py-1 rounded-md bg-[#6C46CF] text-white text-sm font-semibold shadow-sm hover:bg-[#5935B5]">
               Apply
             </button>
-            <button className="px-3 py-1 rounded-md bg-white border border-gray-200 text-sm hover:shadow-sm">
-              View
-            </button>
+<button
+  onClick={onView}
+  className="px-4 py-2 rounded-md bg-white border border-gray-200 text-sm hover:shadow-sm"
+>
+  View Details
+</button>
+
+
           </div>
           <button className="p-2 rounded-full bg-white shadow-sm">
             <Heart className="w-5 h-5 text-gray-300" />
