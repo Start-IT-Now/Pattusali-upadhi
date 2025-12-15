@@ -134,7 +134,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
             <input
               type="text"
               name="job_title"
-              placeholder="e.g. Senior Software Engir"
+              placeholder="e.g. Senior Software Engineer"
               value={formData.job_title}
               onChange={handleInputChange}
               required
@@ -253,12 +253,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     className="w-full px-4 py-2 border border-gray-300 rounded-lg 
            focus:ring-2 focus:ring-purple-300 focus:border-transparent"
   />
-
-  <p className="text-xs text-gray-500 mt-1">
-    Optional — leave empty to keep job open.
-  </p>
 </div>
-
         </div>
 
         {/* RIGHT SIDE */}
@@ -311,6 +306,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
               <option value="Insurance">Insurance</option>
               <option value="Marketing">Marketing</option>
               <option value="Hardware & Networking">Hardware & Networking</option>
+              <option value="Others">Others</option>
             </select>
           </div>
 
