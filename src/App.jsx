@@ -17,6 +17,8 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [volunteer, setVolunteer] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [serviceType, setServiceType] = useState("job");
+
 
   // filters (same shape as FilterSidebar)
   const [filters, setFilters] = useState({
@@ -90,11 +92,17 @@ export default function App() {
     []
   );
 
+  // 5) service type filter (MOST IMPORTANT)
+if (serviceType) {
+  query = query.eq("service_type", serviceType);
+}
+
+
   // fetch initial + whenever page/search/filters change
   useEffect(() => {
     setPage(1);
     fetchJobs({ page: 1, pageSize, search: searchTerm, filters });
-  }, [fetchJobs, searchTerm, filters]); // eslint-disable-line
+  }, [fetchJobs, searchTerm, filters, serviceType]); // eslint-disable-line
 
   // fetch when page changes
   useEffect(() => {
@@ -130,13 +138,28 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex gap-2">
-              {["Guidance", "Need Training", "Access Company", "Contact"].map((t) => (
-                <button key={t} className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold shadow-sm hover:opacity-95">
-                  {t}
-                </button>
-              ))}
-            </div>
+{[
+  { label: "Guidance", value: "guidance" },
+  { label: "Need Training", value: "training" },
+  { label: "Access Company", value: "job" },
+].map((item) => (
+  <button
+    key={item.value}
+    onClick={() => {
+      setServiceType(item.value);
+      setView("jobs");
+      setPage(1);
+    }}
+    className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm
+      ${serviceType === item.value
+        ? "bg-[#6C46CF] text-white"
+        : "bg-white text-gray-700 border"
+      }`}
+  >
+    {item.label}
+  </button>
+))}
+
             <button onClick={handleVolunteerClick} className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold shadow-md">
               {volunteer ? "Post a Job" : "Volunteer"}
             </button>
