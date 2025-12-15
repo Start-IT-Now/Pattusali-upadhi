@@ -320,10 +320,9 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
   >
     <option value="">Select service</option>
-    <option value="job">Job Opportunity</option>
+    <option value="job">Job/Internship</option>
     <option value="guidance">Guidance</option>
     <option value="training">Training</option>
-    <option value="internship">Internship</option>
   </select>
 </div>
 

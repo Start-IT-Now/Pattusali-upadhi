@@ -2,8 +2,8 @@
 import React from "react";
 
 const COMPANY_TYPES = ["Startup", "Foreign MNC", "Indian MNC", "Corporate", "Others"];
-const LOCATIONS = ["Delhi NCR", "Bengaluru", "Ahmedabad", "Mumbai", "Hyderabad", "Chennai", "New Delhi"];
-const INDUSTRIES = ["Financial Services", "Insurance", "Marketing", "Information & Technology"];
+const LOCATIONS = ["Delhi NCR", "Bengaluru", "Ahmedabad", "Mumbai", "Hyderabad", "Chennai", "New Delhi", "Pune", "Kolkata", "Others"];
+const INDUSTRIES = ["Financial Services", "Insurance", "Marketing", "Information & Technology", "Hardware & Networking", "Others"];
 
 export default function FilterSidebar({ filters = {}, setFilters = () => {} }) {
   // helpers to update filters
