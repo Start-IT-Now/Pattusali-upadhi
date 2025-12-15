@@ -17,7 +17,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [volunteer, setVolunteer] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [serviceType, setServiceType] = useState("job");
+  const [servicetype, setServicetype] = useState("job");
 
 
   // filters (same shape as FilterSidebar)
@@ -34,7 +34,14 @@ export default function App() {
 
   // helper: build and run a server-side query
   const fetchJobs = useCallback(
-    async ({ page = 1, pageSize = 9, search = "", filters = {} } = {}) => {
+async ({
+  page = 1,
+  pageSize = 9,
+  search = "",
+  filters = {},
+  servicetype = "job",
+} = {}) => {
+
       setLoading(true);
 
       try {
@@ -47,6 +54,12 @@ export default function App() {
           .select("*", { count: "exact" })
           .order("created_at", { ascending: false })
           .range(start, end);
+
+          // 0) service type filter (job / guidance / training)
+if (servicetype) {
+  query = query.eq("service_type", servicetype);
+}
+
 
         // 1) text search across job_title, company_name, location (server-side)
         const term = (search || "").trim();
@@ -95,8 +108,9 @@ export default function App() {
 // fetch initial + whenever page/search/filters change
 useEffect(() => {
   setPage(1);
-  fetchJobs({ page: 1, pageSize, search: searchTerm, filters, serviceType });
-}, [fetchJobs, searchTerm, filters, serviceType]); // eslint-disable-line
+fetchJobs({ page, pageSize, search: searchTerm, filters, servicetype });
+}, [fetchJobs, searchTerm, filters, servicetype]);
+
 
 const handleVolunteerClick = () => {
     if (volunteer) setView("postForm");
@@ -135,12 +149,12 @@ const handleVolunteerClick = () => {
   <button
     key={item.value}
     onClick={() => {
-      setServiceType(item.value);
+      setServicetype(item.value);
       setView("jobs");
       setPage(1);
     }}
     className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm
-      ${serviceType === item.value
+      ${servicetype === item.value
         ? "bg-[#6C46CF] text-white"
         : "bg-white text-gray-700 border"
       }`}
