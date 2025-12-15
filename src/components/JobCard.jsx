@@ -110,13 +110,19 @@ export default function JobCard({ job, onView }) {
               <span className="text-xs text-gray-500">Posted {formatDate(job.created_at)}</span>
             </div>
 
-            {/* contact (mobile shows under meta) */}
-            <div className="flex items-center gap-2">
-              {job.name && <User className="w-4 h-4 text-gray-400" />}
-              {job.email && <Mail className="w-4 h-4 text-gray-400" />}
-              <span className="truncate max-w-[240px] text-sm text-gray-700">{job.name ? job.name : job.email ?? ""}</span>
+            {job.name && (
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-purple-600" />
+                <span>{job.name}</span>
+              </div>
+            )}
 
-            </div>
+             {job.hr_email && (
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-purple-600" />
+                <span>{job.hr_email}</span>
+              </div>
+            )}
 
           {/* RIGHT (mobile: shown inline below) */}
           <div className="flex flex-col items-end gap-3 md:hidden ml-2">

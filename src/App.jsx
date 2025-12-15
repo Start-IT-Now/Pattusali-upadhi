@@ -143,8 +143,7 @@ const handleVolunteerClick = () => {
           <div className="flex items-center gap-3">
 {[
   { label: "Guidance", value: "guidance" },
-  { label: "Need Training", value: "training" },
-  { label: "Access Company", value: "job" },
+  { label: "Need Training", value: "training" }
 ].map((item) => (
   <button
     key={item.value}
