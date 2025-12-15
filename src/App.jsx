@@ -92,24 +92,13 @@ export default function App() {
     []
   );
 
-  // 5) service type filter (MOST IMPORTANT)
-if (serviceType) {
-  query = query.eq("service_type", serviceType);
-}
+// fetch initial + whenever page/search/filters change
+useEffect(() => {
+  setPage(1);
+  fetchJobs({ page: 1, pageSize, search: searchTerm, filters, serviceType });
+}, [fetchJobs, searchTerm, filters, serviceType]); // eslint-disable-line
 
-
-  // fetch initial + whenever page/search/filters change
-  useEffect(() => {
-    setPage(1);
-    fetchJobs({ page: 1, pageSize, search: searchTerm, filters });
-  }, [fetchJobs, searchTerm, filters, serviceType]); // eslint-disable-line
-
-  // fetch when page changes
-  useEffect(() => {
-    fetchJobs({ page, pageSize, search: searchTerm, filters });
-  }, [page]); // eslint-disable-line
-
-  const handleVolunteerClick = () => {
+const handleVolunteerClick = () => {
     if (volunteer) setView("postForm");
     else setView("auth");
   };
