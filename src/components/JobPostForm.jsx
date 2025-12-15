@@ -9,7 +9,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     location: "",
     phone: "",
     experience: "",
-    service_Type: "job",
+    service_type: "job",
     company_type: "",
     industry: "",
     name: "",
@@ -75,7 +75,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     location: "",
     phone: "",
     experience: "",
-    service_Type: "job",
+    service_type: "job",
     company_type: "",
     industry: "",
     name: "",
@@ -152,6 +152,32 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
               onChange={handleInputChange}
               required
               className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none"
+            />
+          </div>
+
+                    <div>
+            <label className="font-semibold text-gray-900">Representiative Name *</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="e.g. John Doe"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
+            />
+          </div>
+
+                    <div>
+            <label className="font-semibold text-gray-900">Email *</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="e.g.example@gmail.com "
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
             />
           </div>
 
@@ -288,22 +314,23 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
             </select>
           </div>
 
-          <div>
-            <label className="font-semibold text-gray-900">Service *</label>
-            <select
-              name="service"
-              value={formData.service}
-              onChange={handleInputChange}
-              required
-              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
-            >
-              <option value="">Select service</option>
-              <option value="0-1 years">Training</option>
-              <option value="1-3 years">Guidance</option>
-              <option value="3-5 years">Internship</option>
-              <option value="5-7 years">Job Opprtunity</option>
-            </select>
-          </div>
+<div>
+  <label className="font-semibold text-gray-900">Service Type *</label>
+  <select
+    name="service_type"
+    value={formData.service_type}
+    onChange={handleInputChange}
+    required
+    className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
+  >
+    <option value="">Select service</option>
+    <option value="job">Job Opportunity</option>
+    <option value="guidance">Guidance</option>
+    <option value="training">Training</option>
+    <option value="internship">Internship</option>
+  </select>
+</div>
+
 
           <div>
             <label className="font-semibold text-gray-900">Company Register ID *</label>
