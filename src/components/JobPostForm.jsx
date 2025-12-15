@@ -7,11 +7,16 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     job_title: "",
     company_name: "",
     location: "",
+    phone: "",
     experience: "",
+    service: "",
     company_type: "",
     industry: "",
     name: "",
     email: "",
+    hr_email: "",
+    register_number: "",
+    company_website: "",
     end_date: "",
     description: "",
   });
@@ -65,16 +70,21 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     } else {
       setMessage({ type: "success", text: "Job posted successfully!" });
       setFormData({
-        job_title: "",
-        company_name: "",
-        location: "",
-        experience: "",
-        company_type: "",
-        industry: "",
-        name: "",
-        email: "",
-        end_date: "",
-        description: "",
+    job_title: "",
+    company_name: "",
+    location: "",
+    phone: "",
+    experience: "",
+    service: "",
+    company_type: "",
+    industry: "",
+    name: "",
+    email: "",
+    hr_email: "",
+    register_number: "",
+    company_website: "",
+    end_date: "",
+    description: "",
       });
       setSkills([]);
       if (onJobPosted) onJobPosted();
@@ -276,6 +286,75 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
               <option value="Marketing">Marketing</option>
               <option value="Hardware & Networking">Hardware & Networking</option>
             </select>
+          </div>
+
+          <div>
+            <label className="font-semibold text-gray-900">Service *</label>
+            <select
+              name="service"
+              value={formData.service}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 bg-white focus:ring-2 focus:ring-purple-300"
+            >
+              <option value="">Select service</option>
+              <option value="0-1 years">Training</option>
+              <option value="1-3 years">Guidance</option>
+              <option value="3-5 years">Internship</option>
+              <option value="5-7 years">Job Opprtunity</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="font-semibold text-gray-900">Company Register ID *</label>
+            <input
+              type="text"
+              name="register_number"
+              placeholder="e.g. 1234567890"
+              value={formData.register_number}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
+            />
+          </div>
+
+                    <div>
+            <label className="font-semibold text-gray-900"> HR Email *</label>
+            <input
+              type="text"
+              name="hr_email"
+              placeholder="e.g. example@company.co.in"
+              value={formData.hr_email}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
+            />
+          </div>
+
+                    <div>
+            <label className="font-semibold text-gray-900">Phone *</label>
+            <input
+              type="text"
+              name="phone"
+              placeholder="e.g. +91 9876543210"
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
+            />
+          </div>
+
+                    <div>
+            <label className="font-semibold text-gray-900">Company site *</label>
+            <input
+              type="text"
+              name="company_website"
+              placeholder="e.g. www.company.com"
+              value={formData.company_website}
+              onChange={handleInputChange}
+              required
+              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300"
+            />
           </div>
 
         </div>
