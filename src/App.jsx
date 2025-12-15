@@ -136,14 +136,17 @@ const handleVolunteerClick = () => {
             <img src={puv} alt="logo" className="w-14 h-14 rounded-md object-cover" />
             <div>
               <h1 className="text-2xl font-extrabold tracking-tight">Pattusali Upadhi Vedhika</h1>
-              <p className="text-sm text-gray-600">Find your dream Opportunity today</p>
+              <p className="text-sm text-[#6C46CF]">Find your dream Opportunity today</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
 {[
   { label: "Guidance", value: "guidance" },
-  { label: "Need Training", value: "training" }
+  { label: "Need Training", value: "training" },
+  { label: "Jobs/Internships", value: "job" },
+  { label: "Access company", value: null },
+  
 ].map((item) => (
   <button
     key={item.value}
