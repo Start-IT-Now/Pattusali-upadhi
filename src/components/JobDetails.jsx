@@ -21,6 +21,40 @@ export default function JobDetailsModal({ job, onClose }) {
     });
   };
 
+
+  //email functionality
+  const handleApply = async () => {
+  const applicant_name = prompt("Enter your name");
+  const applicant_email = prompt("Enter your email");
+
+  if (!applicant_name || !applicant_email) return;
+
+  const res = await fetch(
+    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-application-email`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({
+        job_title: job.job_title,
+        company_name: job.company_name,
+        hr_email: job.hr_email,
+        applicant_name,
+        applicant_email,
+      }),
+    }
+  );
+
+  if (res.ok) {
+    alert("Application sent successfully!");
+  } else {
+    alert("Failed to send email. Please try again.");
+  }
+};
+
+  
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       
@@ -133,9 +167,13 @@ export default function JobDetailsModal({ job, onClose }) {
             Close
           </button>
 
-          <button className="px-6 py-2 bg-[#6C46CF] text-white rounded-lg hover:bg-[#5935B5] shadow transition">
-            Apply Now
-          </button>
+<button
+  onClick={handleApply}
+  className="px-6 py-2 bg-[#6C46CF] text-white rounded-lg hover:bg-[#5935B5]"
+>
+  Apply Now
+</button>
+
         </div>
 
       </div>
