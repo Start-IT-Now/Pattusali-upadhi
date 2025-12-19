@@ -30,7 +30,7 @@ export default function JobDetailsModal({ job, onClose }) {
   if (!applicant_name || !applicant_email) return;
 
   const res = await fetch(
-    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-application-email`,
+    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/resend-email`,
     {
       method: "POST",
       headers: {
