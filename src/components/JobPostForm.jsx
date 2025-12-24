@@ -1,233 +1,192 @@
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
-import supabase from "../lib/supabase.js";
+import { motion, AnimatePresence } from "framer-motion";
+import supabase from "../lib/supabase";
 
 export default function JobPostForm({ onJobPosted, onCancel }) {
   const [formData, setFormData] = useState({
-    job_title: "",
-    company_name: "",
-    location: "",
-    phone: "",
-    experience: "",
     service_type: "job",
 
+    // common
+    job_title: "",
+    description: "",
+    skills: [],
+
+    // job
+    company_name: "",
+    location: "",
+    experience: "",
     company_type: "",
     industry: "",
-    name: "",
-    email: "",
-    hr_email: "",
-    register_number: "",
-    company_website: "",
     end_date: "",
-    description: "",
+    hr_email: "",
 
+    // guidance
     mentor_name: "",
     mentor_email: "",
+
+    // training
     trainer_name: "",
     trainer_email: "",
   });
 
-  const [skills, setSkills] = useState([]);
-  const [currentSkill, setCurrentSkill] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [skillInput, setSkillInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const update = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const addSkill = () => {
-    const skill = currentSkill.trim();
-    if (!skill || skills.includes(skill)) return;
-    setSkills([...skills, skill]);
-    setCurrentSkill("");
+    if (!skillInput.trim()) return;
+    setFormData({
+      ...formData,
+      skills: [...formData.skills, skillInput.trim()],
+    });
+    setSkillInput("");
   };
 
-  const removeSkill = (skill) => {
-    setSkills(skills.filter((s) => s !== skill));
-  };
+  const removeSkill = (s) =>
+    setFormData({
+      ...formData,
+      skills: formData.skills.filter((x) => x !== s),
+    });
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (!skills.length) {
-      setMessage({ type: "error", text: "Please add at least one skill." });
-      return;
-    }
+    const { error } = await supabase.from("jobs").insert([formData]);
 
-    setIsSubmitting(true);
-    setMessage(null);
-
-    const { error } = await supabase.from("jobs").insert([
-      {
-        ...formData,
-        skills,
-        created_at: new Date(),
-      },
-    ]);
-
-    setIsSubmitting(false);
-
-    if (error) {
-      setMessage({ type: "error", text: error.message });
-    } else {
-      setMessage({ type: "success", text: "Job posted successfully!" });
-      setSkills([]);
-      setFormData({
-        job_title: "",
-        company_name: "",
-        location: "",
-        phone: "",
-        experience: "",
-        service_type: "job",
-        company_type: "",
-        industry: "",
-        name: "",
-        email: "",
-        hr_email: "",
-        register_number: "",
-        company_website: "",
-        end_date: "",
-        description: "",
-        mentor_name: "",
-        mentor_email: "",
-        trainer_name: "",
-        trainer_email: "",
-      });
-
-      onJobPosted?.();
-      setTimeout(() => setMessage(null), 3000);
-    }
+    setLoading(false);
+    if (!error) onJobPosted?.();
   };
 
   return (
     <form
-      onSubmit={handleSubmit}
-      className="bg-white rounded-3xl shadow-md border border-gray-100 p-8"
+      onSubmit={submit}
+      className="bg-white rounded-3xl shadow-md p-8 space-y-8"
     >
       {/* Header */}
-      <div className="flex justify-between mb-6">
-        <h2 className="text-3xl font-bold">Post a New Job</h2>
-        {onCancel && (
-          <button type="button" onClick={onCancel} className="text-gray-600">
-            Cancel
-          </button>
-        )}
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold">Post a New Opportunity</h2>
+        <button onClick={onCancel} type="button" className="text-gray-500">
+          Cancel
+        </button>
       </div>
 
-      {/* Message */}
-      {message && (
-        <div
-          className={`p-4 mb-4 rounded-lg ${
-            message.type === "success"
-              ? "bg-emerald-50 text-emerald-700"
-              : "bg-rose-50 text-rose-700"
-          }`}
+      {/* Service Type */}
+      <div>
+        <label className="font-semibold">Service Type</label>
+        <select
+          name="service_type"
+          value={formData.service_type}
+          onChange={update}
+          className="input mt-1"
         >
-          {message.text}
-        </div>
-      )}
+          <option value="job">Job</option>
+          <option value="guidance">Guidance</option>
+          <option value="training">Training</option>
+        </select>
+      </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* LEFT */}
-        <div className="flex flex-col gap-6">
-          <inputField label="Job Title" name="job_title" value={formData.job_title} onChange={handleInputChange} />
-          <inputField label="Location" name="location" value={formData.location} onChange={handleInputChange} />
-          <inputField label="Name" name="name" value={formData.name} onChange={handleInputChange} />
-          <inputField label="Email" name="email" value={formData.email} onChange={handleInputChange} />
+      {/* Common Fields */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <Field label="Title" name="job_title" value={formData.job_title} onChange={update} />
+        <Field label="Description" name="description" value={formData.description} onChange={update} />
+      </div>
 
-          {/* Skills */}
-          <div>
-            <label className="font-semibold">Skills *</label>
-            <div className="flex gap-2 mt-1">
-              <input
-                value={currentSkill}
-                onChange={(e) => setCurrentSkill(e.target.value)}
-                className="flex-1 input"
-              />
-              <button type="button" onClick={addSkill} className="bg-purple-600 text-white px-3 rounded">
-                <Plus size={18} />
-              </button>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {skills.map((s) => (
-                <span key={s} className="bg-purple-100 px-3 py-1 rounded-full text-sm flex gap-1">
-                  {s}
-                  <X size={14} onClick={() => removeSkill(s)} className="cursor-pointer" />
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT */}
-        <div className="flex flex-col gap-6">
-          <inputField label="Company Name" name="company_name" value={formData.company_name} onChange={handleInputChange} />
-          <inputField label="Phone" name="phone" value={formData.phone} onChange={handleInputChange} />
-          <inputField label="HR Email" name="hr_email" value={formData.hr_email} onChange={handleInputChange} />
-
-          <selectField
-            label="Service Type"
-            name="service_type"
-            value={formData.service_type}
-            onChange={handleInputChange}
-            options={["job", "guidance", "training"]}
+      {/* Skills */}
+      <div>
+        <label className="font-semibold">Skills *</label>
+        <div className="flex gap-2 mt-1">
+          <input
+            value={skillInput}
+            onChange={(e) => setSkillInput(e.target.value)}
+            className="input flex-1"
           />
+          <button type="button" onClick={addSkill} className="btn-primary">
+            <Plus size={16} />
+          </button>
+        </div>
 
-          {formData.service_type === "job" && (
-            <>
-              <selectField
-                label="Experience"
-                name="experience"
-                value={formData.experience}
-                onChange={handleInputChange}
-                options={["0-1 years", "1-3 years", "3-5 years", "5+ years"]}
-              />
-              <inputField label="Application End Date" type="date" name="end_date" value={formData.end_date} onChange={handleInputChange} />
-            </>
-          )}
+        <div className="flex gap-2 mt-2 flex-wrap">
+          {formData.skills.map((s) => (
+            <span key={s} className="chip">
+              {s}
+              <X size={14} onClick={() => removeSkill(s)} />
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Description */}
-      <textarea
-        className="w-full mt-6 input"
-        rows="5"
-        name="description"
-        value={formData.description}
-        onChange={handleInputChange}
-        placeholder="Job Description"
-      />
+      {/* Animated Service Sections */}
+      <AnimatePresence mode="wait">
+        {formData.service_type === "job" && (
+          <AnimatedSection key="job">
+            <SectionTitle>Job Details</SectionTitle>
+            <Grid>
+              <Field label="Company" name="company_name" value={formData.company_name} onChange={update} />
+              <Field label="Location" name="location" value={formData.location} onChange={update} />
+              <Field label="Experience" name="experience" value={formData.experience} onChange={update} />
+              <Field label="HR Email" name="hr_email" value={formData.hr_email} onChange={update} />
+            </Grid>
+          </AnimatedSection>
+        )}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full mt-6 bg-purple-600 text-white py-3 rounded-lg"
-      >
-        {isSubmitting ? "Posting..." : "Post Job"}
+        {formData.service_type === "guidance" && (
+          <AnimatedSection key="guidance">
+            <SectionTitle>Mentor Details</SectionTitle>
+            <Grid>
+              <Field label="Mentor Name" name="mentor_name" value={formData.mentor_name} onChange={update} />
+              <Field label="Mentor Email" name="mentor_email" value={formData.mentor_email} onChange={update} />
+            </Grid>
+          </AnimatedSection>
+        )}
+
+        {formData.service_type === "training" && (
+          <AnimatedSection key="training">
+            <SectionTitle>Trainer Details</SectionTitle>
+            <Grid>
+              <Field label="Trainer Name" name="trainer_name" value={formData.trainer_name} onChange={update} />
+              <Field label="Trainer Email" name="trainer_email" value={formData.trainer_email} onChange={update} />
+            </Grid>
+          </AnimatedSection>
+        )}
+      </AnimatePresence>
+
+      {/* Submit */}
+      <button disabled={loading} className="btn-primary w-full">
+        {loading ? "Posting..." : "Post"}
       </button>
     </form>
   );
 }
 
-/* Reusable Inputs */
-const inputField = ({ label, ...props }) => (
-  <div>
-    <label className="font-semibold">{label}</label>
-    <input {...props} className="input w-full mt-1" />
-  </div>
+/* ---------------- helpers ---------------- */
+
+const AnimatedSection = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, height: 0 }}
+    animate={{ opacity: 1, height: "auto" }}
+    exit={{ opacity: 0, height: 0 }}
+    transition={{ duration: 0.35, ease: "easeInOut" }}
+    className="overflow-hidden"
+  >
+    {children}
+  </motion.div>
 );
 
-const selectField = ({ label, options, ...props }) => (
+const Grid = ({ children }) => (
+  <div className="grid md:grid-cols-2 gap-6">{children}</div>
+);
+
+const SectionTitle = ({ children }) => (
+  <h3 className="text-xl font-semibold mb-4">{children}</h3>
+);
+
+const Field = ({ label, ...props }) => (
   <div>
-    <label className="font-semibold">{label}</label>
-    <select {...props} className="input w-full mt-1">
-      <option value="">Select</option>
-      {options.map((o) => (
-        <option key={o} value={o}>{o}</option>
-      ))}
-    </select>
+    <label className="font-medium">{label}</label>
+    <input {...props} className="input mt-1" />
   </div>
 );
