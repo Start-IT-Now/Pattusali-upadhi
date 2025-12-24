@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import supabase from "../lib/supabase";
+import { FormField } from "./Form/FormField.jsx";
+
 
 export default function JobPostForm({ onJobPosted, onCancel }) {
   const [formData, setFormData] = useState({
