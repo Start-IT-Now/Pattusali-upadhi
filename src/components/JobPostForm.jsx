@@ -13,8 +13,8 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
 
     company_type: "",
     industry: "",
-    representative_name: "",
-    representative_email: "",
+    name: "",
+    email: "",
     hr_email: "",
     register_number: "",
     company_website: "",
@@ -83,8 +83,8 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
         service_type: "job",
         company_type: "",
         industry: "",
-        representative_name: "",
-        representative_email: "",
+        name: "",
+        email: "",
         hr_email: "",
         register_number: "",
         company_website: "",
@@ -135,8 +135,8 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
         <div className="flex flex-col gap-6">
           <inputField label="Job Title" name="job_title" value={formData.job_title} onChange={handleInputChange} />
           <inputField label="Location" name="location" value={formData.location} onChange={handleInputChange} />
-          <inputField label="Representative Name" name="representative_name" value={formData.representative_name} onChange={handleInputChange} />
-          <inputField label="Representative Email" name="representative_email" value={formData.representative_email} onChange={handleInputChange} />
+          <inputField label="Name" name="name" value={formData.name} onChange={handleInputChange} />
+          <inputField label="Email" name="email" value={formData.email} onChange={handleInputChange} />
 
           {/* Skills */}
           <div>
