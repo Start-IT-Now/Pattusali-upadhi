@@ -148,6 +148,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
+            className="grid md:grid-cols-2 gap-6"
           >
             <label className="font-semibold">Guidance Topic</label>
             <input
@@ -165,7 +166,9 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
+            className="grid md:grid-cols-2 gap-6"
           >
+            <div>
             <label className="font-semibold">Training Area</label>
             <input
               name="industry"
@@ -173,7 +176,10 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
               onChange={handleInputChange}
               className={inputBase}
             />
-         <label className="font-semibold">Guidance Type</label>
+            </div>
+
+            <div>
+         <label className="font-semibold">Training Type</label>
         <select
           name="Guidance_type"
           value={formData.guidance_type}
@@ -183,6 +189,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           <option value="job">Paid</option>
           <option value="guidance">Free</option>
         </select>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
