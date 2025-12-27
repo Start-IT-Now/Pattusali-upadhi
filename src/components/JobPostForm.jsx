@@ -14,6 +14,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     location: "",
     experience: "",
     company_type: "",
+    guidance_type: "",
     industry: "",
     description: "",
     hr_email: "",
@@ -172,6 +173,16 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
               onChange={handleInputChange}
               className={inputBase}
             />
+         <label className="font-semibold">Guidance Type</label>
+        <select
+          name="Guidance_type"
+          value={formData.guidance_type}
+          onChange={handleInputChange}
+          className={inputBase}
+        >
+          <option value="job">Paid</option>
+          <option value="guidance">Free</option>
+        </select>
           </motion.div>
         )}
       </AnimatePresence>
