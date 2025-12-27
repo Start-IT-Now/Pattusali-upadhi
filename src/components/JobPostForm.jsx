@@ -361,6 +361,40 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           <option value="guidance">Hybrid</option>
         </select>
             </div>
+
+                       <div>
+            <label className="font-semibold">Trainer Name</label>
+            <input
+              name="trainer_name"
+              value={formData.trainer_name}
+              onChange={handleInputChange}
+              className={inputBase}
+            />
+            </div>
+
+            <div>
+            <label className="font-semibold">Training Duration</label>
+            <input
+              name="trainer_duration"
+              value={formData.training_duration}
+              onChange={handleInputChange}
+              className={inputBase}
+            />
+            </div>
+
+                     <div>
+         <label className="font-semibold">Certification</label>
+        <select
+          name="certification"
+          value={formData.training_certification}
+          onChange={handleInputChange}
+          className={inputBase}
+        >
+          <option value="job">Yes</option>
+          <option value="guidance">No</option>
+          <option value="guidance">Maybe</option>
+        </select>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
