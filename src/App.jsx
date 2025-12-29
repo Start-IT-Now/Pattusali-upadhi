@@ -144,28 +144,28 @@ const handleVolunteerClick = () => {
 
           <div className="flex items-center gap-3">
 {[
-  { label: "Guidance", value: "guidance" },
-  { label: "Need Training", value: "training" },
-  { label: "Jobs/Internships", value: "job" },
-  { label: "Access company", value: null },
-  
+  { label: "Home", view: "home" },
+  { label: "Guidance", service: "guidance" },
+  { label: "Need Training", service: "training" },
+  { label: "Jobs / Internships", service: "job" },
 ].map((item) => (
   <button
-    key={item.value}
+    key={item.label}
     onClick={() => {
-      setServicetype(item.value);
-      setView("jobs");
-      setPage(1);
+      if (item.view) {
+        setView(item.view);
+      } else {
+        setServicetype(item.service);
+        setView("jobs");
+        setPage(1);
+      }
     }}
-    className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm
-      ${servicetype === item.value
-        ? "bg-[#6C46CF] text-white"
-        : "bg-white text-gray-700 border"
-      }`}
+    className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold"
   >
     {item.label}
   </button>
 ))}
+
 
             <button onClick={handleVolunteerClick} className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold shadow-md">
               {volunteer ? "Post a Job" : "Volunteer"}
@@ -177,8 +177,6 @@ const handleVolunteerClick = () => {
       {/* Main area */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-         <HomePage onApplyClick={() => setView("jobs")} />
-          
         {view === "auth" ? (
           <VolunteerAuth onSuccess={handleAuthSuccess} onCancel={() => setView("jobs")} />
         ) : view === "postForm" ? (
