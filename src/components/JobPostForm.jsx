@@ -24,7 +24,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     guidance_slot:" ",
     guidance_period:" ",
     mentor_name: "",
-    mentor_mail:" ",
+    mentor_email:" ",
     guidance_mode:" ",
 
     training_type: "",
@@ -317,8 +317,8 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
             <div>
             <label className="font-semibold">Mentor Mail</label>
             <input
-              name="mentor_mail"
-              value={formData.mentor_mail}
+              name="mentor_email"
+              value={formData.mentor_email}
               onChange={handleInputChange}
               className={inputBase}
             />

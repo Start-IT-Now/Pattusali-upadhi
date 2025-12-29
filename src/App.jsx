@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Search } from "lucide-react";
 import  supabase  from "./lib/supabase.js"; 
+import HomePage from "./components/HomePage.jsx";
 import JobCard from "./components/JobCard.jsx";
 import JobPostForm from "./components/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";
@@ -175,6 +176,9 @@ const handleVolunteerClick = () => {
 
       {/* Main area */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+         <HomePage onApplyClick={() => setView("jobs")} />
+          
         {view === "auth" ? (
           <VolunteerAuth onSuccess={handleAuthSuccess} onCancel={() => setView("jobs")} />
         ) : view === "postForm" ? (
@@ -185,6 +189,7 @@ const handleVolunteerClick = () => {
             }}
             onCancel={() => setView("jobs")}
           />
+          
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
             {/* Sidebar */}
