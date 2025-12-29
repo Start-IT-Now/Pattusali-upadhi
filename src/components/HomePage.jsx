@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function HomePage({ onApplyClick }) {
   return (
-    <div className="space-y-12">
+    <div className="space-y-3">
 
       {/* HERO SECTION */}
       <section className="bg-[#F7F3FF] py-4">
