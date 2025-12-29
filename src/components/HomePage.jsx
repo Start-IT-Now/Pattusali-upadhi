@@ -33,7 +33,7 @@ export default function HomePage({ onApplyClick }) {
       </section>
 
       {/* ABOUT SECTION */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white mb-2">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -82,7 +82,7 @@ export default function HomePage({ onApplyClick }) {
 
       {/* Terms and Conditions */}
       {/* Main Content – Two clearly separated sections */}
-      <div className="p-8 flex-1 space-y-8 text-gray-900">
+      <div className="py-20 flex-1 space-y-8 text-gray-900">
         {/* SECTION 1: Applicants */}
         <section className="border rounded-xl p-6 bg-white shadow-sm">
           {/* Tag / identifier */}
