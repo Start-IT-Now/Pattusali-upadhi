@@ -12,9 +12,9 @@ import JobDetails from "./components/JobDetails.jsx";
 import puv from "./puv.png";
 
 export default function App() {
+  const [view, setView] = useState("home");
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState("jobs");
   const [searchTerm, setSearchTerm] = useState("");
   const [volunteer, setVolunteer] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
