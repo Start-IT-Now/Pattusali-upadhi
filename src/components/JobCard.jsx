@@ -20,14 +20,9 @@ export default function JobCard({ job, onView }) {
       {/* Header */}
       <div className="flex justify-between items-start gap-4">
         <div>
-          <span className="text-xs uppercase tracking-wide text-purple-600 font-semibold">
-            {service}
-          </span>
-
-          <h3 className="text-lg font-bold text-gray-900 mt-1">
+          <h3 className="text-lg font-bold text-gray-900">
             {job.job_title}
           </h3>
-
           {job.company_name && (
             <p className="text-sm text-gray-600">{job.company_name}</p>
           )}
@@ -38,33 +33,25 @@ export default function JobCard({ job, onView }) {
         </button>
       </div>
 
-      {/* Service-specific content */}
-      <div className="mt-4 space-y-3 text-sm text-gray-700">
+      {/* ================= SINGLE HORIZONTAL META ROW ================= */}
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-700">
 
-        {/* ================= JOB ================= */}
+        {/* -------- JOB -------- */}
         {service === "job" && (
           <>
-            {job.location && (
-              <Meta icon={MapPin} label={job.location} />
-            )}
-            {job.experience && (
-              <Meta icon={Briefcase} label={`${job.experience} yrs`} />
-            )}
-            {job.work_mode && (
-              <Meta icon={Clock} label={job.work_mode} />
-            )}
-            {job.hr_email && (
-              <Meta icon={Mail} label={job.hr_email} />
-            )}
+            <MetaInline icon={MapPin} label={job.location} />
+            <MetaInline icon={Briefcase} label={job.experience && `${job.experience} yrs`} />
+            <MetaInline icon={Clock} label={job.work_mode} />
+            <MetaInline icon={Mail} label={job.hr_email} />
 
             {job.skills?.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {job.skills.map((s, i) => (
+                {job.skills.map((skill, i) => (
                   <span
                     key={i}
-                    className="px-2 py-1 rounded-full bg-purple-50 text-purple-700 text-xs"
+                    className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-medium"
                   >
-                    {s}
+                    {skill}
                   </span>
                 ))}
               </div>
@@ -72,24 +59,24 @@ export default function JobCard({ job, onView }) {
           </>
         )}
 
-        {/* ================= GUIDANCE ================= */}
+        {/* -------- GUIDANCE -------- */}
         {service === "guidance" && (
           <>
-            <Meta icon={User} label={`Mentor: ${job.mentor_name}`} />
-            <Meta icon={Clock} label={`Slot: ${job.guidance_slot}`} />
-            <Meta icon={Calendar} label={`Period: ${job.guidance_period}`} />
-            <Meta icon={Mail} label={job.mentor_email} />
+            <MetaInline icon={User} label={job.mentor_name && `Mentor: ${job.mentor_name}`} />
+            <MetaInline icon={Clock} label={job.guidance_slot} />
+            <MetaInline icon={Calendar} label={job.guidance_period} />
+            <MetaInline icon={Mail} label={job.mentor_email} />
           </>
         )}
 
-        {/* ================= TRAINING ================= */}
+        {/* -------- TRAINING -------- */}
         {service === "training" && (
           <>
-            <Meta icon={GraduationCap} label={job.training_topic} />
-            <Meta icon={User} label={`Trainer: ${job.trainer_name}`} />
-            <Meta icon={Clock} label={`Duration: ${job.training_duration}`} />
+            <MetaInline icon={GraduationCap} label={job.training_topic} />
+            <MetaInline icon={User} label={job.trainer_name && `Trainer: ${job.trainer_name}`} />
+            <MetaInline icon={Clock} label={job.training_duration} />
             {job.training_certification && (
-              <Meta
+              <MetaInline
                 icon={Calendar}
                 label={`Certificate: ${job.training_certification}`}
               />
@@ -120,11 +107,11 @@ export default function JobCard({ job, onView }) {
   );
 }
 
-/* ---------- Reusable Meta Row ---------- */
-function Meta({ icon: Icon, label }) {
+/* ---------- INLINE META (single-line safe) ---------- */
+function MetaInline({ icon: Icon, label }) {
   if (!label) return null;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 whitespace-nowrap">
       <Icon className="w-4 h-4 text-purple-600" />
       <span>{label}</span>
     </div>
