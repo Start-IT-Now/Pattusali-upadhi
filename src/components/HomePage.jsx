@@ -3,16 +3,16 @@ import Lottie from 'lottie-react';
 
 const solutions = [
   {
-    title: "Talent Sift (AI)",
-    description: "AI agents designed for industry specific resume screening and qualification."
+    title: "Jobs/Internships",
+    description:  "Access verified job and internship opportunities shared by trusted organizations and volunteers, helping you take confident steps toward a stable career."
   },
   {
-    title: "My Buddy",
-    description: "Boost productivity with a smart assistant that supports and resolves employee queries instantly."
+    title: "Guidance",
+    description: "Receive personalized mentorship and direction from experienced professionals who help you make informed decisions at every stage of your journey."
   },
   {
-    title: "Easy Automate",
-    description: "Streamline operations with low code automation - Resilient, Transparent and Tailored for every user."
+    title: "Training",
+    description:  "Build practical skills through focused training programs designed to improve employability, confidence, and long-term career readiness."
   }
 ];
 
@@ -248,7 +248,7 @@ export default function HomePage({ onApplyClick }) {
                   <Lottie animationData={solution.animation} loop={true} style={{ width: 80, height: 80 }} />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">{solution.title}</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">{solution.title}</h3>
               <p className="text-gray-500">{solution.description}</p>
             </motion.div>
           ))}
