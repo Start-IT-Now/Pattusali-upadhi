@@ -34,7 +34,7 @@ export default function JobCard({ job, onView }) {
       </div>
 
       {/* ================= SINGLE HORIZONTAL META ROW ================= */}
-      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-700">
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-gray-700">
 
         {/* -------- JOB -------- */}
         {service === "job" && (
@@ -49,7 +49,7 @@ export default function JobCard({ job, onView }) {
                 {job.skills.map((skill, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-medium"
+                    className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm font-medium"
                   >
                     {skill}
                   </span>
