@@ -4,122 +4,161 @@ import {
   Calendar,
   Mail,
   User,
-  GraduationCap,
-  Users,
-  Clock,
+  CalendarClock,
   Heart,
 } from "lucide-react";
 
 export default function JobCard({ job, onView }) {
-  const formatDate = (date) =>
-    date ? new Date(date).toLocaleDateString("en-IN") : "—";
+  const formatDate = (dateString) => {
+    if (!dateString) return "—";
+    const d = new Date(dateString);
+    return d.toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  const service = job.service_type; // job | guidance | training
 
   return (
-    <article className="bg-white rounded-2xl p-6 shadow-md border hover:shadow-lg transition">
-      {/* HEADER */}
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="text-xl font-semibold text-gray-900">
-            {job.service_type === "job" && job.job_title}
-            {job.service_type === "guidance" && job.guidance_type}
-            {job.service_type === "training" && job.training_type}
-          </h3>
-
-          {job.company_name && (
-            <p className="text-sm text-gray-500">{job.company_name}</p>
-          )}
+    <article className="w-full bg-white rounded-2xl p-5 shadow-md border border-gray-100 hover:shadow-lg transition">
+      <div className="flex items-start gap-4 md:gap-6">
+        {/* Avatar */}
+        <div className="flex-shrink-0">
+          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-100 flex items-center justify-center text-lg font-bold text-purple-700">
+            {service?.charAt(0)?.toUpperCase()}
+          </div>
         </div>
 
-        <span className="px-3 py-1 text-xs rounded-full bg-purple-50 text-purple-700">
-          {job.service_type.toUpperCase()}
-        </span>
-      </div>
-
-      {/* BODY */}
-      <div className="mt-4 space-y-2 text-sm text-gray-700">
-
-        {/* JOB */}
-        {job.service_type === "job" && (
-          <>
-            {job.experience && (
-              <div className="flex gap-2 items-center">
-                <Briefcase size={16} /> {job.experience} years
+        {/* Main */}
+        <div className="flex-1 min-w-0">
+          {/* Header */}
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="text-sm text-gray-500 font-medium">
+                {service === "job" && job.company_name}
+                {service === "guidance" && "Guidance Program"}
+                {service === "training" && "Training Program"}
               </div>
-            )}
-            {job.job_type && <div>Job Type: {job.job_type}</div>}
-            {job.work_mode && <div>Work Mode: {job.work_mode}</div>}
-            {job.hr_name && (
-              <div className="flex gap-2 items-center">
-                <User size={16} /> {job.hr_name}
+
+              <h3 className="text-lg md:text-xl font-semibold text-gray-900">
+                {service === "job" && job.job_title}
+                {service === "guidance" && job.guidance_type}
+                {service === "training" && job.training_title}
+              </h3>
+            </div>
+
+            {/* Actions */}
+            <div className="hidden md:flex flex-col items-end gap-2">
+              <div className="flex gap-2">
+                <button className="px-3 py-1 rounded-md bg-[#6C46CF] text-white text-sm font-semibold">
+                  Apply
+                </button>
+                <button
+                  onClick={() => onView?.(job)}
+                  className="px-3 py-1 rounded-md bg-white border text-sm"
+                >
+                  View
+                </button>
               </div>
+              <button className="p-2 rounded-full bg-white shadow-sm">
+                <Heart className="w-5 h-5 text-gray-300" />
+              </button>
+            </div>
+          </div>
+
+          {/* Chips */}
+          <div className="flex flex-wrap gap-2 mt-3">
+            {job.company_type && (
+              <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm">
+                {job.company_type}
+              </span>
             )}
+
+            {job.industry && (
+              <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
+                {job.industry}
+              </span>
+            )}
+
+            {job.skills?.map((skill, i) => (
+              <span
+                key={i}
+                className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+
+          {/* Meta row */}
+          <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-600">
+            {/* JOB */}
+            {service === "job" && (
+              <>
+                {job.experience && (
+                  <Meta icon={Briefcase} value={job.experience} />
+                )}
+                {job.work_mode && (
+                  <Meta icon={MapPin} value={job.work_mode} />
+                )}
+              </>
+            )}
+
+            {/* GUIDANCE */}
+            {service === "guidance" && (
+              <>
+                {job.guidance_mode && (
+                  <Meta icon={User} value={job.guidance_mode} />
+                )}
+                {job.guidance_period && (
+                  <Meta icon={CalendarClock} value={job.guidance_period} />
+                )}
+              </>
+            )}
+
+            {/* TRAINING */}
+            {service === "training" && (
+              <>
+                {job.training_mode && (
+                  <Meta icon={User} value={job.training_mode} />
+                )}
+                {job.training_duration && (
+                  <Meta icon={CalendarClock} value={job.training_duration} />
+                )}
+              </>
+            )}
+
+            <Meta
+              icon={Calendar}
+              value={`Posted ${formatDate(job.created_at)}`}
+              muted
+            />
+
             {job.hr_email && (
-              <div className="flex gap-2 items-center">
-                <Mail size={16} /> {job.hr_email}
-              </div>
+              <Meta icon={Mail} value={job.hr_email} />
             )}
-          </>
-        )}
+          </div>
 
-        {/* GUIDANCE */}
-        {job.service_type === "guidance" && (
-          <>
-            {job.mentor_name && (
-              <div className="flex gap-2 items-center">
-                <Users size={16} /> {job.mentor_name}
-              </div>
-            )}
-            {job.guidance_mode && <div>Mode: {job.guidance_mode}</div>}
-            {job.guidance_slot && <div>Slot: {job.guidance_slot}</div>}
-            {job.guidance_period && <div>Period: {job.guidance_period}</div>}
-            {job.mentor_email && (
-              <div className="flex gap-2 items-center">
-                <Mail size={16} /> {job.mentor_email}
-              </div>
-            )}
-          </>
-        )}
-
-        {/* TRAINING */}
-        {job.service_type === "training" && (
-          <>
-            {job.trainer_name && (
-              <div className="flex gap-2 items-center">
-                <GraduationCap size={16} /> {job.trainer_name}
-              </div>
-            )}
-            {job.training_mode && <div>Mode: {job.training_mode}</div>}
-            {job.training_duration && (
-              <div className="flex gap-2 items-center">
-                <Clock size={16} /> {job.training_duration}
-              </div>
-            )}
-            {job.training_topic && <div>Topic: {job.training_topic}</div>}
-            {job.training_certification && (
-              <div>Certification: {job.training_certification}</div>
-            )}
-          </>
-        )}
-      </div>
-
-      {/* FOOTER */}
-      <div className="mt-6 flex justify-between items-center">
-        <span className="text-xs text-gray-500 flex items-center gap-1">
-          <Calendar size={14} /> Posted {formatDate(job.created_at)}
-        </span>
-
-        <div className="flex gap-2">
-          <button
-            onClick={() => onView(job)}
-            className="px-4 py-2 text-sm border rounded-md hover:shadow"
-          >
-            View
-          </button>
-          <button className="p-2 rounded-full border">
-            <Heart size={16} />
-          </button>
+          {/* Description */}
+          {job.description && (
+            <p className="mt-3 text-sm text-gray-600 line-clamp-2">
+              {job.description}
+            </p>
+          )}
         </div>
       </div>
     </article>
+  );
+}
+
+/* Small helper */
+function Meta({ icon: Icon, value, muted }) {
+  return (
+    <div className="flex items-center gap-2">
+      <Icon className={`w-4 h-4 ${muted ? "text-gray-400" : "text-purple-600"}`} />
+      <span className={muted ? "text-gray-500 text-xs" : ""}>{value}</span>
+    </div>
   );
 }
