@@ -235,7 +235,7 @@ export default function HomePage({ onApplyClick }) {
           {solutions.map((solution, index) => (
             <motion.div
               key={index}
-              className="info-card text-center"
+             className="info-card text-center bg-white/10 backdrop-blur-md rounded-2xl p-8 cursor-pointer transition-all duration-300 hover:bg-white/20 hover:-translate-y-2"
               custom={index}
               initial="hidden"
               whileInView="visible"
@@ -248,19 +248,21 @@ export default function HomePage({ onApplyClick }) {
                   <Lottie animationData={solution.animation} loop={true} style={{ width: 80, height: 80 }} />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">{solution.title}</h3>
-              <p className="text-gray-500">{solution.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-white">{solution.title}</h3>
+              <p className="text-white/80 leading-relaxed">{solution.description}</p>
             </motion.div>
           ))}
-            </div>
+</div>
+</div>
 
-          <button
-            onClick={onApplyClick}
-            className="px-8 py-3 bg-white text-purple-700 font-semibold rounded-full hover:bg-purple-100 transition"
-          >
-            Apply Now
-          </button>
-        </div>
+<div className="mt-14 flex justify-center">
+  <button
+    onClick={onFeatureClick}
+    className="px-10 py-4 bg-white text-purple-700 font-semibold rounded-full shadow-lg hover:scale-105 transition"
+  >
+    Apply Now
+  </button>
+</div>
       </section>
     </div>
     </div>
