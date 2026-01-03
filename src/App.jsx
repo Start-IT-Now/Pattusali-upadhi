@@ -279,7 +279,6 @@ const handleVolunteerClick = () => {
         )}
       </main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
           <Route path="/jobs" element={<JobsPage serviceType="job" />} />
           <Route path="/guidance" element={<JobsPage serviceType="guidance" />} />
           <Route path="/training" element={<JobsPage serviceType="training" />} />
