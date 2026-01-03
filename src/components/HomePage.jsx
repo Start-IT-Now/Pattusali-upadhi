@@ -33,8 +33,8 @@ const cardVariants = {
   }
 };
 
-const onFeatureClick = () => {};
-
+const onFeatureClick = () => { navigate("/jobs"); };
+const ofFeatureClick = () => { navigate("/guidance"); };
 
 export default function HomePage({ onApplyClick }) {
   return (
@@ -290,6 +290,14 @@ export default function HomePage({ onApplyClick }) {
     className="px-10 py-4 bg-white text-purple-700 font-semibold rounded-full shadow-lg hover:scale-105 transition"
   >
     Apply Now
+  </button>
+</div>
+<div className="mt-14 flex justify-center">
+  <button
+    onClick={ofFeatureClick}
+    className="px-10 py-4 bg-white text-purple-700 font-semibold rounded-full shadow-lg hover:scale-105 transition"
+  >
+    Guidance
   </button>
 </div>
       </section>
