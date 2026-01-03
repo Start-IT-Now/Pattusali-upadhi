@@ -64,14 +64,18 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     e.preventDefault();
     setLoading(true);
 
-    
-const { data, error } = await supabase
-  .from("jobs")
-  .insert([payload]);
+    const { error } = await supabase.from("jobs").insert([
+      { ...formData, skills },
+    ]);
 
-console.log("SUPABASE ERROR 👉", error);
-console.log("PAYLOAD 👉", payload);
+    setLoading(false);
 
+    if (!error) {
+      onJobPosted?.();
+      onCancel?.();
+    } else {
+      alert("Failed to post");
+    }
   };
 
   return (
@@ -225,7 +229,7 @@ console.log("PAYLOAD 👉", payload);
         <label className="font-semibold">Job Type</label>
         <select
           name="job_type"
-          value={formData.job_type_type}
+          value={formData.job_type}
           onChange={handleInputChange}
           className={inputBase}
         >
@@ -280,7 +284,7 @@ console.log("PAYLOAD 👉", payload);
         <label className="font-semibold">Guidance Mode</label>
         <select
           name="guidance_mode"
-          value={formData.guidance_mode_mode}
+          value={formData.guidance_mode}
           onChange={handleInputChange}
           className={inputBase}
         >
@@ -334,7 +338,7 @@ console.log("PAYLOAD 👉", payload);
             <div>
          <label className="font-semibold">Training Type</label>
         <select
-          name="Training_type"
+          name="training_type"
           value={formData.training_type}
           onChange={handleInputChange}
           className={inputBase}
@@ -347,7 +351,7 @@ console.log("PAYLOAD 👉", payload);
           <div>
          <label className="font-semibold">Training Mode</label>
         <select
-          name="Trainging_mode"
+          name="trainging_mode"
           value={formData.training_mode}
           onChange={handleInputChange}
           className={inputBase}
@@ -371,7 +375,7 @@ console.log("PAYLOAD 👉", payload);
             <div>
             <label className="font-semibold">Training Duration</label>
             <input
-              name="trainer_duration"
+              name="training_duration"
               value={formData.training_duration}
               onChange={handleInputChange}
               className={inputBase}
@@ -381,7 +385,7 @@ console.log("PAYLOAD 👉", payload);
                      <div>
          <label className="font-semibold">Certification</label>
         <select
-          name="certification"
+          name="training_certification"
           value={formData.training_certification}
           onChange={handleInputChange}
           className={inputBase}
