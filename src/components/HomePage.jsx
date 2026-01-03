@@ -289,21 +289,30 @@ const ofFeatureClick = () => { navigate("/guidance"); };
 </div>
 </div>
 
-<div className="mt-14 flex justify-center">
+
+          <div className="flex items-center gap-3">
+{[
+  { label: "Home", view: "home" },
+  { label: "Guidance", service: "guidance" },
+  { label: "Need Training", service: "training" },
+  { label: "Jobs / Internships", service: "job" },
+].map((item) => (
   <button
-    onClick={onFeatureClick}
-    className="px-10 py-4 bg-white text-purple-700 font-semibold rounded-full shadow-lg hover:scale-105 transition"
+    key={item.label}
+    onClick={() => {
+      if (item.view) {
+        setView(item.view);
+      } else {
+        setServicetype(item.service);
+        setView("jobs");
+        setPage(1);
+      }
+    }}
+    className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold"
   >
-    Apply Now
+    {item.label}
   </button>
-</div>
-<div className="mt-14 flex justify-center">
-  <button
-    onClick={ofFeatureClick}
-    className="px-10 py-4 bg-white text-purple-700 font-semibold rounded-full shadow-lg hover:scale-105 transition"
-  >
-    Guidance
-  </button>
+))}
 </div>
       </section>
     </div>
