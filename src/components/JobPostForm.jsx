@@ -203,7 +203,7 @@ const handleSubmit = async (e) => {
             className="grid md:grid-cols-2 gap-6"
           >
             <div>
-              <label className="font-semibold">Experience</label>
+              <label className="font-semibold">Experience (Years)</label>
               <input
                 name="experience"
                 value={formData.experience}
@@ -250,9 +250,9 @@ const handleSubmit = async (e) => {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="foreign mnc"> Foreign MNC</option>
+          <option value="foreignmnc"> Foreign MNC</option>
           <option value="startup">Startup</option>
-          <option value="indian mnc">Indian MNC</option>
+          <option value="indianmnc">Indian MNC</option>
           <option value="corporate">Corporate</option>
           <option value="others">Others</option>
         </select>
@@ -266,11 +266,11 @@ const handleSubmit = async (e) => {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="IT">Information Technology</option>
-          <option value="Finance">Financial Services</option>
-          <option value="Marketing">Marketing</option>
-          <option value="Insurance">Insurance</option>
-          <option value="Hardware">Hardware & Networking</option>
+          <option value="it">Information Technology</option>
+          <option value="finance">Financial Services</option>
+          <option value="marketing">Marketing</option>
+          <option value="insurance">Insurance</option>
+          <option value="hardware">Hardware & Networking</option>
           <option value="others">Others</option>
         </select>
       </div>
@@ -298,9 +298,9 @@ const handleSubmit = async (e) => {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="full-time"> Full-Time</option>
-          <option value="part-time">Part-Time</option>
-          <option value="paid intern">Paid Internship</option>
+          <option value="fulltime"> Full-Time</option>
+          <option value="parttime">Part-Time</option>
+          <option value="paidintern">Paid Internship</option>
           <option value="contract">Contract</option>
           <option value="others">Others</option>
         </select>
