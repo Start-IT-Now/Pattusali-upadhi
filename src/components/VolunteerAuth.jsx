@@ -191,7 +191,7 @@ export default function VolunteerAuth({ onSuccess, onCancel }) {
             onClick={onCancel}
             className="text-sm text-gray-600 hover:underline"
           >
-            ← Back to jobs
+            ← Back 
           </button>
 
           <button

@@ -1,4 +1,23 @@
 import { motion } from "framer-motion";
+import Lottie from 'lottie-react';
+
+const solutions = [
+  {
+    animation: aiBrain,
+    title: "Talent Sift (AI)",
+    description: "AI agents designed for industry specific resume screening and qualification."
+  },
+  {
+    animation: chatbotBuddy,
+    title: "My Buddy",
+    description: "Boost productivity with a smart assistant that supports and resolves employee queries instantly."
+  },
+  {
+    animation: lightningAutomation,
+    title: "Easy Automate",
+    description: "Streamline operations with low code automation - Resilient, Transparent and Tailored for every user."
+  }
+];
 
 export default function HomePage({ onApplyClick }) {
   return (
@@ -71,10 +90,10 @@ export default function HomePage({ onApplyClick }) {
               What We Believe
             </h3>
             <ul className="space-y-3 text-gray-700">
-              <li>• Talent exists everywhere</li>
+              <li>• Because sharing multiplies</li>
               <li>• Guidance changes direction</li>
               <li>• Opportunity creates transformation</li>
-              <li>• Responsibility defines growth</li>
+              <li>• Responsibility defines growth for everyone</li>
             </ul>
           </motion.div>
         </div>
@@ -202,6 +221,29 @@ export default function HomePage({ onApplyClick }) {
             Our volunteers are ready to support those who are willing
             to take responsibility for their growth.
           </p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {solutions.map((solution, index) => (
+            <motion.div
+              key={index}
+              className="info-card text-center"
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+              onClick={onFeatureClick}
+            >
+              <div className="flex justify-center mb-6">
+                <div className="w-24 h-24 flex items-center justify-center overflow-hidden">
+                  <Lottie animationData={solution.animation} loop={true} style={{ width: 80, height: 80 }} />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-800">{solution.title}</h3>
+              <p className="text-gray-500">{solution.description}</p>
+            </motion.div>
+          ))}
+            </div>
 
           <button
             onClick={onApplyClick}
