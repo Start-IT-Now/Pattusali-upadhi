@@ -185,11 +185,11 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job"> Foreign MNC</option>
-          <option value="guidance">Startup</option>
-          <option value="training">Indian MNC</option>
-          <option value="training">Corporate</option>
-          <option value="training">Others</option>
+          <option value="foreign mnc"> Foreign MNC</option>
+          <option value="startup">Startup</option>
+          <option value="indian mnc">Indian MNC</option>
+          <option value="corporate">Corporate</option>
+          <option value="others">Others</option>
         </select>
       </div>
 
@@ -201,12 +201,12 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job">Information Technology</option>
-          <option value="guidance">Financial Services</option>
-          <option value="training">Marketing</option>
-          <option value="job">Insurance</option>
-          <option value="guidance">Hardware & Networking</option>
-          <option value="training">Others</option>
+          <option value="IT">Information Technology</option>
+          <option value="Finance">Financial Services</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Insurance">Insurance</option>
+          <option value="Hardware">Hardware & Networking</option>
+          <option value="others">Others</option>
         </select>
       </div>
 
@@ -218,10 +218,10 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job"> Onsite </option>
-          <option value="guidance">Work from Home</option>
-          <option value="training"> Remote </option>
-          <option value="training">Hybrid</option>
+          <option value="onsite"> Onsite </option>
+          <option value="wfh">Work from Home</option>
+          <option value="remote"> Remote </option>
+          <option value="hybrid">Hybrid</option>
         </select>
       </div>
 
@@ -233,11 +233,11 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job"> Full-Time</option>
-          <option value="guidance">Part-Time</option>
-          <option value="training">Paid Internship</option>
-          <option value="training">Contract</option>
-          <option value="training">Others</option>
+          <option value="full-time"> Full-Time</option>
+          <option value="part-time">Part-Time</option>
+          <option value="paid intern">Paid Internship</option>
+          <option value="contract">Contract</option>
+          <option value="others">Others</option>
         </select>
       </div>
 
@@ -260,8 +260,8 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job"> Free</option>
-          <option value="guidance">Paid</option>
+          <option value="free"> Free</option>
+          <option value="paid">Paid</option>
         </select>
       </div>
 
@@ -273,10 +273,10 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job">Morning</option>
-          <option value="guidance">Afternoon</option>
-          <option value="training">Evening</option>
-          <option value="job">Night</option>
+          <option value="morning">Morning</option>
+          <option value="afternoon">Afternoon</option>
+          <option value="evening">Evening</option>
+          <option value="night">Night</option>
         </select>
       </div>
 
@@ -288,9 +288,9 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job"> Online </option>
-          <option value="guidance">Offline</option>
-          <option value="training">Hybrid</option>
+          <option value="online"> Online </option>
+          <option value="offline">Offline</option>
+          <option value="hybrid">Hybrid</option>
         </select>
       </div>
 
@@ -343,8 +343,8 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job">Paid</option>
-          <option value="guidance">Free</option>
+          <option value="paid">Paid</option>
+          <option value="free">Free</option>
         </select>
             </div>
 
@@ -356,9 +356,9 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job">Online</option>
-          <option value="guidance">Offline</option>
-          <option value="guidance">Hybrid</option>
+          <option value="online">Online</option>
+          <option value="offline">Offline</option>
+          <option value="hybrid">Hybrid</option>
         </select>
             </div>
 
@@ -390,9 +390,9 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           onChange={handleInputChange}
           className={inputBase}
         >
-          <option value="job">Yes</option>
-          <option value="guidance">No</option>
-          <option value="guidance">Maybe</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="maybe">Maybe</option>
         </select>
             </div>
           </motion.div>
