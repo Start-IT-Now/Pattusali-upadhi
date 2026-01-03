@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import Lottie from 'lottie-react';
 import career from "../career.jpg";
+import { useNavigate } from "react-router-dom";
+
 
 import intern from '../intern.json';
 import guidance from '../guidance.json';
@@ -32,6 +34,8 @@ const cardVariants = {
     transition: { duration: 0.4 }
   }
 };
+
+const navigate = useNavigate();
 
 const onFeatureClick = () => { navigate("/jobs"); };
 const ofFeatureClick = () => { navigate("/guidance"); };
