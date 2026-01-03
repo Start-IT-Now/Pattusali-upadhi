@@ -316,11 +316,6 @@ export default function HomePage({ onApplyClick }) {
 
     </div>
       </section>
-              <Routes>
-                <Route path="/jobs" element={<JobsPage serviceType="job" />} />
-                <Route path="/guidance" element={<JobsPage serviceType="guidance" />} />
-                <Route path="/training" element={<JobsPage serviceType="training" />} />
-              </Routes>
     </div>
     </div>
   );
