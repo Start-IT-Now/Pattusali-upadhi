@@ -3,17 +3,14 @@ import Lottie from 'lottie-react';
 
 const solutions = [
   {
-    animation: aiBrain,
     title: "Talent Sift (AI)",
     description: "AI agents designed for industry specific resume screening and qualification."
   },
   {
-    animation: chatbotBuddy,
     title: "My Buddy",
     description: "Boost productivity with a smart assistant that supports and resolves employee queries instantly."
   },
   {
-    animation: lightningAutomation,
     title: "Easy Automate",
     description: "Streamline operations with low code automation - Resilient, Transparent and Tailored for every user."
   }
