@@ -6,7 +6,7 @@ import supabase from "../lib/supabase";
 const inputBase =
   "w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none";
 
-export default async function JobPostForm({ onJobPosted, onCancel }) {
+export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {} }) {
   const [formData, setFormData] = useState({
     service_type: "job",
     job_title: "",
@@ -39,7 +39,7 @@ export default async function JobPostForm({ onJobPosted, onCancel }) {
   });
 
  const buildPayload = (formData, serviceType) => {
-  const clean = (v) => (v?.trim() ? v : null);
+  const clean = (v) => (v && v.trim() ? v : null);
 
   const base = {
     service_type: serviceType,
@@ -87,7 +87,11 @@ export default async function JobPostForm({ onJobPosted, onCancel }) {
       trainer_name: clean(formData.trainer_name),
     };
   }
+
+  // ✅ SAFETY FALLBACK
+  return base;
 };
+
 
 
   const [skills, setSkills] = useState([]);
@@ -112,24 +116,32 @@ export default async function JobPostForm({ onJobPosted, onCancel }) {
     setSkills(skills.filter((x) => x !== s));
 
   /* ✅ SUBMIT */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-     const payload = buildPayload(formData, serviceType);
-     const { error } = await supabase
-    .from("jobs")
-    .insert([payload]);
+  const payload = buildPayload(formData, formData.service_type);
 
+  if (!payload) {
+    console.error("Payload is empty");
     setLoading(false);
+    return;
+  }
 
-    if (!error) {
-      onJobPosted?.();
-      onCancel?.();
-    } else {
-      alert("Failed to post");
-    }
-  };
+  const { error } = await supabase.from("jobs").insert([payload]);
+
+  setLoading(false);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  onJobPosted?.();
+  onCancel?.();
+};
+
+
 
   return (
     <form
