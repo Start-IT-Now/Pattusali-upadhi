@@ -4,6 +4,7 @@ import career from "../career.jpg";
 import { useNavigate } from "react-router-dom";
 
 
+
 import intern from '../intern.json';
 import guidance from '../guidance.json';
 import training from '../training.json';
@@ -35,12 +36,12 @@ const cardVariants = {
   }
 };
 
-const navigate = useNavigate();
+
+export default function HomePage({ onApplyClick }) {
+  const navigate = useNavigate();
 
 const onFeatureClick = () => { navigate("/jobs"); };
 const ofFeatureClick = () => { navigate("/guidance"); };
-
-export default function HomePage({ onApplyClick }) {
   return (
     <div className="space-y-3">
 

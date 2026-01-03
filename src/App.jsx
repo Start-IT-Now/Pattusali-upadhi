@@ -1,6 +1,7 @@
 // src/App.jsx
 import { useState, useEffect, useCallback } from "react";
 import { Search } from "lucide-react";
+import { BrowserRouter } from "react-router-dom";
 import  supabase  from "./lib/supabase.js"; 
 import HomePage from "./components/HomePage.jsx";
 import JobCard from "./components/JobCard.jsx";
