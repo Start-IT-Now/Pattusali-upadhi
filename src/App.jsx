@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { BrowserRouter } from "react-router-dom";
 import  supabase  from "./lib/supabase.js"; 
 import HomePage from "./components/HomePage.jsx";
+import JobsPage from "./components/JobsPage";
 import JobCard from "./components/JobCard.jsx";
 import JobPostForm from "./components/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";
@@ -20,6 +21,25 @@ export default function App() {
   const [volunteer, setVolunteer] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
   const [servicetype, setServicetype] = useState("job");
+
+  <Routes>
+  <Route path="/" element={<HomePage />} />
+
+  <Route
+    path="/jobs"
+    element={<JobsPage serviceType="job" />}
+  />
+
+  <Route
+    path="/guidance"
+    element={<JobsPage serviceType="guidance" />}
+  />
+
+  <Route
+    path="/training"
+    element={<JobsPage serviceType="training" />}
+  />
+</Routes>
 
 
   // filters (same shape as FilterSidebar)

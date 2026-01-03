@@ -1,21 +1,13 @@
 import { motion } from "framer-motion";
 import Lottie from 'lottie-react';
 import career from "../career.jpg";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+
 
 
 
 import intern from '../intern.json';
 import guidance from '../guidance.json';
 import training from '../training.json';
-
- const [servicetype, setServicetype] = useState("job");
-
- useEffect(() => {
-   setPage(1);
- fetchJobs({ servicetype });
- }, [ servicetype]);
 
 const solutions = [
   {
@@ -46,10 +38,11 @@ const cardVariants = {
 
 
 export default function HomePage({ onApplyClick }) {
-  const navigate = useNavigate();
 
-const onFeatureClick = () => { navigate("/jobs"); };
-const ofFeatureClick = () => { navigate("/guidance"); };
+ const onFeatureClick = () => {
+    navigate("/jobs"); // OR call onApplyClick()
+  };
+
   return (
     <div className="space-y-3">
 
@@ -298,30 +291,30 @@ const ofFeatureClick = () => { navigate("/guidance"); };
 </div>
 
 
-          <div className="flex items-center gap-3">
-{[
-  { label: "Home", view: "home" },
-  { label: "Guidance", service: "guidance" },
-  { label: "Need Training", service: "training" },
-  { label: "Jobs / Internships", service: "job" },
-].map((item) => (
-  <button
-    key={item.label}
-    onClick={() => {
-      if (item.view) {
-        setView(item.view);
-      } else {
-        setServicetype(item.service);
-        setView("jobs");
-        setPage(1);
-      }
-    }}
-    className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold"
-  >
-    {item.label}
-  </button>
-))}
-</div>
+    <div className="flex flex-wrap justify-center gap-6 mt-10">
+
+      <button
+        onClick={() => navigate("/jobs")}
+        className="px-10 py-4 bg-purple-600 text-white font-semibold rounded-full shadow-lg"
+      >
+        Jobs / Internships
+      </button>
+
+      <button
+        onClick={() => navigate("/guidance")}
+        className="px-10 py-4 bg-white text-purple-700 border font-semibold rounded-full shadow-lg"
+      >
+        Guidance
+      </button>
+
+      <button
+        onClick={() => navigate("/training")}
+        className="px-10 py-4 bg-white text-purple-700 border font-semibold rounded-full shadow-lg"
+      >
+        Training
+      </button>
+
+    </div>
       </section>
     </div>
     </div>
