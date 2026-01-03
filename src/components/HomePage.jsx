@@ -1,16 +1,23 @@
 import { motion } from "framer-motion";
 import Lottie from 'lottie-react';
 
+import intern from '../intern.json';
+import guidance from '../guidance.json';
+import training from '../training.json';
+
 const solutions = [
   {
+    animation:intern,
     title: "Jobs/Internships",
     description:  "Access verified job and internship opportunities shared by trusted organizations and volunteers, helping you take confident steps toward a stable career."
   },
   {
+    animation:guidance,
     title: "Guidance",
     description: "Receive personalized mentorship and direction from experienced professionals who help you make informed decisions at every stage of your journey."
   },
   {
+    animation:training,
     title: "Training",
     description:  "Build practical skills through focused training programs designed to improve employability, confidence, and long-term career readiness."
   }
