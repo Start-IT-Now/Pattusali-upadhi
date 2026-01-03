@@ -351,7 +351,7 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
           <div>
          <label className="font-semibold">Training Mode</label>
         <select
-          name="trainging_mode"
+          name="training_mode"
           value={formData.training_mode}
           onChange={handleInputChange}
           className={inputBase}
