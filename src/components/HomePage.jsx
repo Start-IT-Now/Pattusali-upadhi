@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Lottie from 'lottie-react';
+import career from "../career.jpg";
 
 import intern from '../intern.json';
 import guidance from '../guidance.json';
@@ -40,32 +41,53 @@ export default function HomePage({ onApplyClick }) {
     <div className="space-y-3">
 
       {/* HERO SECTION */}
-      <section className="bg-[#F7F3FF] py-4">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6"
-          >
-            Change Is the Only Constant
-          </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto"
-          >
-            In today’s fast-changing world, uncertainty is inevitable.
-            What makes the difference is timely guidance and the right support.
-            <br />
-            <span className="font-semibold text-purple-700">
-              Upadhi Vedhika bridges the gap between talent and opportunity.
-            </span>
-          </motion.p>
-        </div>
-      </section>
+<section className="bg-[#F7F3FF] py-16">
+  <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+
+    {/* LEFT: Text */}
+    <div className="text-center md:text-left">
+      <motion.h1
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6"
+      >
+        Change Is the Only Constant
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="text-lg text-gray-700 leading-relaxed"
+      >
+        In today’s fast-changing world, uncertainty is inevitable.
+        What makes the difference is timely guidance and the right support.
+        <br />
+        <span className="font-semibold text-purple-700">
+          Upadhi Vedhika bridges the gap between talent and opportunity.
+        </span>
+      </motion.p>
+    </div>
+
+    {/* RIGHT: Image */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+      className="flex justify-center"
+    >
+      <img
+        src={career}
+        alt="Guidance and Opportunity"
+        className="max-w-full h-auto rounded-2xl shadow-lg"
+      />
+    </motion.div>
+
+  </div>
+</section>
+
 
       {/* ABOUT SECTION */}
       <section className="py-20 bg-white mb-2">
