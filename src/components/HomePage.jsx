@@ -251,7 +251,7 @@ export default function HomePage({ onApplyClick }) {
               onClick={onFeatureClick}
             >
               <div className="flex justify-center mb-6">
-                <div className="w-24 h-24 flex items-center justify-center overflow-hidden">
+                <div className="w-48 h-48 flex items-center justify-center overflow-hidden">
                   <Lottie animationData={solution.animation} loop={true} style={{ width: 80, height: 80 }} />
                 </div>
               </div>
