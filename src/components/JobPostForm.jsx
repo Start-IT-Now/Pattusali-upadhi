@@ -6,7 +6,7 @@ import supabase from "../lib/supabase";
 const inputBase =
   "w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none";
 
-export default function JobPostForm({ onJobPosted, onCancel }) {
+export default async function JobPostForm({ onJobPosted, onCancel }) {
   const [formData, setFormData] = useState({
     service_type: "job",
     job_title: "",
@@ -30,13 +30,65 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     training_type: "",
     training_mode: "",
     trainer_name: "",
-    training_duration:" ",
-    training_topic:" ",
-    training_certification:" ",
+    training_duration:"",
+    training_topic:"",
+    training_certification:"",
 
     description: "",
     end_date: "",
   });
+
+ const buildPayload = (formData, serviceType) => {
+  const clean = (v) => (v?.trim() ? v : null);
+
+  const base = {
+    service_type: serviceType,
+    job_title: formData.job_title,
+    description: clean(formData.description),
+    end_date: formData.end_date || null,
+  };
+
+  if (serviceType === "job") {
+    return {
+      ...base,
+      company_name: clean(formData.company_name),
+      location: clean(formData.location),
+      experience: clean(formData.experience),
+      job_type: clean(formData.job_type),
+      work_mode: clean(formData.work_mode),
+      industry: clean(formData.industry),
+      company_type: clean(formData.company_type),
+      hr_name: clean(formData.hr_name),
+      hr_email: clean(formData.hr_email),
+      skills,
+    };
+  }
+
+  if (serviceType === "guidance") {
+    return {
+      ...base,
+      guidance_type: clean(formData.guidance_type),
+      guidance_slot: clean(formData.guidance_slot),
+      guidance_period: clean(formData.guidance_period),
+      guidance_mode: clean(formData.guidance_mode),
+      mentor_name: clean(formData.mentor_name),
+      mentor_email: clean(formData.mentor_email),
+    };
+  }
+
+  if (serviceType === "training") {
+    return {
+      ...base,
+      training_type: clean(formData.training_type),
+      training_mode: clean(formData.training_mode),
+      training_duration: clean(formData.training_duration),
+      training_topic: clean(formData.training_topic),
+      training_certification: clean(formData.training_certification),
+      trainer_name: clean(formData.trainer_name),
+    };
+  }
+};
+
 
   const [skills, setSkills] = useState([]);
   const [skill, setSkill] = useState("");
@@ -64,9 +116,10 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.from("jobs").insert([
-      { ...formData, skills },
-    ]);
+     const payload = buildPayload(formData, serviceType);
+     const { error } = await supabase
+    .from("jobs")
+    .insert([payload]);
 
     setLoading(false);
 
