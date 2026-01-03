@@ -42,7 +42,7 @@ export default function HomePage({ onApplyClick }) {
 
       {/* HERO SECTION */}
 
-<section className="bg-[#F7F3FF] py-16">
+<section className="bg-[#F7F3FF] py-12">
   <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
 
     {/* LEFT: Text */}
