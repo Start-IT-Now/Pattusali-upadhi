@@ -242,38 +242,43 @@ const handleSubmit = async (e) => {
               />
             </div>
 
-                  <div>
-        <label className="font-semibold">Company Type</label>
-        <select
-          name="company_type"
-          value={formData.company_type}
-          onChange={handleInputChange}
-          className={inputBase}
-        >
-          <option value="foreignmnc"> Foreign MNC</option>
-          <option value="startup">Startup</option>
-          <option value="indianmnc">Indian MNC</option>
-          <option value="corporate">Corporate</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
+<div>
+  <label className="font-semibold">Company Type</label>
+  <select
+    name="company_type"
+    value={formData.company_type || ""}
+    onChange={handleInputChange}
+    className={inputBase}
+    required
+  >
+    <option value="">Select company type</option>
+    <option value="Foreign MNC">Foreign MNC</option>
+    <option value="Startup">Startup</option>
+    <option value="Indian MNC">Indian MNC</option>
+    <option value="Corporate">Corporate</option>
+    <option value="Others">Others</option>
+  </select>
+</div>
 
-            <div>
-        <label className="font-semibold">Industry</label>
-        <select
-          name="industry"
-          value={formData.industry}
-          onChange={handleInputChange}
-          className={inputBase}
-        >
-          <option value="it">Information Technology</option>
-          <option value="finance">Financial Services</option>
-          <option value="marketing">Marketing</option>
-          <option value="insurance">Insurance</option>
-          <option value="hardware">Hardware & Networking</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
+<div>
+  <label className="font-semibold">Industry</label>
+  <select
+    name="industry"
+    value={formData.industry || ""}
+    onChange={handleInputChange}
+    className={inputBase}
+    required
+  >
+    <option value="">Select industry</option>
+    <option value="Information & Technology">Information & Technology</option>
+    <option value="Financial Services">Financial Services</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Insurance">Insurance</option>
+    <option value="Hardware & Networking">Hardware & Networking</option>
+    <option value="Others">Others</option>
+  </select>
+</div>
+
 
        <div>
         <label className="font-semibold">Work Mode</label>
