@@ -12,6 +12,8 @@ import VolunteerAuth from "./components/VolunteerAuth.jsx";
 import Filterbar from "./components/FilterBar.jsx";
 import JobDetails from "./components/JobDetails.jsx";
 import puv from "./puv.png";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 
 export default function App() {
   const [view, setView] = useState("home");
@@ -21,25 +23,6 @@ export default function App() {
   const [volunteer, setVolunteer] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
   const [servicetype, setServicetype] = useState("job");
-
-  <Routes>
-  <Route path="/" element={<HomePage />} />
-
-  <Route
-    path="/jobs"
-    element={<JobsPage serviceType="job" />}
-  />
-
-  <Route
-    path="/guidance"
-    element={<JobsPage serviceType="guidance" />}
-  />
-
-  <Route
-    path="/training"
-    element={<JobsPage serviceType="training" />}
-  />
-</Routes>
 
 
   // filters (same shape as FilterSidebar)
@@ -295,7 +278,12 @@ const handleVolunteerClick = () => {
           </div>
         )}
       </main>
-
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/jobs" element={<JobsPage serviceType="job" />} />
+          <Route path="/guidance" element={<JobsPage serviceType="guidance" />} />
+          <Route path="/training" element={<JobsPage serviceType="training" />} />
+        </Routes>
       {/* Footer */}
 <Footer />
 
