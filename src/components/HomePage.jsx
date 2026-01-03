@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Lottie from 'lottie-react';
 import career from "../career.jpg";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
 
 
 
