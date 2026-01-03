@@ -9,6 +9,13 @@ import intern from '../intern.json';
 import guidance from '../guidance.json';
 import training from '../training.json';
 
+ const [servicetype, setServicetype] = useState("job");
+
+ useEffect(() => {
+   setPage(1);
+ fetchJobs({ servicetype });
+ }, [ servicetype]);
+
 const solutions = [
   {
     animation:intern,
