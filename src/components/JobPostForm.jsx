@@ -192,6 +192,39 @@ const handleSubmit = async (e) => {
         </div>
       </div>
 
+            <div className="grid md:grid-cols-2 gap-6">
+<div>
+  <label className="font-semibold">
+    Application End Date
+    <span className="text-gray-400 text-sm ml-1">(optional)</span>
+  </label>
+
+  <input
+    type="date"
+    name="end_date"
+    value={formData.end_date || ""}
+    onChange={handleInputChange}
+    className={inputBase}
+    min={new Date().toISOString().split("T")[0]} 
+  />
+
+  <p className="text-xs text-gray-500 mt-1">
+    Leave empty if the application has no deadline.
+  </p>
+</div>
+
+
+        <div>
+          <label className="font-semibold">Location</label>
+          <input
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            className={inputBase}
+          />
+        </div>
+      </div>
+
       {/* SERVICE-SPECIFIC FIELDS */}
       <AnimatePresence mode="wait">
         {formData.service_type === "job" && (
@@ -290,12 +323,10 @@ const handleSubmit = async (e) => {
     required
   >
     <option value="">Select workmode</option>
-    <option value="Information & Technology">Information & Technology</option>
-    <option value="Financial Services">Financial Services</option>
-    <option value="Marketing">Marketing</option>
-    <option value="Insurance">Insurance</option>
-    <option value="Hardware & Networking">Hardware & Networking</option>
-    <option value="Others">Others</option>
+    <option value="Work from Office">Work from office</option>
+    <option value="Work from Home">Work from home</option>
+    <option value="Remote">Remote</option>
+    <option value="Hybrid">Hybrid</option>
   </select>
 </div>
 
