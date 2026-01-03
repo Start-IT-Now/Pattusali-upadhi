@@ -64,18 +64,14 @@ export default function JobPostForm({ onJobPosted, onCancel }) {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.from("jobs").insert([
-      { ...formData, skills },
-    ]);
+    
+const { data, error } = await supabase
+  .from("jobs")
+  .insert([payload]);
 
-    setLoading(false);
+console.log("SUPABASE ERROR 👉", error);
+console.log("PAYLOAD 👉", payload);
 
-    if (!error) {
-      onJobPosted?.();
-      onCancel?.();
-    } else {
-      alert("Failed to post");
-    }
   };
 
   return (
