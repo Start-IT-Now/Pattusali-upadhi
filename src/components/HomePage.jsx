@@ -252,7 +252,7 @@ export default function HomePage({ onApplyClick }) {
             >
               <div className="flex justify-center mb-6">
                 <div className="w-48 h-48 flex items-center justify-center overflow-hidden">
-                  <Lottie animationData={solution.animation} loop={true} style={{ width: 80, height: 80 }} />
+                  <Lottie animationData={solution.animation} loop={true} style={{ width: 100, height: 100 }} />
                 </div>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-white">{solution.title}</h3>
