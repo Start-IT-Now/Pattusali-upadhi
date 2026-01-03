@@ -280,36 +280,43 @@ const handleSubmit = async (e) => {
 </div>
 
 
-       <div>
-        <label className="font-semibold">Work Mode</label>
-        <select
-          name="work_mode"
-          value={formData.work_mode}
-          onChange={handleInputChange}
-          className={inputBase}
-        >
-          <option value="onsite"> Onsite </option>
-          <option value="wfh">Work from Home</option>
-          <option value="remote"> Remote </option>
-          <option value="hybrid">Hybrid</option>
-        </select>
-      </div>
+<div>
+  <label className="font-semibold">Work Mode</label>
+  <select
+    name="work_mode"
+    value={formData.work_mode || ""}
+    onChange={handleInputChange}
+    className={inputBase}
+    required
+  >
+    <option value="">Select workmode</option>
+    <option value="Information & Technology">Information & Technology</option>
+    <option value="Financial Services">Financial Services</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Insurance">Insurance</option>
+    <option value="Hardware & Networking">Hardware & Networking</option>
+    <option value="Others">Others</option>
+  </select>
+</div>
 
-       <div>
-        <label className="font-semibold">Job Type</label>
-        <select
-          name="job_type"
-          value={formData.job_type}
-          onChange={handleInputChange}
-          className={inputBase}
-        >
-          <option value="fulltime"> Full-Time</option>
-          <option value="parttime">Part-Time</option>
-          <option value="paidintern">Paid Internship</option>
-          <option value="contract">Contract</option>
-          <option value="others">Others</option>
-        </select>
-      </div>
+<div>
+  <label className="font-semibold">Job Type</label>
+  <select
+    name="job_type"
+    value={formData.job_type || ""}
+    onChange={handleInputChange}
+    className={inputBase}
+    required
+  >
+    <option value="">Select Jobtype</option>
+    <option value="Information & Technology">Information & Technology</option>
+    <option value="Financial Services">Financial Services</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Insurance">Insurance</option>
+    <option value="Hardware & Networking">Hardware & Networking</option>
+    <option value="Others">Others</option>
+  </select>
+</div>
 
           </motion.div>
         )}
