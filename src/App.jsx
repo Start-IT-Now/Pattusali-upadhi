@@ -3,14 +3,13 @@ import { useState, useEffect, useCallback } from "react";
 import { Search } from "lucide-react";
 import { BrowserRouter } from "react-router-dom";
 import  supabase  from "./lib/supabase.js"; 
-import HomePage from "./components/HomePage.jsx";
-import JobsPage from "./components/JobsPage";
+import HomePage from "./Pages/HomePage.jsx";
 import JobCard from "./components/JobCard.jsx";
-import JobPostForm from "./components/JobPostForm.jsx";
+import JobPostForm from "./Pages/JobPostForm.jsx";
 import Footer from "./components/Footer.jsx";
-import VolunteerAuth from "./components/VolunteerAuth.jsx";
+import VolunteerAuth from "./Pages/VolunteerAuth.jsx";
 import Filterbar from "./components/FilterBar.jsx";
-import JobDetails from "./components/JobDetails.jsx";
+import JobDetails from "./Pages/JobDetails.jsx";
 import puv from "./puv.png";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
@@ -278,11 +277,6 @@ const handleVolunteerClick = () => {
           </div>
         )}
       </main>
-        <Routes>
-          <Route path="/jobs" element={<JobsPage serviceType="job" />} />
-          <Route path="/guidance" element={<JobsPage serviceType="guidance" />} />
-          <Route path="/training" element={<JobsPage serviceType="training" />} />
-        </Routes>
       {/* Footer */}
 <Footer />
 
