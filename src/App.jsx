@@ -1,289 +1,91 @@
 // src/App.jsx
-import { useState, useEffect, useCallback } from "react";
-import { Search } from "lucide-react";
-import { BrowserRouter } from "react-router-dom";
-import  supabase  from "./lib/supabase.js"; 
-import HomePage from "./Pages/HomePage.jsx";
-import JobCard from "./components/JobCard.jsx";
-import JobPostForm from "./Pages/JobPostForm.jsx";
-import Footer from "./components/Footer.jsx";
-import VolunteerAuth from "./Pages/VolunteerAuth.jsx";
-import Filterbar from "./components/FilterBar.jsx";
-import JobDetails from "./Pages/JobDetails.jsx";
-import puv from "./puv.png";
+import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-
+import HomePage from "./Pages/HomePage.jsx";
+import JobsPage from "./Pages/JobsPage.jsx";
+import VolunteerAuth from "./Pages/VolunteerAuth.jsx";
+import JobPostForm from "./Pages/JobPostForm.jsx";
+import JobDetails from "./Pages/JobDetails.jsx";
+import Footer from "./components/Footer.jsx";
+import puv from "./puv.png";
 
 export default function App() {
-  const [view, setView] = useState("home");
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
   const [volunteer, setVolunteer] = useState(null);
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [servicetype, setServicetype] = useState("job");
-
-
-  // filters (same shape as FilterSidebar)
-  const [filters, setFilters] = useState({
-    location: null,
-    companyType: [],
-    industry: [],
-  });
-
-  // pagination
-  const [page, setPage] = useState(1);
-  const pageSize = 9; // change as needed
-  const [total, setTotal] = useState(0);
-
-  // helper: build and run a server-side query
-  const fetchJobs = useCallback(
-async ({
-  page = 1,
-  pageSize = 9,
-  search = "",
-  filters = {},
-  servicetype = "job",
-} = {}) => {
-
-      setLoading(true);
-
-      try {
-        const start = (page - 1) * pageSize;
-        const end = start + pageSize - 1;
-
-        // base query: select all, ask for exact count
-        let query = supabase
-          .from("jobs")
-          .select("*", { count: "exact" })
-          .order("created_at", { ascending: false })
-          .range(start, end);
-
-          // 0) service type filter (job / guidance / training)
-if (servicetype) {
-  query = query.eq("service_type", servicetype);
-}
-
-
-        // 1) text search across job_title, company_name, location (server-side)
-        const term = (search || "").trim();
-        if (term) {
-          const escaped = term.replace(/%/g, "\\%").replace(/,/g, "\\,");
-          const orExpr = `job_title.ilike.%${escaped}%,company_name.ilike.%${escaped}%,location.ilike.%${escaped}%`;
-          query = query.or(orExpr);
-        }
-
-        // 2) location filter (single)
-        if (filters.location) {
-          query = query.eq("location", filters.location);
-        }
-
-        // 3) companyType filter (multi) - expects a string column `company_type`
-        if (Array.isArray(filters.companyType) && filters.companyType.length > 0) {
-          query = query.in("company_type", filters.companyType);
-        }
-
-        // 4) industry filter (multi) - expects a string column `industry`
-        if (Array.isArray(filters.industry) && filters.industry.length > 0) {
-          query = query.in("industry", filters.industry);
-        }
-
-        const { data, error, count } = await query;
-
-        if (error) {
-          console.error("Supabase fetchJobs error:", error);
-          setJobs([]);
-          setTotal(0);
-        } else {
-          setJobs(Array.isArray(data) ? data : []);
-          setTotal(typeof count === "number" ? count : 0);
-        }
-      } catch (err) {
-        console.error("Unexpected fetchJobs error:", err);
-        setJobs([]);
-        setTotal(0);
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
-
-// fetch initial + whenever page/search/filters change
-useEffect(() => {
-  setPage(1);
-fetchJobs({ page, pageSize, search: searchTerm, filters, servicetype });
-}, [fetchJobs, searchTerm, filters, servicetype]);
-
-
-const handleVolunteerClick = () => {
-    if (volunteer) setView("postForm");
-    else setView("auth");
-  };
 
   const handleAuthSuccess = (userData) => {
     setVolunteer(userData);
-    setView("postForm");
+    navigate("/post-job");
   };
-  
-
-  // pagination helpers
-  const lastPage = Math.max(1, Math.ceil(total / pageSize));
-  const goPrev = () => setPage((p) => Math.max(1, p - 1));
-  const goNext = () => setPage((p) => Math.min(lastPage, p + 1));
 
   return (
-    <div className="min-h-screen bg-[#F7F3FF] text-gray-900">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src={puv} alt="logo" className="w-14 h-14 rounded-md object-cover" />
+    <div className="min-h-screen bg-[#F7F3FF] flex flex-col">
+      {/* HEADER */}
+      <header className="bg-white sticky top-0 z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div
+            className="flex items-center gap-3 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <img src={puv} className="w-12 h-12 rounded-md" alt="logo" />
             <div>
-              <h1 className="text-2xl font-extrabold tracking-tight">Pattusali Upadhi Vedhika</h1>
-              <p className="text-sm text-[#6C46CF]">Find your dream Opportunity today</p>
+              <h1 className="text-xl font-extrabold">
+                Pattusali Upadhi Vedhika
+              </h1>
+              <p className="text-sm text-purple-600">
+                Find your dream Opportunity today
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-{[
-  { label: "Home", view: "home" },
-  { label: "Guidance", service: "guidance" },
-  { label: "Need Training", service: "training" },
-  { label: "Jobs / Internships", service: "job" },
-].map((item) => (
-  <button
-    key={item.label}
-    onClick={() => {
-      if (item.view) {
-        setView(item.view);
-      } else {
-        setServicetype(item.service);
-        setView("jobs");
-        setPage(1);
-      }
-    }}
-    className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold"
-  >
-    {item.label}
-  </button>
-))}
-
-
-            <button onClick={handleVolunteerClick} className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold shadow-md">
-              {volunteer ? "Post a Job" : "Volunteer"}
-            </button>
-          </div>
+          <nav className="hidden md:flex gap-3">
+            <NavBtn label="Home" onClick={() => navigate("/")} />
+            <NavBtn label="Jobs" onClick={() => navigate("/jobs")} />
+            <NavBtn label="Guidance" onClick={() => navigate("/guidance")} />
+            <NavBtn label="Training" onClick={() => navigate("/training")} />
+            <NavBtn
+              label={volunteer ? "Post a Job" : "Volunteer"}
+              onClick={() =>
+                navigate(volunteer ? "/post-job" : "/volunteer")
+              }
+            />
+          </nav>
         </div>
       </header>
 
-      {/* Main area */}
-<main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-  {view === "home" && (
-    <HomePage onApplyClick={() => setView("jobs")} />
-  )}
-
-  {view === "auth" && (
-    <VolunteerAuth
-      onSuccess={handleAuthSuccess}
-      onCancel={() => setView("home")}
-    />
-  )}
-
-  {view === "postForm" && (
-    <JobPostForm
-      onJobPosted={() => {
-        setView("jobs");
-      }}
-      onCancel={() => setView("home")}
-    />
-  )}
-
-  {view === "jobs" && (
-    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
-      <aside className="sticky top-24 self-start">
-        <Filterbar filters={filters} setFilters={setFilters} />
-      </aside>
-
-
-            {/* Content column */}
-            <section className="space-y-6">
-              {/* Search bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    placeholder="Search by job title, company, location..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-300"
-                  />
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-sm text-gray-600">
-                    Showing <span className="font-semibold">{total}</span> results
-                  </div>
-                </div>
-              </div>
-
-              {/* Job list */}
-              {loading ? (
-                <div className="py-20 text-center">
-                  <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600" />
-                  <p className="mt-4 text-gray-600">Loading jobs...</p>
-                </div>
-              ) : jobs.length === 0 ? (
-                <div className="bg-white rounded-2xl p-8 text-center shadow">No jobs found</div>
-              ) : (
-                <>
-                  {/* single column list (one horizontal card per row) */}
-                  <div className="flex flex-col gap-6">
-                    {jobs.map((job) => (
-                      <JobCard
-                        key={job.id}
-                        job={job}
-                        onView={() => setSelectedJob(job)}  // <-- pass callback
-                      />
-                    ))}
-                  </div>
-
-                  {/* Pagination */}
-                  <div className="flex items-center justify-between mt-6">
-                    <div className="text-sm text-gray-600">
-                      Page {page} of {lastPage} — {total} results
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={goPrev}
-                        disabled={page <= 1}
-                        className="px-3 py-2 rounded-md bg-white border border-gray-200 text-sm disabled:opacity-50"
-                      >
-                        Prev
-                      </button>
-                      <button
-                        onClick={goNext}
-                        disabled={page >= lastPage}
-                        className="px-3 py-2 rounded-md bg-white border border-gray-200 text-sm disabled:opacity-50"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </>
-              )}
-            </section>
-          </div>
-        )}
+      {/* ROUTES */}
+      <main className="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/jobs" element={<JobsPage servicetype="job" />} />
+          <Route path="/guidance" element={<JobsPage servicetype="guidance" />} />
+          <Route path="/training" element={<JobsPage servicetype="training" />} />
+          <Route
+            path="/volunteer"
+            element={
+              <VolunteerAuth
+                onSuccess={handleAuthSuccess}
+                onCancel={() => navigate("/")}
+              />
+            }
+          />
+          <Route path="/post-job" element={<JobPostForm />} />
+          <Route path="/jobs/:id" element={<JobDetails />} />
+        </Routes>
       </main>
-      {/* Footer */}
-<Footer />
 
-{/* Job Details Modal (render when a job is selected) */}
-{selectedJob && (
-  <JobDetails job={selectedJob} onClose={() => setSelectedJob(null)} />
-)}
+      <Footer />
     </div>
+  );
+}
+
+function NavBtn({ label, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold"
+    >
+      {label}
+    </button>
   );
 }
