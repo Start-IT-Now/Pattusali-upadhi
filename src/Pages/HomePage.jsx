@@ -88,23 +88,62 @@ export default function HomePage() {
               Upadhi Vedhika is a non-profit organization supporting deserving
               and economically challenged individuals.
             </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+               Through a network of committed volunteers, we provide mentorship, direction, and access to opportunities that help individuals grow with confidence and purpose. </p>
             <p className="font-semibold">
-              Support is earned through merit, commitment, and effort.
+            Support is not given by chance - it is earned through merit, commitment, and effort.
             </p>
+
           </div>
 
           <div className="bg-purple-50 rounded-2xl p-6">
             <h3 className="text-lg font-semibold text-purple-800 mb-3">
               What We Believe
             </h3>
-            <ul className="space-y-2 text-sm">
-              <li>• Sharing multiplies impact</li>
-              <li>• Guidance changes direction</li>
-              <li>• Opportunity transforms lives</li>
-            </ul>
+<ul className="space-y-3 text-gray-700">
+   <li>• Because sharing multiplies</li> 
+   <li>• Guidance changes direction</li>
+    <li>• Opportunity creates transformation</li> 
+    <li>• Responsibility defines growth for everyone</li>
+    </ul>
           </div>
         </div>
       </section>
+
+{/* Terms and Conditions */}
+ {/* Main Content – Two clearly separated sections */}
+  <div className="py-20 flex-1 space-y-8 text-gray-900"> 
+    {/* SECTION 1: Applicants */} 
+    <section className="border rounded-xl p-6 bg-white shadow-sm"> 
+      {/* Tag / identifier */} 
+      <span className="inline-block mb-2 px-3 py-1 text-xs font-semibold rounded-full bg-gray-200 text-gray-700"> For Applicants </span>
+       {/* Telugu Heading */} 
+       <h1 className="text-2xl font-bold text-center mb-4" style={{ color: "#2380dcf9" }} > 
+        🎯 పట్టుసాళి ఉపాది వేదిక </h1>
+         <h2 className="text-xl font-semibold mt-2 mb-4" style={{ color: "#fc4327f9" }} > 📜 Terms &amp; Conditions </h2> 
+         <ol className="list-decimal pl-6 space-y-3 mt-2">
+           <li> The information provided in your CV will be kept confidential and will be circulated only as required for the purpose mentioned. </li>
+            <li> Please note this is not a guarantee for employment; we make an effort to refer your application to an appropriate employer or connect you with respective industry experts from Pattusalli Community. </li>
+             <li> All communications from the Upadi Vedika will be in the form of email only. Any communications on WhatsApp or social media are not entertained at this point of time. </li>
+              <li> This service is provided strictly on a voluntary basis. </li>
+               <li> Applicants are not required or mandated to remit any form of fee or compensation for this service. Furthermore, any commercial agreements or transactions entered into between the applicant and any third party are conducted at the applicant&apos;s sole discretion, and the platform owner assumes no liability or responsibility for such arrangements. </li>
+                </ol>
+                 </section> 
+                 
+ {/* SECTION 2: Volunteers */} 
+ <section className="border rounded-xl p-6 bg-white shadow-sm">
+  {/* Tag / identifier */} 
+ <span className="inline-block mb-2 px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"> For Volunteers </span>
+  {/* Telugu Heading */}
+   <h1 className="text-2xl font-bold text-center mb-4" style={{ color: "#2380dcf9" }} > 🙌 పట్టుసాళి ఉపాది వేదిక – స్వచ్ఛంధ సేవకులు </h1> 
+   <h2 className="text-xl font-semibold mt-2 mb-4" style={{ color: "#fc4327f9" }} > 🤝 Guidelines for Volunteers </h2> 
+   <ol className="list-decimal pl-6 space-y-3 mt-2"> 
+    <li> The data you share shall remain confidential. </li> 
+    <li> Based on requests received through email (<span className="font-mono">UpadhiVedika@startitnow.co.in</span>), only relevant data will be provided to the respective volunteer regarding the applicants. </li>
+     <li> Data provided to volunteers is expected to be kept confidential, and volunteers are equally responsible for maintaining privacy. </li>
+      <li> All communications from the Upadhi Vedika will be in the form of email only. Any communications on WhatsApp or social media are not entertained at this point of time. </li>
+       </ol>
+        </section>
 
       {/* CTA SECTION */}
       <section className="bg-purple-600 py-12 md:py-20">
@@ -139,32 +178,9 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <button
-              onClick={() => navigate("/jobs")}
-              className="w-full sm:w-auto px-8 py-3 bg-white text-purple-700 font-semibold rounded-full"
-            >
-              Jobs / Internships
-            </button>
-
-            <button
-              onClick={() => navigate("/guidance")}
-              className="w-full sm:w-auto px-8 py-3 border text-white rounded-full"
-            >
-              Guidance
-            </button>
-
-            <button
-              onClick={() => navigate("/training")}
-              className="w-full sm:w-auto px-8 py-3 border text-white rounded-full"
-            >
-              Training
-            </button>
-          </div>
         </div>
       </section>
-    </div>
+      </div>
+      </div>
   );
 }
