@@ -14,37 +14,82 @@ export default function JobsPage({ servicetype }) {
     industry: [],
   });
 
-  const fetchJobs = useCallback(async () => {
-    setLoading(true);
+ const fetchListings = async () => {
+  setLoading(true);
 
+  try {
     let query = supabase
       .from("jobs")
       .select("*")
-      .order("created_at", { ascending: false });
+      .eq("service_type", servicetype);
 
-    // ✅ SERVICE TYPE FILTER (CRITICAL)
-    if (servicetype) {
-      query = query.eq("service_type", servicetype);
+    /* ---------- COMMON SEARCH ---------- */
+    if (searchTerm) {
+      query = query.ilike("title", `%${searchTerm}%`);
     }
 
-    // search
-    if (searchTerm) {
-      query = query.or(
-        `job_title.ilike.%${searchTerm}%,company_name.ilike.%${searchTerm}%,location.ilike.%${searchTerm}%`
-      );
+    /* ---------- JOB FILTERS ---------- */
+    if (servicetype === "job") {
+      if (filters.location?.length) {
+        query = query.in("location", filters.location);
+      }
+
+      if (filters.companyType?.length) {
+        query = query.in("company_type", filters.companyType);
+      }
+
+      if (filters.industry?.length) {
+        query = query.in("industry", filters.industry);
+      }
+    }
+
+    /* ---------- GUIDANCE FILTERS ---------- */
+    if (servicetype === "guidance") {
+      if (filters.mentor) {
+        query = query.ilike("mentor_name", `%${filters.mentor}%`);
+      }
+
+      if (filters.mode?.length) {
+        query = query.in("session_mode", filters.mode);
+      }
+
+      if (filters.slot?.length) {
+        query = query.in("time_slot", filters.slot);
+      }
+    }
+
+    /* ---------- TRAINING FILTERS ---------- */
+    if (servicetype === "training") {
+      if (filters.topic) {
+        query = query.ilike("training_topic", `%${filters.topic}%`);
+      }
+
+      if (filters.duration?.length) {
+        query = query.in("training_duration", filters.duration);
+      }
+
+      if (filters.certification?.length) {
+        query = query.in("certification", filters.certification);
+      }
     }
 
     const { data, error } = await query;
 
-    if (error) {
-      console.error("Jobs fetch error:", error);
-      setJobs([]);
-    } else {
-      setJobs(data || []);
-    }
+    if (error) throw error;
 
+    setJobs(data || []);
+  } catch (err) {
+    console.error("Fetch error:", err);
+    setJobs([]);
+  } finally {
     setLoading(false);
-  }, [servicetype, searchTerm, filters]);
+  }
+};
+
+useEffect(() => {
+  fetchListings();
+}, [servicetype, filters, searchTerm]);
+
 
   // ✅ MUST RE-RUN WHEN servicetype CHANGES
 useEffect(() => {
