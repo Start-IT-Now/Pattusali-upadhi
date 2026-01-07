@@ -85,3 +85,15 @@ export default function Header({ volunteer }) {
 
   );
 }
+
+function NavButton({ label, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold hover:opacity-90 transition"
+    >
+      {label}
+    </button>
+  );
+}
+
