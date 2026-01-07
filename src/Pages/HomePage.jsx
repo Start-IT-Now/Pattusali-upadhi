@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
 import Lottie from 'lottie-react';
-import career from "../career.jpg";
-
-
-
-
+import career from "../career.png";
 import intern from '../intern.json';
 import guidance from '../guidance.json';
 import training from '../training.json';
