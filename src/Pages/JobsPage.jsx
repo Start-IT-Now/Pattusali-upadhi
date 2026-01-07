@@ -47,14 +47,20 @@ export default function JobsPage({ servicetype }) {
   }, [servicetype, searchTerm, filters]);
 
   // ✅ MUST RE-RUN WHEN servicetype CHANGES
-  useEffect(() => {
-    fetchJobs();
-  }, [fetchJobs]);
+useEffect(() => {
+  setFilters({});
+}, [servicetype]);
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
       <aside className="sticky top-24 self-start">
-        <Filterbar filters={filters} setFilters={setFilters} />
+ <Filterbar
+  servicetype={servicetype}
+  filters={filters}
+  setFilters={setFilters}
+/>
+
       </aside>
 
       <section className="space-y-6">
