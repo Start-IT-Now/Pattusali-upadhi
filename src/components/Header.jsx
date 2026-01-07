@@ -4,7 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import puv from "../puv.png";
 
 export default function Header({ volunteer }) {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
 
   const links = [
     { label: "Home", to: "/" },
@@ -14,78 +15,73 @@ export default function Header({ volunteer }) {
   ];
 
   return (
-    <header className="bg-white sticky top-0 z-40 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
-          <img src={puv} className="w-10 h-10 rounded-md" alt="logo" />
-          <div className="leading-tight">
-            <span className="font-extrabold text-base sm:text-lg">
-              Upadhi Vedhika
-            </span>
-            <p className="text-xs text-purple-600 hidden sm:block">
-              Find your dream Opportunity
-            </p>
-          </div>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-4">
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              className={({ isActive }) =>
-                `px-4 py-2 rounded-full text-sm font-semibold transition ${
-                  isActive
-                    ? "bg-purple-600 text-white"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`
-              }
-            >
-              {l.label}
-            </NavLink>
-          ))}
-
-          {/* Volunteer Button */}
-          <NavLink
-            to={volunteer ? "/post-job" : "/volunteer"}
-            className="px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold hover:opacity-90"
-          >
-            {volunteer ? "Post a Job" : "Volunteer"}
-          </NavLink>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+   <header className="bg-white sticky top-0 z-40 shadow-sm">
+  <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    {/* Logo */}
+    <div
+      className="flex items-center gap-2 cursor-pointer"
+      onClick={() => navigate("/")}
+    >
+      <img src={puv} alt="logo" className="w-9 h-9 rounded-md" />
+      <div className="leading-tight">
+        <h1 className="text-sm font-bold">Upadhi Vedhika</h1>
+        <p className="text-[11px] text-purple-600">
+          Find your dream Opportunity
+        </p>
       </div>
+    </div>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden bg-white border-t">
-          {[...links,
-            {
-              label: volunteer ? "Post a Job" : "Volunteer",
-              to: volunteer ? "/post-job" : "/volunteer",
-            },
-          ].map((l) => (
-            <Link
-              key={l.label}
-              to={l.to}
-              onClick={() => setOpen(false)}
-              className="block px-6 py-4 text-sm font-medium border-b"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </header>
+    {/* Desktop Nav */}
+    <nav className="hidden md:flex items-center gap-3">
+      <NavButton label="Home" onClick={() => navigate("/")} />
+      <NavButton label="Jobs" onClick={() => navigate("/jobs")} />
+      <NavButton label="Guidance" onClick={() => navigate("/guidance")} />
+      <NavButton label="Training" onClick={() => navigate("/training")} />
+      <NavButton
+        label={volunteer ? "Post a Job" : "Volunteer"}
+        onClick={() =>
+          navigate(volunteer ? "/post-job" : "/volunteer")
+        }
+      />
+    </nav>
+
+    {/* Mobile Menu Button */}
+    <button
+      className="md:hidden p-2"
+      onClick={() => setMenuOpen(!menuOpen)}
+      aria-label="Menu"
+    >
+      {menuOpen ? <X size={22} /> : <Menu size={22} />}
+    </button>
+  </div>
+
+  {/* Mobile Menu */}
+  {menuOpen && (
+    <div className="md:hidden bg-white border-t">
+      {[
+        { label: "Home", path: "/" },
+        { label: "Jobs", path: "/jobs" },
+        { label: "Guidance", path: "/guidance" },
+        { label: "Training", path: "/training" },
+        {
+          label: volunteer ? "Post a Job" : "Volunteer",
+          path: volunteer ? "/post-job" : "/volunteer",
+        },
+      ].map((item) => (
+        <button
+          key={item.label}
+          onClick={() => {
+            navigate(item.path);
+            setMenuOpen(false);
+          }}
+          className="block w-full text-left px-5 py-4 text-sm font-medium border-b"
+        >
+          {item.label}
+        </button>
+      ))}
+    </div>
+  )}
+</header>
+
   );
 }
