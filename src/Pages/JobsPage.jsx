@@ -8,6 +8,7 @@ export default function JobsPage({ servicetype }) {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedJob, setSelectedJob] = useState(null);
   const [filters, setFilters] = useState({
     location: null,
     companyType: [],
@@ -130,7 +131,7 @@ useEffect(() => {
         ) : (
           <div className="flex flex-col gap-6">
             {jobs.map((job) => (
-              <JobCard key={job.id} job={job} />
+              <JobCard key={job.id} job={job} onView={(job) => setSelectedJob(job)}/>
             ))}
           </div>
         )}
