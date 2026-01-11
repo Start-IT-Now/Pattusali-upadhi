@@ -139,3 +139,10 @@ useEffect(() => {
     </div>
   );
 }
+
+{selectedJob && (
+  <JobDetailsModal
+    job={selectedJob}
+    onClose={() => setSelectedJob(null)}
+  />
+)}

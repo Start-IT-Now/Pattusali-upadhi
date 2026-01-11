@@ -120,9 +120,3 @@ function MetaInline({ icon: Icon, label }) {
   );
 }
 
-{selectedJob && (
-  <JobDetailsModal
-    job={selectedJob}
-    onClose={() => setSelectedJob(null)}
-  />
-)}
