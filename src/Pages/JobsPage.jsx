@@ -98,51 +98,61 @@ useEffect(() => {
 }, [servicetype]);
 
 
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
-      <aside className="sticky top-24 self-start">
- <Filterbar
-  servicetype={servicetype}
-  filters={filters}
-  setFilters={setFilters}
-/>
+return (
+  <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
+    {/* SIDEBAR */}
+    <aside className="sticky top-24 self-start">
+      <Filterbar
+        servicetype={servicetype}
+        filters={filters}
+        setFilters={setFilters}
+      />
+    </aside>
 
-      </aside>
+    {/* MAIN CONTENT */}
+    <section className="space-y-6">
+      {/* Search */}
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <input
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search jobs..."
+          className="w-full pl-12 pr-4 py-3 rounded-lg border"
+        />
+      </div>
 
-      <section className="space-y-6">
-        {/* Search */}
-        <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search jobs..."
-            className="w-full pl-12 pr-4 py-3 rounded-lg border"
-          />
+      {/* Content */}
+      {loading && (
+        <div className="text-center py-20">Loading...</div>
+      )}
+
+      {!loading && jobs.length === 0 && (
+        <div className="text-center py-20 text-gray-600">
+          No listings found
         </div>
+      )}
 
-        {/* Content */}
-        {loading ? (
-          <div className="text-center py-20">Loading...</div>
-        ) : jobs.length === 0 ? (
-          <div className="text-center py-20 text-gray-600">
-            No listings found
-          </div>
-        ) : (
-          <div className="flex flex-col gap-6">
-            {jobs.map((job) => (
-              <JobCard key={job.id} job={job} onView={(job) => setSelectedJob(job)}/>
-            ))}
-          </div>
-        )}
-      </section>
-    </div>
-  );
+      {!loading && jobs.length > 0 && (
+        <div className="flex flex-col gap-6">
+          {jobs.map((job) => (
+            <JobCard
+              key={job.id}
+              job={job}
+              onView={(job) => setSelectedJob(job)}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+
+    {/* ✅ STEP 3 — MODAL GOES HERE */}
+    {selectedJob && (
+      <JobDetailsModal
+        job={selectedJob}
+        onClose={() => setSelectedJob(null)}
+      />
+    )}
+  </div>
+);
 }
-
-{selectedJob && (
-  <JobDetailsModal
-    job={selectedJob}
-    onClose={() => setSelectedJob(null)}
-  />
-)}
