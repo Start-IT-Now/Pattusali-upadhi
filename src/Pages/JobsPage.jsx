@@ -3,6 +3,8 @@ import { Search } from "lucide-react";
 import supabase from "../lib/supabase";
 import JobCard from "../Pages/JobCard.jsx";
 import Filterbar from "../components/FilterBar.jsx";
+import JobDetails from "../Pages/JobDetails";
+
 
 export default function JobsPage({ servicetype }) {
   const [jobs, setJobs] = useState([]);
@@ -136,7 +138,7 @@ return (
       {!loading && jobs.length > 0 && (
         <div className="flex flex-col gap-6">
           {jobs.map((job) => (
-            <JobCard
+            <JobDetails
               key={job.id}
               job={job}
               onView={(job) => setSelectedJob(job)}
@@ -148,7 +150,7 @@ return (
 
     {/* ✅ STEP 3 — MODAL GOES HERE */}
     {selectedJob && (
-      <JobDetailsModal
+      <JobDetails
         job={selectedJob}
         onClose={() => setSelectedJob(null)}
       />
