@@ -93,12 +93,16 @@ export default function JobCard({ job, onView }) {
 
         <div className="flex gap-2">
           <button
-            onClick={() => onView(job)}
+            onClick={() => navigate(`/jobs/${job.id}`)}
             className="px-4 py-2 text-sm border rounded-lg hover:bg-gray-50"
           >
             View
           </button>
-          <button className="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+
+          {/* APPLY BUTTON */}
+          <button
+            className="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+          >
             Apply
           </button>
         </div>
