@@ -8,8 +8,11 @@ import {
   GraduationCap,
   Heart,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function JobCard({ job, onView }) {
+  const navigate = useNavigate();
   const formatDate = (date) =>
     date ? new Date(date).toLocaleDateString("en-IN") : "—";
 
