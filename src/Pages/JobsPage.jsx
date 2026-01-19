@@ -137,13 +137,13 @@ return (
 
       {!loading && jobs.length > 0 && (
         <div className="flex flex-col gap-6">
-          {jobs.map((job) => (
-            <JobDetails
-              key={job.id}
-              job={job}
-              onView={(job) => setSelectedJob(job)}
-            />
-          ))}
+{jobs.map((job) => (
+  <JobCard
+    key={job.id}
+    job={job}
+    onView={(job) => setSelectedJob(job)}
+  />
+))}
         </div>
       )}
     </section>
