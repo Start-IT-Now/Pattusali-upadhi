@@ -25,6 +25,8 @@ export default function JobsPage({ servicetype }) {
       .from("jobs")
       .select("*")
       .eq("service_type", servicetype);
+      query = query.eq("status", "approved");
+
 
     /* ---------- COMMON SEARCH ---------- */
     if (searchTerm) {

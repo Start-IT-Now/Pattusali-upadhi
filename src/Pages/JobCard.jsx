@@ -32,10 +32,23 @@ export default function JobCard({ job, onView }) {
         <button className="p-2 rounded-full hover:bg-gray-100">
           <Heart className="w-5 h-5 text-gray-400" />
         </button>
+        {job.status && (
+  <span
+    className={`px-3 py-1 text-xs rounded-full font-semibold
+      ${job.status === "approved" && "bg-green-100 text-green-700"}
+      ${job.status === "pending" && "bg-yellow-100 text-yellow-700"}
+      ${job.status === "rejected" && "bg-red-100 text-red-700"}
+    `}
+  >
+    {job.status.toUpperCase()}
+  </span>
+)}
+
       </div>
 
       {/* ================= SINGLE HORIZONTAL META ROW ================= */}
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-gray-700">
+        
 
         {/* -------- JOB -------- */}
         {service === "job" && (
@@ -100,9 +113,6 @@ export default function JobCard({ job, onView }) {
     View
   </button>
 
-  <button className="px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700">
-    Apply
-  </button>
 </div>
       </div>
     </article>

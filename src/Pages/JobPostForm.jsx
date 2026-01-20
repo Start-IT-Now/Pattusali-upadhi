@@ -7,6 +7,7 @@ const inputBase =
   "w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none";
 
 export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {} }) {
+  const reviewToken = crypto.randomUUID();
   const [formData, setFormData] = useState({
     service_type: "job",
     job_title: "",
@@ -36,6 +37,8 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
 
     description: "",
     end_date: "",
+    status:"pending",
+    review_token: reviewToken
   });
 
  const buildPayload = (formData, serviceType) => {
@@ -46,6 +49,8 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     job_title: formData.job_title,
     description: clean(formData.description),
     end_date: formData.end_date || null,
+    status: "pending",
+    review_token: formData.review_token,
   };
 
   if (serviceType === "job") {
@@ -123,12 +128,25 @@ const handleSubmit = async (e) => {
   const payload = buildPayload(formData, formData.service_type);
 
   if (!payload) {
-    console.error("Payload is empty");
     setLoading(false);
     return;
   }
 
   const { error } = await supabase.from("jobs").insert([payload]);
+
+  if (!error) {
+    await fetch(
+      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-job-alert`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+  }
 
   setLoading(false);
 
@@ -140,7 +158,6 @@ const handleSubmit = async (e) => {
   onJobPosted?.();
   onCancel?.();
 };
-
 
 
   return (

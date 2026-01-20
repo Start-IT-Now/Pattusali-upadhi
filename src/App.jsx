@@ -7,6 +7,7 @@ import JobsPage from "./Pages/JobsPage.jsx";
 import VolunteerAuth from "./Pages/VolunteerAuth.jsx";
 import JobPostForm from "./Pages/JobPostForm.jsx";
 import JobDetails from "./Pages/JobDetails.jsx";
+import AdminJobs from "./Pages/AdminJobs.jsx";
 
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -45,6 +46,7 @@ export default function App() {
           />
 
           <Route path="/post-job" element={<JobPostForm />} />
+          <Route path="/admin/jobs" element={<AdminJobs />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
         </Routes>
       </main>
