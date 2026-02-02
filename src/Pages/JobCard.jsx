@@ -29,9 +29,6 @@ export default function JobCard({ job, onView }) {
           )}
         </div>
 
-        <button className="p-2 rounded-full hover:bg-gray-100">
-          <Heart className="w-5 h-5 text-gray-400" />
-        </button>
         {job.status && (
   <span
     className={`px-3 py-1 text-xs rounded-full font-semibold

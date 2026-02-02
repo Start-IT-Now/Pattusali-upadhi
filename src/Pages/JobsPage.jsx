@@ -104,8 +104,18 @@ useEffect(() => {
 
 return (
   <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
-    {/* SIDEBAR */}
-    <aside className="sticky top-24 self-start">
+    {/* ✅ MOBILE FILTER BUTTON */}
+    <div className="lg:hidden">
+      <button
+        onClick={() => setShowMobileFilter(true)}
+        className="w-full py-3 rounded-lg border bg-white font-semibold"
+      >
+        Open Filters
+      </button>
+    </div>
+
+    {/* ✅ SIDEBAR ONLY FOR DESKTOP */}
+    <aside className="hidden lg:block sticky top-24 self-start">
       <Filterbar
         servicetype={servicetype}
         filters={filters}
@@ -127,35 +137,47 @@ return (
       </div>
 
       {/* Content */}
-      {loading && (
-        <div className="text-center py-20">Loading...</div>
-      )}
+      {loading && <div className="text-center py-20">Loading...</div>}
 
       {!loading && jobs.length === 0 && (
-        <div className="text-center py-20 text-gray-600">
-          No listings found
-        </div>
+        <div className="text-center py-20 text-gray-600">No listings found</div>
       )}
 
       {!loading && jobs.length > 0 && (
         <div className="flex flex-col gap-6">
-{jobs.map((job) => (
-  <JobCard
-    key={job.id}
-    job={job}
-    onView={(job) => setSelectedJob(job)}
-  />
-))}
+          {jobs.map((job) => (
+            <JobCard key={job.id} job={job} onView={(job) => setSelectedJob(job)} />
+          ))}
         </div>
       )}
     </section>
 
-    {/* ✅ STEP 3 — MODAL GOES HERE */}
+    {/* ✅ JOB DETAILS MODAL */}
     {selectedJob && (
-      <JobDetails
-        job={selectedJob}
-        onClose={() => setSelectedJob(null)}
-      />
+      <JobDetails job={selectedJob} onClose={() => setSelectedJob(null)} />
+    )}
+
+    {/* ✅ MOBILE FILTER MODAL */}
+    {showMobileFilter && (
+      <div className="fixed inset-0 z-50 bg-black/40 flex justify-end">
+        <div className="w-[85%] max-w-sm h-full bg-white p-4 overflow-y-auto">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="font-bold text-lg">Filters</h2>
+            <button
+              onClick={() => setShowMobileFilter(false)}
+              className="text-red-500 font-semibold"
+            >
+              Close
+            </button>
+          </div>
+
+          <Filterbar
+            servicetype={servicetype}
+            filters={filters}
+            setFilters={setFilters}
+          />
+        </div>
+      </div>
     )}
   </div>
 );

@@ -320,11 +320,13 @@ const handleSubmit = async (e) => {
     required
   >
     <option value="">Select industry</option>
-    <option value="Information & Technology">Information & Technology</option>
+    <option value="Insurance">Agriculture</option>
+    <option value="Marketing">Education</option>
     <option value="Financial Services">Financial Services</option>
-    <option value="Marketing">Marketing</option>
-    <option value="Insurance">Insurance</option>
     <option value="Hardware & Networking">Hardware & Networking</option>
+    <option value="Information & Technology">Information & Technology</option>
+    <option value="Insurance">Insurance</option>
+    <option value="Marketing">Marketing</option>
     <option value="Others">Others</option>
   </select>
 </div>
@@ -361,6 +363,7 @@ const handleSubmit = async (e) => {
     <option value="Financial Services">Financial Services</option>
     <option value="Marketing">Marketing</option>
     <option value="Insurance">Insurance</option>
+    <option value="Financial Services">Teaching</option>
     <option value="Hardware & Networking">Hardware & Networking</option>
     <option value="Others">Others</option>
   </select>
