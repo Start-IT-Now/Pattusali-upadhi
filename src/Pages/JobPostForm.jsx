@@ -191,43 +191,60 @@ const handleSubmit = async (e) => {
   onCancel?.();
 };
 
-const SelectWithOthers = ({ label, name, value, options, required = false }) => (
-  <div>
-    <label className="font-semibold">{label}</label>
+const handleOtherChange = (field, value) => {
+  setOtherInputs((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+};
 
-    <select
-      name={name}
-      value={value || ""}
-      onChange={handleInputChange}
-      className={inputBase}
-      required={required}
-    >
-      <option value="">Select {label}</option>
+function SelectWithOthers({
+  label,
+  name,
+  value,
+  options,
+  required = false,
+  inputBase,
+  onSelectChange,
+  otherValue,
+  onOtherChange,
+}) {
+  return (
+    <div>
+      <label className="font-semibold">{label}</label>
 
-      {options.map((opt) => (
-        <option key={opt} value={opt}>
-          {opt}
-        </option>
-      ))}
+      <select
+        name={name}
+        value={value || ""}
+        onChange={onSelectChange}
+        className={inputBase}
+        required={required}
+      >
+        <option value="">Select {label}</option>
 
-      <option value="Others">Others</option>
-    </select>
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
 
-    {/* ✅ Show textbox when Others */}
-    {value === "Others" && (
-      <input
-        type="text"
-        value={otherInputs[name] || ""}
-        onChange={(e) =>
-          setOtherInputs((prev) => ({ ...prev, [name]: e.target.value }))
-        }
-        placeholder={`Enter ${label}`}
-        className={`${inputBase} mt-2`}
-        required
-      />
-    )}
-  </div>
-);
+        <option value="Others">Others</option>
+      </select>
+
+      {value === "Others" && (
+        <input
+          type="text"
+          value={otherValue || ""}
+          onChange={(e) => onOtherChange(name, e.target.value)}
+          placeholder={`Enter ${label}`}
+          className={`${inputBase} mt-2`}
+          required
+        />
+      )}
+    </div>
+  );
+}
+
 
 
   return (
@@ -389,6 +406,10 @@ const SelectWithOthers = ({ label, name, value, options, required = false }) => 
   value={formData.company_type}
   required
   options={["Foreign MNC", "Startup", "Indian MNC", "Corporate"]}
+  inputBase={inputBase}
+  onSelectChange={handleInputChange}
+  otherValue={otherInputs.company_type}
+  onOtherChange={handleOtherChange}
 />
 
 
@@ -406,8 +427,11 @@ const SelectWithOthers = ({ label, name, value, options, required = false }) => 
     "Insurance",
     "Marketing",
   ]}
+  inputBase={inputBase}
+  onSelectChange={handleInputChange}
+  otherValue={otherInputs.industry}
+  onOtherChange={handleOtherChange}
 />
-
 
 
 <div>
@@ -433,6 +457,10 @@ const SelectWithOthers = ({ label, name, value, options, required = false }) => 
   value={formData.job_type}
   required
   options={["Full-time", "Part-time", "Contract", "Freelance", "Internship"]}
+  inputBase={inputBase}
+  onSelectChange={handleInputChange}
+  otherValue={otherInputs.job_type}
+  onOtherChange={handleOtherChange}
 />
 
 
