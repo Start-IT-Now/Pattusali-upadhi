@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, X } from "lucide-react";
+import { Phone, Plus, X } from "lucide-react";
 import supabase from "../lib/supabase";
 
 const inputBase =
@@ -47,6 +47,9 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
   const base = {
     service_type: serviceType,
     job_title: formData.job_title,
+    phone: formData.phone,
+    name: formData.name,
+    email: formData.email,
     description: clean(formData.description),
     end_date: formData.end_date || null,
     status: "pending",
@@ -213,9 +216,28 @@ const handleSubmit = async (e) => {
             className={inputBase}
           />
         </div>
-      </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+     <div className="grid md:grid-cols-2 gap-6">
+        <div>
+          <label className="font-semibold">Representative Name</label>
+          <input
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            className={inputBase}
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">Representative Email</label>
+          <input
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={inputBase}
+          />
+        </div>
+ 
 <div>
   <label className="font-semibold">
     Application End Date
@@ -235,18 +257,22 @@ const handleSubmit = async (e) => {
     Leave empty if the application has no deadline.
   </p>
 </div>
-
-
-        <div>
-          <label className="font-semibold">Location</label>
+               <div>
+          <label className="font-semibold">Phone</label>
           <input
-            name="location"
-            value={formData.location}
+            name="phone"
+            value={formData.phone}
             onChange={handleInputChange}
             className={inputBase}
           />
         </div>
       </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+      </div>
+      </div>
+
+      
 
       {/* SERVICE-SPECIFIC FIELDS */}
       <AnimatePresence mode="wait">
