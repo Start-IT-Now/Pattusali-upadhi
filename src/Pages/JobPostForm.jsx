@@ -6,6 +6,53 @@ import supabase from "../lib/supabase";
 const inputBase =
   "w-full mt-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-300 outline-none";
 
+  function SelectWithOthers({
+  label,
+  name,
+  value,
+  options,
+  required = false,
+  inputBase,
+  onSelectChange,
+  otherValue,
+  onOtherChange,
+}) {
+  return (
+    <div>
+      <label className="font-semibold">{label}</label>
+
+      <select
+        name={name}
+        value={value || ""}
+        onChange={onSelectChange}
+        className={inputBase}
+        required={required}
+      >
+        <option value="">Select {label}</option>
+
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+
+        <option value="Others">Others</option>
+      </select>
+
+      {value === "Others" && (
+        <input
+          type="text"
+          value={otherValue || ""}
+          onChange={(e) => onOtherChange(name, e.target.value)}
+          placeholder={`Enter ${label}`}
+          className={`${inputBase} mt-2`}
+          required
+        />
+      )}
+    </div>
+  );
+}
+
 export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {} }) {
   const reviewToken = crypto.randomUUID();
   const [formData, setFormData] = useState({
@@ -17,7 +64,7 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     job_type:"",
     hr_name:"",
     hr_email: "",
-    work_mode:" ",
+    work_mode:"",
     industry: "",
     company_type: "",
 
@@ -198,54 +245,6 @@ const handleOtherChange = (field, value) => {
     [field]: value,
   }));
 };
-
-function SelectWithOthers({
-  label,
-  name,
-  value,
-  options,
-  required = false,
-  inputBase,
-  onSelectChange,
-  otherValue,
-  onOtherChange,
-}) {
-  return (
-    <div>
-      <label className="font-semibold">{label}</label>
-
-      <select
-        name={name}
-        value={value || ""}
-        onChange={onSelectChange}
-        className={inputBase}
-        required={required}
-      >
-        <option value="">Select {label}</option>
-
-        {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
-
-        <option value="Others">Others</option>
-      </select>
-
-      {value === "Others" && (
-        <input
-          type="text"
-          value={otherValue || ""}
-          onChange={(e) => onOtherChange(name, e.target.value)}
-          placeholder={`Enter ${label}`}
-          className={`${inputBase} mt-2`}
-          required
-        />
-      )}
-    </div>
-  );
-}
-
 
 
   return (
