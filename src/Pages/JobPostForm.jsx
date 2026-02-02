@@ -216,6 +216,7 @@ const handleSubmit = async (e) => {
             className={inputBase}
           />
         </div>
+        </div>
 
      <div className="grid md:grid-cols-2 gap-6">
         <div>
@@ -237,7 +238,9 @@ const handleSubmit = async (e) => {
             className={inputBase}
           />
         </div>
+        </div>
  
+<div className="grid md:grid-cols-2 gap-6">
 <div>
   <label className="font-semibold">
     Application End Date
@@ -268,11 +271,6 @@ const handleSubmit = async (e) => {
         </div>
       </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-      </div>
-      </div>
-
-      
 
       {/* SERVICE-SPECIFIC FIELDS */}
       <AnimatePresence mode="wait">
