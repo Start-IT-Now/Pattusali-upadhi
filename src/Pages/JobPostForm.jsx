@@ -146,12 +146,18 @@ const handleSubmit = async (e) => {
         body: JSON.stringify(payload),
       }
     );
+
+    // ✅ Alert message after submit
+    alert(
+      "✅ Your post has been submitted successfully!\nIt will be reviewed and published within 24 hours."
+    );
   }
 
   setLoading(false);
 
   if (error) {
     console.error(error);
+    alert("❌ Failed to submit. Please try again.");
     return;
   }
 
