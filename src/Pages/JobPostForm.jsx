@@ -125,15 +125,16 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
   const [loading, setLoading] = useState(false);
 
   /* ✅ SINGLE INPUT HANDLER */
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+const handleInputChange = (e) => {
+  const { name, value, tagName } = e.target;
 
-      // ✅ if not Others then clear textbox value
-  if (value !== "Others") {
+  setFormData((prev) => ({ ...prev, [name]: value }));
+
+  // ✅ only clear if it's a SELECT element
+  if (tagName === "SELECT" && value !== "Others") {
     setOtherInputs((prev) => ({ ...prev, [name]: "" }));
   }
-  };
+};
 
   /* ✅ SKILLS */
   const addSkill = () => {
