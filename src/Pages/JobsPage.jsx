@@ -16,6 +16,8 @@ export default function JobsPage({ servicetype }) {
     companyType: [],
     industry: [],
   });
+const [showMobileFilter, setShowMobileFilter] = useState(false);
+
 
  const fetchListings = async () => {
   setLoading(true);
