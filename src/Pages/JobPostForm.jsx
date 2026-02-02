@@ -13,20 +13,20 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     job_title: "",
     company_name: "",
     location: "",
-    experience: "",
-    job_type:" ",
-    hr_name:" ",
+    experience:"",
+    job_type:"",
+    hr_name:"",
     hr_email: "",
     work_mode:" ",
     industry: "",
     company_type: "",
 
-    guidance_type: "",
-    guidance_slot:" ",
-    guidance_period:" ",
+    guidance_type:"",
+    guidance_slot:"",
+    guidance_period:"",
     mentor_name: "",
-    mentor_email:" ",
-    guidance_mode:" ",
+    mentor_email:"",
+    guidance_mode:"",
 
     training_type: "",
     training_mode: "",
@@ -40,6 +40,12 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     status:"pending",
     review_token: reviewToken
   });
+
+    const [otherInputs, setOtherInputs] = useState({
+  company_type: "",
+  industry: "",
+  job_type: "",
+});
 
  const buildPayload = (formData, serviceType) => {
   const clean = (v) => (v && v.trim() ? v : null);
@@ -62,10 +68,21 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
       company_name: clean(formData.company_name),
       location: clean(formData.location),
       experience: clean(formData.experience),
-      job_type: clean(formData.job_type),
+              company_type:
+          formData.company_type === "Others"
+            ? clean(otherInputs.company_type)
+            : clean(formData.company_type),
+
+        industry:
+          formData.industry === "Others"
+            ? clean(otherInputs.industry)
+            : clean(formData.industry),
+
+        job_type:
+          formData.job_type === "Others"
+            ? clean(otherInputs.job_type)
+            : clean(formData.job_type),
       work_mode: clean(formData.work_mode),
-      industry: clean(formData.industry),
-      company_type: clean(formData.company_type),
       hr_name: clean(formData.hr_name),
       hr_email: clean(formData.hr_email),
       skills,
@@ -96,6 +113,7 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     };
   }
 
+
   // ✅ SAFETY FALLBACK
   return base;
 };
@@ -110,6 +128,11 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+      // ✅ if not Others then clear textbox value
+  if (value !== "Others") {
+    setOtherInputs((prev) => ({ ...prev, [name]: "" }));
+  }
   };
 
   /* ✅ SKILLS */
@@ -167,6 +190,44 @@ const handleSubmit = async (e) => {
   onJobPosted?.();
   onCancel?.();
 };
+
+const SelectWithOthers = ({ label, name, value, options, required = false }) => (
+  <div>
+    <label className="font-semibold">{label}</label>
+
+    <select
+      name={name}
+      value={value || ""}
+      onChange={handleInputChange}
+      className={inputBase}
+      required={required}
+    >
+      <option value="">Select {label}</option>
+
+      {options.map((opt) => (
+        <option key={opt} value={opt}>
+          {opt}
+        </option>
+      ))}
+
+      <option value="Others">Others</option>
+    </select>
+
+    {/* ✅ Show textbox when Others */}
+    {value === "Others" && (
+      <input
+        type="text"
+        value={otherInputs[name] || ""}
+        onChange={(e) =>
+          setOtherInputs((prev) => ({ ...prev, [name]: e.target.value }))
+        }
+        placeholder={`Enter ${label}`}
+        className={`${inputBase} mt-2`}
+        required
+      />
+    )}
+  </div>
+);
 
 
   return (
@@ -322,44 +383,31 @@ const handleSubmit = async (e) => {
               />
             </div>
 
-<div>
-  <label className="font-semibold">Company Type</label>
-  <select
-    name="company_type"
-    value={formData.company_type || ""}
-    onChange={handleInputChange}
-    className={inputBase}
-    required
-  >
-    <option value="">Select company type</option>
-    <option value="Foreign MNC">Foreign MNC</option>
-    <option value="Startup">Startup</option>
-    <option value="Indian MNC">Indian MNC</option>
-    <option value="Corporate">Corporate</option>
-    <option value="Others">Others</option>
-  </select>
-</div>
+<SelectWithOthers
+  label="Company Type"
+  name="company_type"
+  value={formData.company_type}
+  required
+  options={["Foreign MNC", "Startup", "Indian MNC", "Corporate"]}
+/>
 
-<div>
-  <label className="font-semibold">Industry</label>
-  <select
-    name="industry"
-    value={formData.industry || ""}
-    onChange={handleInputChange}
-    className={inputBase}
-    required
-  >
-    <option value="">Select industry</option>
-    <option value="Insurance">Agriculture</option>
-    <option value="Marketing">Education</option>
-    <option value="Financial Services">Financial Services</option>
-    <option value="Hardware & Networking">Hardware & Networking</option>
-    <option value="Information & Technology">Information & Technology</option>
-    <option value="Insurance">Insurance</option>
-    <option value="Marketing">Marketing</option>
-    <option value="Others">Others</option>
-  </select>
-</div>
+
+<SelectWithOthers
+  label="Industry"
+  name="industry"
+  value={formData.industry}
+  required
+  options={[
+    "Agriculture",
+    "Education",
+    "Financial Services",
+    "Hardware & Networking",
+    "Information & Technology",
+    "Insurance",
+    "Marketing",
+  ]}
+/>
+
 
 
 <div>
@@ -379,25 +427,14 @@ const handleSubmit = async (e) => {
   </select>
 </div>
 
-<div>
-  <label className="font-semibold">Job Type</label>
-  <select
-    name="job_type"
-    value={formData.job_type || ""}
-    onChange={handleInputChange}
-    className={inputBase}
-    required
-  >
-    <option value="">Select Jobtype</option>
-    <option value="Information & Technology">Information & Technology</option>
-    <option value="Financial Services">Financial Services</option>
-    <option value="Marketing">Marketing</option>
-    <option value="Insurance">Insurance</option>
-    <option value="Financial Services">Teaching</option>
-    <option value="Hardware & Networking">Hardware & Networking</option>
-    <option value="Others">Others</option>
-  </select>
-</div>
+<SelectWithOthers
+  label="Job Type"
+  name="job_type"
+  value={formData.job_type}
+  required
+  options={["Full-time", "Part-time", "Contract", "Freelance", "Internship"]}
+/>
+
 
           </motion.div>
         )}
