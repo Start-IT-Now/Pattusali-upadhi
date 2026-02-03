@@ -3,9 +3,16 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import puv from "../puv.png";
 
-export default function Header({ volunteer }) {
+export default function Header({ volunteer, setVolunteer }) {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+  localStorage.removeItem("volunteer");
+  localStorage.removeItem("volunteer_token");
+   setVolunteer(null);
+  navigate("/volunteer");
+};
 
   return (
 <header className="bg-white sticky top-0 z-40 shadow-sm">
@@ -24,6 +31,7 @@ export default function Header({ volunteer }) {
       </div>
     </div>
 
+
     {/* Desktop Nav */}
     <nav className="hidden md:flex gap-3">
       <NavButton label="Home" onClick={() => navigate("/")} />
@@ -36,6 +44,12 @@ export default function Header({ volunteer }) {
           navigate(volunteer ? "/post-job" : "/volunteer")
         }
       />
+      {volunteer && (
+  <NavButton
+    label="Logout"
+    onClick={handleLogout}
+  />
+)}
     </nav>
 
     {/* Mobile Menu Button */}
@@ -48,31 +62,36 @@ export default function Header({ volunteer }) {
   </div>
 
   {/* Mobile Menu */}
-  {menuOpen && (
-    <div className="md:hidden bg-white border-t">
-      {[
-        { label: "Home", path: "/" },
-        { label: "Jobs", path: "/jobs" },
-        { label: "Guidance", path: "/guidance" },
-        { label: "Training", path: "/training" },
-        {
-          label: volunteer ? "Post a Job" : "Volunteer",
-          path: volunteer ? "/post-job" : "/volunteer",
-        },
-      ].map((item) => (
-        <button
-          key={item.label}
-          onClick={() => {
+{menuOpen && (
+  <div className="md:hidden bg-white border-t">
+    {[
+      { label: "Home", path: "/" },
+      { label: "Jobs", path: "/jobs" },
+      { label: "Guidance", path: "/guidance" },
+      { label: "Training", path: "/training" },
+      {
+        label: volunteer ? "Post a Job" : "Volunteer",
+        path: volunteer ? "/post-job" : "/volunteer",
+      },
+      ...(volunteer ? [{ label: "Logout", action: "logout" }] : []),
+    ].map((item) => (
+      <button
+        key={item.label}
+        onClick={() => {
+          if (item.action === "logout") {
+            handleLogout();
+          } else {
             navigate(item.path);
-            setMenuOpen(false);
-          }}
-          className="block w-full text-left px-5 py-4 text-sm font-medium border-b"
-        >
-          {item.label}
-        </button>
-      ))}
-    </div>
-  )}
+          }
+          setMenuOpen(false);
+        }}
+        className="block w-full text-left px-5 py-4 text-sm font-medium border-b"
+      >
+        {item.label}
+      </button>
+    ))}
+  </div>
+)}
 </header>
   );
 }
