@@ -11,7 +11,7 @@ export default function Header({ volunteer, setVolunteer }) {
   localStorage.removeItem("volunteer");
   localStorage.removeItem("volunteer_token");
    setVolunteer(null);
-  navigate("/volunteer");
+  navigate("/");
 };
 
   return (
