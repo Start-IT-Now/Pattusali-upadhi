@@ -41,7 +41,7 @@ export default function Header({ volunteer, setVolunteer }) {
       <NavButton
         label={volunteer ? "Post a Job" : "Volunteer"}
         onClick={() =>
-          navigate(volunteer ? "/" : "/volunteer")
+          navigate(volunteer ? "/post-job" : "/volunteer")
         }
       />
       {volunteer && (

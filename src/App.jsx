@@ -16,7 +16,7 @@ export default function App() {
 
   const handleAuthSuccess = (userData) => {
     setVolunteer(userData);
-    navigate("/post-job");
+    navigate("/");
   };
 
   return (
