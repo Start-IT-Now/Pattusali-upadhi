@@ -325,10 +325,6 @@ const handleOtherChange = (field, value) => {
     required
     className={`${inputBase} focus:ring-2 focus:ring-blue-500 focus:outline-none`}
   />
-
-  {!formData.email && (
-    <p className="text-sm text-red-500">Email is Required</p>
-  )}
 </div>
         </div>
  
@@ -367,10 +363,6 @@ const handleOtherChange = (field, value) => {
     required
     className={`${inputBase} focus:ring-2 focus:ring-blue-500 focus:outline-none`}
   />
-
-  {!formData.phone && (
-    <p className="text-sm text-red-500">Phone Number is Required</p>
-  )}
 </div>
       </div>
 
@@ -704,10 +696,6 @@ const handleOtherChange = (field, value) => {
       required
       className={`${inputBase} mt-1 focus:ring-2 focus:ring-blue-500 focus:outline-none`}
     />
-
-    {!formData.url && (
-      <p className="text-sm text-red-500 mt-1">URL is required</p>
-    )}
   </div>
 </div>
 
