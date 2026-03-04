@@ -129,26 +129,42 @@ export default function JobDetailsModal({ job, onClose }) {
           )}
         </div>
 
-        {/* CONTACT SECTION */}
-        <div className="bg-gray-50 p-5 rounded-xl mb-8">
-          <h3 className="font-semibold text-gray-900 mb-3">Contact</h3>
+{/* CONTACT SECTION */}
+<div className="bg-gray-50 p-5 rounded-xl mb-8">
+  <h3 className="font-semibold text-gray-900 mb-3">Contact</h3>
 
-          <div className="flex flex-col gap-2 text-gray-700">
-            {job.name && (
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-gray-600" />
-                {job.name}
-              </div>
-            )}
+  <div className="flex flex-col gap-2 text-gray-700">
 
-            {job.email && (
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gray-600" />
-                {job.email}
-              </div>
-            )}
-          </div>
-        </div>
+    {job.name && (
+      <div className="flex items-center gap-2">
+        <User className="w-4 h-4 text-gray-600" />
+        {job.name}
+      </div>
+    )}
+
+    {job.email && (
+      <div className="flex items-center gap-2">
+        <Mail className="w-4 h-4 text-gray-600" />
+        {job.email}
+      </div>
+    )}
+
+    {job.url && (
+      <div className="flex items-center gap-2">
+        <Link className="w-4 h-4 text-gray-600" />
+        <a
+          href={job.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          {job.url}
+        </a>
+      </div>
+    )}
+
+  </div>
+</div>
 
         {/* DESCRIPTION */}
         <div className="mb-8">

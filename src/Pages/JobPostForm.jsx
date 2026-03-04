@@ -97,7 +97,7 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
   job_type: "",
 });
 
- const buildPayload = (formData, serviceType) => {
+const buildPayload = (formData, serviceType) => {
   const clean = (v) => (v && v.trim() ? v : null);
 
   const base = {
@@ -108,7 +108,7 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     email: formData.email,
     description: clean(formData.description),
     end_date: formData.end_date || null,
-    url: formData.end_date,
+    url: clean(formData.url),
     status: "pending",
     review_token: formData.review_token,
   };

@@ -6,7 +6,7 @@ import {
   User,
   Clock,
   GraduationCap,
-  Heart,
+  Link,
 } from "lucide-react";
 
 
@@ -54,6 +54,7 @@ export default function JobCard({ job, onView }) {
             <MetaInline icon={Briefcase} label={job.experience && `${job.experience} yrs`} />
             <MetaInline icon={Clock} label={job.work_mode} />
             <MetaInline icon={Mail} label={job.hr_email} />
+            <MetaInline icon={Link} label={job.url} />
 
             {job.skills?.length > 0 && (
               <div className="flex flex-wrap gap-2">
@@ -77,6 +78,8 @@ export default function JobCard({ job, onView }) {
             <MetaInline icon={Clock} label={job.guidance_slot} />
             <MetaInline icon={Calendar} label={job.guidance_period} />
             <MetaInline icon={Mail} label={job.mentor_email} />
+            <MetaInline icon={Link} label={job.url} />
+
           </>
         )}
 
@@ -86,6 +89,7 @@ export default function JobCard({ job, onView }) {
             <MetaInline icon={GraduationCap} label={job.training_topic} />
             <MetaInline icon={User} label={job.trainer_name && `Trainer: ${job.trainer_name}`} />
             <MetaInline icon={Clock} label={job.training_duration} />
+            <MetaInline icon={Link} label={job.url} />
             {job.training_certification && (
               <MetaInline
                 icon={Calendar}
