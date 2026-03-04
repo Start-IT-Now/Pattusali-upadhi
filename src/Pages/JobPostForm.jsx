@@ -648,53 +648,68 @@ const handleOtherChange = (field, value) => {
       </AnimatePresence>
 
       {/* SKILLS */}
-      <div className="grid md:grid-cols-2 gap-6">
-      <div>
-        <label className="font-semibold">Skills</label>
-        <div className="flex gap-2 mt-1">
-          <input
-            value={skill}
-            onChange={(e) => setSkill(e.target.value)}
-            className={inputBase}
+<div className="grid md:grid-cols-2 gap-6">
+
+  {/* Skills Field */}
+  <div>
+    <label className="font-semibold">Skills</label>
+
+    <div className="flex gap-2 mt-1">
+      <input
+        value={skill}
+        onChange={(e) => setSkill(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && addSkill()}
+        className={inputBase}
+        placeholder="Add skill"
+      />
+
+      <button
+        type="button"
+        onClick={addSkill}
+        className="px-3 py-2 bg-purple-600 text-white rounded"
+      >
+        <Plus size={16} />
+      </button>
+    </div>
+
+    <div className="flex gap-2 mt-2 flex-wrap">
+      {skills.map((s) => (
+        <span
+          key={s}
+          className="bg-purple-100 px-3 py-1 rounded-full flex items-center gap-1"
+        >
+          {s}
+          <X
+            size={14}
+            className="cursor-pointer"
+            onClick={() => removeSkill(s)}
           />
-          <button type="button" onClick={addSkill}>
-            <Plus />
-          </button>
-        </div>
+        </span>
+      ))}
+    </div>
+  </div>
 
-        <div className="flex gap-2 mt-2 flex-wrap">
-          {skills.map((s) => (
-            <span
-              key={s}
-              className="bg-purple-100 px-3 py-1 rounded-full flex gap-1"
-            >
-              {s}
-              <X size={14} onClick={() => removeSkill(s)} />
-            </span>
-          ))}
-        </div>
-        
-<div >
-  <label className="font-semibold">
-    URL <span className="text-red-500">*</span>
-  </label>
+  {/* URL Field */}
+  <div>
+    <label className="font-semibold">
+      URL <span className="text-red-500">*</span>
+    </label>
 
-  <input
-    type="url"
-    name="url"
-    value={formData.url}
-    onChange={handleInputChange}
-    placeholder="https://example.com"
-    required
-    className={`${inputBase} focus:ring-2 focus:ring-blue-500 focus:outline-none`}
-  />
+    <input
+      type="url"
+      name="url"
+      value={formData.url}
+      onChange={handleInputChange}
+      placeholder="https://example.com"
+      required
+      className={`${inputBase} mt-1 focus:ring-2 focus:ring-blue-500 focus:outline-none`}
+    />
 
-  {!formData.url && (
-    <p className="text-sm text-red-500">URL is required</p>
-  )}
+    {!formData.url && (
+      <p className="text-sm text-red-500 mt-1">URL is required</p>
+    )}
+  </div>
 </div>
-      </div>
-      </div>
 
       {/* DESCRIPTION */}
       <div>
