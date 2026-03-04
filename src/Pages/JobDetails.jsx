@@ -5,6 +5,7 @@ import {
   Mail,
   User,
   CalendarClock,
+  Link,
   X,
 } from "lucide-react";
 
