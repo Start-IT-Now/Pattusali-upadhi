@@ -60,13 +60,16 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     job_title: "",
     company_name: "",
     location: "",
+    email:"",
     experience:"",
     job_type:"",
     hr_name:"",
     hr_email: "",
+    phone:"",
     work_mode:"",
     industry: "",
     company_type: "",
+    url:"",
 
     guidance_type:"",
     guidance_slot:"",
@@ -105,6 +108,7 @@ export default function JobPostForm({ onJobPosted = () => {}, onCancel = () => {
     email: formData.email,
     description: clean(formData.description),
     end_date: formData.end_date || null,
+    url: formData.end_date,
     status: "pending",
     review_token: formData.review_token,
   };
@@ -307,15 +311,25 @@ const handleOtherChange = (field, value) => {
           />
         </div>
 
-        <div>
-          <label className="font-semibold">Representative Email</label>
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={inputBase}
-          />
-        </div>
+<div className="flex flex-col gap-1">
+  <label className="font-semibold">
+    Representative Email <span className="text-red-500">*</span>
+  </label>
+
+  <input
+    type="email"
+    name="email"
+    value={formData.email}
+    onChange={handleInputChange}
+    placeholder="tom@example.com"
+    required
+    className={`${inputBase} focus:ring-2 focus:ring-blue-500 focus:outline-none`}
+  />
+
+  {!formData.url && (
+    <p className="text-sm text-red-500">Email is Required</p>
+  )}
+</div>
         </div>
  
 <div className="grid md:grid-cols-2 gap-6">
@@ -338,15 +352,26 @@ const handleOtherChange = (field, value) => {
     Leave empty if the application has no deadline.
   </p>
 </div>
-               <div>
-          <label className="font-semibold">Phone</label>
-          <input
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            className={inputBase}
-          />
-        </div>
+
+<div className="flex flex-col gap-1">
+  <label className="font-semibold">
+    Phone <span className="text-red-500">*</span>
+  </label>
+
+  <input
+    type="phone"
+    name="phone"
+    value={formData.phone}
+    onChange={handleInputChange}
+    placeholder="+91 123465679"
+    required
+    className={`${inputBase} focus:ring-2 focus:ring-blue-500 focus:outline-none`}
+  />
+
+  {!formData.url && (
+    <p className="text-sm text-red-500">Phone Number is Required</p>
+  )}
+</div>
       </div>
 
 
@@ -623,6 +648,7 @@ const handleOtherChange = (field, value) => {
       </AnimatePresence>
 
       {/* SKILLS */}
+      <div className="grid md:grid-cols-2 gap-6">
       <div>
         <label className="font-semibold">Skills</label>
         <div className="flex gap-2 mt-1">
@@ -647,6 +673,26 @@ const handleOtherChange = (field, value) => {
             </span>
           ))}
         </div>
+<div className="flex flex-col gap-1">
+  <label className="font-semibold">
+    URL <span className="text-red-500">*</span>
+  </label>
+
+  <input
+    type="url"
+    name="url"
+    value={formData.url}
+    onChange={handleInputChange}
+    placeholder="https://example.com"
+    required
+    className={`${inputBase} focus:ring-2 focus:ring-blue-500 focus:outline-none`}
+  />
+
+  {!formData.url && (
+    <p className="text-sm text-red-500">URL is required</p>
+  )}
+</div>
+      </div>
       </div>
 
       {/* DESCRIPTION */}
