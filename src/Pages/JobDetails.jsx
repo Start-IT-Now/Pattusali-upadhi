@@ -55,12 +55,15 @@ const handleResumeUpload = async (file) => {
         Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
         "Content-Type": file.type,
+        "x-upsert": "true"
       },
       body: file,
     }
   );
 
   if (!res.ok) {
+    const err = await res.text();
+    console.error(err);
     throw new Error("Resume upload failed");
   }
 
