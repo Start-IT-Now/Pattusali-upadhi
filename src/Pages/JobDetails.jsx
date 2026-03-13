@@ -76,7 +76,7 @@ export default function JobDetailsModal({ job, onClose }) {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "applicants/json",
           apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
           Prefer: "return=minimal",
