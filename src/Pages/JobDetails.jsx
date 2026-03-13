@@ -40,7 +40,7 @@ export default function JobDetailsModal({ job, onClose }) {
       if (!email) return;
 
       const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/applicants?job_id=eq.${job.id}&applicant_email=eq.${email}`,
+        `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/Applicants?job_id=eq.${job.id}&applicant_email=eq.${email}`,
         {
           headers: {
             apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
@@ -72,11 +72,11 @@ export default function JobDetailsModal({ job, onClose }) {
     e.preventDefault();
 
     const res = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/applicants`,
+      `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/Applicants`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "applicants/json",
+          "Content-Type": "application/json",
           apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
           Prefer: "return=minimal",
