@@ -21,7 +21,15 @@ export default function JobDetailsModal({ job, onClose }) {
     email: "",
     phone: "",
     education: "",
-  });
+    purpose_of_application: "",
+    interested_field: "",
+    present_location: "",
+    last_working_date: "",
+    key_skills: "",
+    total_industry_experience: "",
+    industry_experience_description: "",
+    resume: null
+}); 
 
   const formatDate = (dateString) => {
     if (!dateString) return "—";
@@ -33,6 +41,31 @@ export default function JobDetailsModal({ job, onClose }) {
     });
   };
 
+  //Resume Upload
+
+const handleResumeUpload = async (file) => {
+
+  const fileName = `${Date.now()}_${file.name}`;
+
+  const res = await fetch(
+    `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/resumes-cv/${fileName}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+        "Content-Type": file.type,
+      },
+      body: file,
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Resume upload failed");
+  }
+
+  return `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/resumes-cv/${fileName}`;
+};
   // check if already applied
   useEffect(() => {
     const checkApplication = async () => {
@@ -68,8 +101,17 @@ export default function JobDetailsModal({ job, onClose }) {
   };
 
   // submit application
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  let resumeUrl = null;
+
+  try {
+
+    // Upload resume if file selected
+    if (formData.resume) {
+      resumeUrl = await handleResumeUpload(formData.resume);
+    }
 
     const res = await fetch(
       `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/Applicants`,
@@ -85,10 +127,21 @@ export default function JobDetailsModal({ job, onClose }) {
           job_id: job.id,
           job_title: job.job_title,
           company_name: job.company_name,
+
           applicant_name: formData.name,
           applicant_email: formData.email,
           phone: formData.phone,
           education: formData.education,
+
+          purpose_of_application: formData.purpose_of_application,
+          interested_field: formData.interested_field,
+          present_location: formData.present_location,
+          last_working_date: formData.last_working_date,
+          key_skills: formData.key_skills,
+          total_industry_experience: formData.total_industry_experience,
+          industry_experience_description: formData.industry_experience_description,
+
+          resume_url: resumeUrl
         }),
       }
     );
@@ -99,9 +152,21 @@ export default function JobDetailsModal({ job, onClose }) {
       setShowApplyForm(false);
       alert("Application submitted successfully!");
     } else {
-      alert("Failed to submit application");
+      const error = await res.json();
+
+      if (error.code === "23505") {
+        alert("You have already applied for this job.");
+      } else {
+        alert("Submission failed.");
+        console.error(error);
+      }
     }
-  };
+
+  } catch (err) {
+    console.error(err);
+    alert("Resume upload failed.");
+  }
+};
 
   return (
     <>
@@ -296,26 +361,103 @@ export default function JobDetailsModal({ job, onClose }) {
                 className="border p-2 rounded"
               />
 
-              <div className="flex justify-end gap-2 mt-3">
+              <select
+                name="purpose_of_application"
+                onChange={handleChange}
+                required
+                className="border p-2 rounded"
+              >
+                  <option value="">Purpose of Application</option>
+                  <option>I am student and need internship</option>
+                  <option>I completed education looking for job</option>
+                  <option>Experienced candidate looking for change</option>
+                  <option>Training on industry skills</option>
+                  <option>Request higher education books free</option>
+                  <option>I am housewife having career break and want to restart career</option>
+              </select>
 
-                <button
-                  type="button"
-                  onClick={() => setShowApplyForm(false)}
-                  className="px-4 py-2 bg-gray-200 rounded"
-                >
-                  Cancel
-                </button>
+              <select
+                name="interested_field"
+                onChange={handleChange}
+                required
+                className="border p-2 rounded"
+              >
+                  <option value="">Interested Field</option>
+                  <option>Sales</option>
+                  <option>Marketing</option>
+                  <option>Software Development</option>
+                  <option>Legal</option>
+                  <option>Teaching</option>
+              </select>
 
-                <button
-                  type="submit"
-                  className="px-5 py-2 bg-[#6C46CF] text-white rounded"
-                >
-                  Submit
-                </button>
+              <input
+                name="present_location"
+                placeholder="Present Location"
+                onChange={handleChange}
+                className="border p-2 rounded"
+              />
 
-              </div>
+              <input  
+                type="date"
+                name="last_working_date"
+                onChange={handleChange}
+                className="border p-2 rounded"
+              />
 
-            </form>
+              <input
+                name="key_skills"
+                placeholder="Key Skills"
+                onChange={handleChange}
+                className="border p-2 rounded"
+              />
+
+              <input
+                name="total_industry_experience"
+                placeholder="Total Industry Experience (Years)"
+                onChange={handleChange}
+                className="border p-2 rounded"
+              />
+
+              <textarea
+                name="industry_experience_description"
+                placeholder="Describe Industry Experience"
+                onChange={handleChange}
+                className="border p-2 rounded"
+              />
+
+<label className="text-sm font-medium">Upload Resume (PDF/DOC)</label>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={(e) =>
+                setFormData({
+                ...formData,
+                resume: e.target.files[0]
+              })
+             }
+              className="border p-2 rounded"
+            />
+
+<div className="flex justify-end gap-2 mt-3">
+
+<button
+type="button"
+onClick={() => setShowApplyForm(false)}
+className="px-4 py-2 bg-gray-200 rounded"
+>
+Cancel
+</button>
+
+<button
+type="submit"
+className="px-5 py-2 bg-[#6C46CF] text-white rounded"
+>
+Submit
+</button>
+
+</div>
+
+</form>
 
           </div>
 
