@@ -319,150 +319,152 @@ const handleSubmit = async (e) => {
       </div>
 
       {/* APPLY FORM MODAL */}
-      {showApplyForm && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+ {showApplyForm && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-6">
 
-          <div className="bg-white p-6 rounded-xl w-full max-w-md">
+    <div className="bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 shadow-xl">
 
-            <h3 className="text-lg font-semibold mb-4">
-              Apply for {job.job_title}
-            </h3>
+      <h3 className="text-lg font-semibold mb-4">
+        Apply for {job.job_title}
+      </h3>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
-              <input
-                name="name"
-                placeholder="Full Name"
-                onChange={handleChange}
-                required
-                className="border p-2 rounded"
-              />
+        <input
+          name="name"
+          placeholder="Full Name"
+          onChange={handleChange}
+          required
+          className="border p-2 rounded"
+        />
 
-              <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                onChange={handleChange}
-                required
-                className="border p-2 rounded"
-              />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={handleChange}
+          required
+          className="border p-2 rounded"
+        />
 
-              <input
-                name="phone"
-                placeholder="Phone"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <input
+          name="phone"
+          placeholder="Phone"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-              <input
-                name="education"
-                placeholder="Education"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <input
+          name="education"
+          placeholder="Education"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-              <select
-                name="purpose_of_application"
-                onChange={handleChange}
-                required
-                className="border p-2 rounded"
-              >
-                  <option value="">Purpose of Application</option>
-                  <option>I am student and need internship</option>
-                  <option>I completed education looking for job</option>
-                  <option>Experienced candidate looking for change</option>
-                  <option>Training on industry skills</option>
-                  <option>Request higher education books free</option>
-                  <option>I am housewife having career break and want to restart career</option>
-              </select>
+        <select
+          name="purpose_of_application"
+          onChange={handleChange}
+          required
+          className="border p-2 rounded"
+        >
+          <option value="">Purpose of Application</option>
+          <option>I am student and need internship</option>
+          <option>I completed education looking for job</option>
+          <option>Experienced candidate looking for change</option>
+          <option>Training on industry skills</option>
+          <option>Request higher education books free</option>
+          <option>I am housewife having career break and want to restart career</option>
+        </select>
 
-              <select
-                name="interested_field"
-                onChange={handleChange}
-                required
-                className="border p-2 rounded"
-              >
-                  <option value="">Interested Field</option>
-                  <option>Sales</option>
-                  <option>Marketing</option>
-                  <option>Software Development</option>
-                  <option>Legal</option>
-                  <option>Teaching</option>
-              </select>
+        <select
+          name="interested_field"
+          onChange={handleChange}
+          required
+          className="border p-2 rounded"
+        >
+          <option value="">Interested Field</option>
+          <option>Sales</option>
+          <option>Marketing</option>
+          <option>Software Development</option>
+          <option>Legal</option>
+          <option>Teaching</option>
+        </select>
 
-              <input
-                name="present_location"
-                placeholder="Present Location"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <input
+          name="present_location"
+          placeholder="Present Location"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-              <input  
-                type="date"
-                name="last_working_date"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <input
+          type="date"
+          name="last_working_date"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-              <input
-                name="key_skills"
-                placeholder="Key Skills"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <input
+          name="key_skills"
+          placeholder="Key Skills"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-              <input
-                name="total_industry_experience"
-                placeholder="Total Industry Experience (Years)"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <input
+          name="total_industry_experience"
+          placeholder="Total Industry Experience (Years)"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-              <textarea
-                name="industry_experience_description"
-                placeholder="Describe Industry Experience"
-                onChange={handleChange}
-                className="border p-2 rounded"
-              />
+        <textarea
+          name="industry_experience_description"
+          placeholder="Describe Industry Experience"
+          onChange={handleChange}
+          className="border p-2 rounded"
+        />
 
-<label className="text-sm font-medium">Upload Resume (PDF/DOC)</label>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={(e) =>
-                setFormData({
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium">
+            Upload Resume (PDF/DOC)
+          </label>
+
+          <input
+            type="file"
+            accept=".pdf,.doc,.docx"
+            onChange={(e) =>
+              setFormData({
                 ...formData,
-                resume: e.target.files[0]
+                resume: e.target.files[0],
               })
-             }
-              className="border p-2 rounded"
-            />
-
-<div className="flex justify-end gap-2 mt-3">
-
-<button
-type="button"
-onClick={() => setShowApplyForm(false)}
-className="px-4 py-2 bg-gray-200 rounded"
->
-Cancel
-</button>
-
-<button
-type="submit"
-className="px-5 py-2 bg-[#6C46CF] text-white rounded"
->
-Submit
-</button>
-
-</div>
-
-</form>
-
-          </div>
-
+            }
+            className="border p-2 rounded"
+          />
         </div>
-      )}
+
+        <div className="flex justify-end gap-2 pt-2">
+          <button
+            type="button"
+            onClick={() => setShowApplyForm(false)}
+            className="px-4 py-2 bg-gray-200 rounded"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="px-5 py-2 bg-[#6C46CF] text-white rounded"
+          >
+            Submit
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+)}
     </>
   );
 }
