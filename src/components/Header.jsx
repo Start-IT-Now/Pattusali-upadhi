@@ -69,7 +69,7 @@ export default function Header({ volunteer, setVolunteer }) {
     </button>
   </div>
 
-  {/* Mobile Menu */}
+{/* Mobile Menu */}
 {menuOpen && (
   <div className="md:hidden bg-white border-t">
     {[
@@ -77,16 +77,20 @@ export default function Header({ volunteer, setVolunteer }) {
       { label: "Jobs", path: "/jobs" },
       { label: "Guidance", path: "/guidance" },
       { label: "Training", path: "/training" },
+
       {
         label: volunteer ? "Post a Job" : "Volunteer",
         path: volunteer ? "/post-job" : "/volunteer",
       },
 
-   ...(volunteer
-  ? [{ label: "Dashboard", path: "/volunteerdashboard" }]
-  : [{ label: "Volunteer", path: "/volunteer" }]),
+      ...(volunteer
+        ? [{ label: "Dashboard", path: "/volunteerdashboard" }]
+        : []),
 
-      ...(volunteer ? [{ label: "Logout", action: "logout" }] : []),
+      ...(volunteer
+        ? [{ label: "Logout", action: "logout" }]
+        : []),
+
     ].map((item) => (
       <button
         key={item.label}
