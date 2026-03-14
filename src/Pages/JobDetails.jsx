@@ -45,7 +45,7 @@ export default function JobDetailsModal({ job, onClose }) {
 
 const handleResumeUpload = async (file) => {
 
-  const fileName = `${Date.now()}_${file.name}`;
+  const fileName = `${Date.now()}_${file.name.replace(/\s+/g, "_")}`;
 
   const res = await fetch(
     `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/resumes-cv/${fileName}`,

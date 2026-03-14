@@ -26,78 +26,74 @@ export default function VolunteerDashboard() {
 
   return (
 
-    <div className="p-8">
+   <div className="p-8">
 
-      <h1 className="text-2xl font-bold mb-6">
-        Volunteer Dashboard
-      </h1>
+<h1 className="text-2xl font-bold mb-6">
+Volunteer Dashboard
+</h1>
 
-      <table className="w-full border">
+<div className="overflow-x-auto bg-white rounded-lg shadow">
 
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="p-3">Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Interested Field</th>
-            <th>Location</th>
-            <th>Experience</th>
-            <th>Resume</th>
-          </tr>
-        </thead>
+<table className="w-full text-sm text-left">
 
-        <tbody>
+<thead className="bg-gray-100 text-gray-700">
 
-          {applicants.map((applicant) => (
+<tr>
+<th className="p-3">Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Interested Field</th>
+<th>Location</th>
+<th>Experience</th>
+<th>Resume</th>
+</tr>
 
-            <tr key={applicant.id} className="border-t">
+</thead>
 
-              <td className="p-3">
-                {applicant.applicant_name}
-              </td>
+<tbody>
 
-              <td>
-                {applicant.applicant_email}
-              </td>
+{applicants.map((applicant) => (
 
-              <td>
-                {applicant.phone}
-              </td>
+<tr key={applicant.id} className="border-t hover:bg-gray-50">
 
-              <td>
-                {applicant.interested_field}
-              </td>
+<td className="p-3 font-medium">
+{applicant.applicant_name}
+</td>
 
-              <td>
-                {applicant.present_location}
-              </td>
+<td>{applicant.applicant_email}</td>
 
-              <td>
-                {applicant.total_industry_experience}
-              </td>
+<td>{applicant.phone}</td>
 
-              <td>
+<td>{applicant.interested_field}</td>
 
-                <a
-                  href={applicant.resume_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline"
-                >
-                  View Resume
-                </a>
+<td>{applicant.present_location}</td>
 
-              </td>
+<td>{applicant.total_industry_experience}</td>
 
-            </tr>
+<td>
 
-          ))}
+<a
+href={applicant.resume_url}
+target="_blank"
+rel="noopener noreferrer"
+className="text-blue-600 hover:underline"
+>
+View Resume
+</a>
 
-        </tbody>
+</td>
 
-      </table>
+</tr>
 
-    </div>
+))}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
 
   );
 }
