@@ -45,12 +45,12 @@ export default function Header({ volunteer, setVolunteer }) {
         }
       />
 
-      <NavButton
-        label={volunteer ? "Dashboard" : "Volunteer"}
-        onClick={() =>
-          navigate(volunteer ? "/volunteerdashboard" : "/volunteer")
-        }
-      />
+{volunteer && (
+  <NavButton
+    label="Dashboard"
+    onClick={() => navigate("/volunteerdashboard")}
+  />
+)}
 
       {volunteer && (
   <NavButton
@@ -82,10 +82,9 @@ export default function Header({ volunteer, setVolunteer }) {
         path: volunteer ? "/post-job" : "/volunteer",
       },
 
-          {
-        label: volunteer ? "Dashboard" : "Volunteer",
-        path: volunteer ? "/volunteerdashboard" : "/volunteer",
-      },
+   ...(volunteer
+  ? [{ label: "Dashboard", path: "/volunteerdashboard" }]
+  : [{ label: "Volunteer", path: "/volunteer" }]),
 
       ...(volunteer ? [{ label: "Logout", action: "logout" }] : []),
     ].map((item) => (
@@ -114,7 +113,7 @@ function NavButton({ label, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold"
+      className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold hover:bg-[#5a38b8] transition"
     >
       {label}
     </button>
