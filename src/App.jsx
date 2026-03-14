@@ -9,6 +9,7 @@ import JobDetails from "./Pages/JobDetails.jsx";
 import AdminJobs from "./Pages/AdminJobs.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import VolunteerDashboard from "./Pages/Volunteerdashboard";
 
 export default function App() {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="/post-job" element={<JobPostForm />} />
           <Route path="/admin/jobs" element={<AdminJobs />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
+          <Route path="/volunteerdashboard" element={<VolunteerDashboard />} />
         </Routes>
       </main>
 
