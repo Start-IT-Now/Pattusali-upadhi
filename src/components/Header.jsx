@@ -44,6 +44,14 @@ export default function Header({ volunteer, setVolunteer }) {
           navigate(volunteer ? "/post-job" : "/volunteer")
         }
       />
+
+      <NavButton
+        label={volunteer ? "Dashboard" : "Volunteer"}
+        onClick={() =>
+          navigate(volunteer ? "/volunteerdashboard" : "/volunteer")
+        }
+      />
+
       {volunteer && (
   <NavButton
     label="Logout"
@@ -73,6 +81,12 @@ export default function Header({ volunteer, setVolunteer }) {
         label: volunteer ? "Post a Job" : "Volunteer",
         path: volunteer ? "/post-job" : "/volunteer",
       },
+
+          {
+        label: volunteer ? "Dashboard" : "Volunteer",
+        path: volunteer ? "/volunteerdashboard" : "/volunteer",
+      },
+
       ...(volunteer ? [{ label: "Logout", action: "logout" }] : []),
     ].map((item) => (
       <button
