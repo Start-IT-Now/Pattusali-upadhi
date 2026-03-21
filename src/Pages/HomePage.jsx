@@ -50,7 +50,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-3xl md:text-5xl font-extrabold mb-4"
             >
-              Change Is the Only Constant
+             Empowering Pattusali Community Together
             </motion.h1>
 
             <motion.p
@@ -58,10 +58,20 @@ export default function HomePage() {
               animate={{ opacity: 1 }}
               className="text-base md:text-lg text-gray-700"
             >
-              In today’s fast-changing world, uncertainty is inevitable.
+Upadhi Vedika is a Pattusali community-powered, non-profit initiative dedicated to uplifting deserving and economically challenged individuals from the Pattusali community.
+Built on the spirit of “community supporting community,” this platform brings together a strong network of committed Pattusali volunteers who actively mentor, train, guide, and connect individuals students and professionals alike to meaningful opportunities.
+From career direction to real world exposure, Upadhi Vedika empowers individuals to grow with confidence, dignity, and purpose.
+This initiative is enabled and supported by www.startitnow.co.in, providing the platform, structure, and reach to amplify community impact at scale.
               <br />
               <span className="font-semibold text-purple-700">
-                Upadhi Vedhika bridges the gap between talent and opportunity.
+           Authorized and approved by the Pattusali Hyderabad Community Association, Upadhi Vedika stands as a trusted bridge between potential and opportunity.
+
+Be a Part of the Change
+🔹 Register – Take the first step towards new opportunities and career growth
+🔹 Volunteer (Button) – Share your knowledge, guide others, and uplift our community
+
+Join us today. Empower lives. Strengthen our community.
+
               </span>
             </motion.p>
           </div>
