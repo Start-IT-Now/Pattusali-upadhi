@@ -63,16 +63,7 @@ Built on the spirit of “community supporting community,” this platform bring
 From career direction to real world exposure, Upadhi Vedika empowers individuals to grow with confidence, dignity, and purpose.
 This initiative is enabled and supported by www.startitnow.co.in, providing the platform, structure, and reach to amplify community impact at scale.
               <br />
-              <span className="font-semibold text-purple-700">
-           Authorized and approved by the Pattusali Hyderabad Community Association, Upadhi Vedika stands as a trusted bridge between potential and opportunity.
 
-Be a Part of the Change
-🔹 Register – Take the first step towards new opportunities and career growth
-🔹 Volunteer (Button) – Share your knowledge, guide others, and uplift our community
-
-Join us today. Empower lives. Strengthen our community.
-
-              </span>
             </motion.p>
           </div>
 
@@ -99,7 +90,9 @@ Join us today. Empower lives. Strengthen our community.
               and economically challenged individuals.
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
-               Through a network of committed volunteers, we provide mentorship, direction, and access to opportunities that help individuals grow with confidence and purpose. </p>
+               Through a network of committed volunteers, we provide mentorship, direction, and access to opportunities that help individuals grow with confidence and purpose.</p>
+             <p className="text-gray-700 leading-relaxed mb-4">
+               Authorized and approved by the Pattusali Hyderabad Community Association, Upadhi Vedika stands as a trusted bridge between potential and opportunity.</p>
             <p className="font-semibold">
             Support is not given by chance - it is earned through merit, commitment, and effort.
             </p>
@@ -108,13 +101,14 @@ Join us today. Empower lives. Strengthen our community.
 
           <div className="bg-purple-50 rounded-2xl p-6">
             <h3 className="text-lg font-semibold text-purple-800 mb-3">
-              What We Believe
+              Be a Part of the Change
             </h3>
 <ul className="space-y-3 text-gray-700">
-   <li>• Because sharing multiplies</li> 
-   <li>• Guidance changes direction</li>
-    <li>• Opportunity creates transformation</li> 
-    <li>• Responsibility defines growth for everyone</li>
+   <li> 🔹 Because sharing multiplies.</li> 
+    <li> 🔹Responsibility defines growth for everyone.</li>
+   <li> 🔹 Register – Take the first step towards new opportunities and career growth.</li>
+   <li> 🔹 Volunteer (Button) – Share your knowledge, guide others, and uplift our community.</li>
+   <li>Join us today. Empower lives. Strengthen our community.</li>
     </ul>
           </div>
         </div>
