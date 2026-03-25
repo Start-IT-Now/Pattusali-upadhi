@@ -53,7 +53,6 @@ export default function JobCard({ job, onView }) {
             <MetaInline icon={MapPin} label={job.location} />
             <MetaInline icon={Briefcase} label={job.experience && `${job.experience} yrs`} />
             <MetaInline icon={Clock} label={job.work_mode} />
-            <MetaInline icon={Mail} label={job.hr_email} />
             <MetaInline icon={Link} label={job.url} />
 
             {job.skills?.length > 0 && (
@@ -109,7 +108,7 @@ export default function JobCard({ job, onView }) {
         <div className="flex gap-2">
   <button
     onClick={() => onView(job)}
-    className="px-4 py-2 text-sm border rounded-lg hover:bg-gray-50"
+    className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold hover:bg-[#5a38b8] transition"
   >
     View
   </button>

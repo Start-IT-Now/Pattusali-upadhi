@@ -95,10 +95,11 @@ export default function HomePage() {
             <p className="text-gray-700 leading-relaxed mb-4">
                Through a network of committed volunteers, we provide mentorship, direction, and access to opportunities that help individuals grow with confidence and purpose.</p>
              <p className="text-gray-700 leading-relaxed mb-4">
-               Authorized and approved by the Pattusali Hyderabad Community Association, Upadhi Vedika stands as a trusted bridge between potential and opportunity.</p>
-            <p className="font-semibold">
-            Support is not given by chance - it is earned through merit, commitment, and effort.
+               Support is not given by chance - it is earned through merit, commitment, and effort.
             </p>
+            <p className="font-semibold">
+              Authorized and approved by the Pattusali Hyderabad Community Association, Upadhi Vedika stands as a trusted bridge between potential and opportunity.</p>
+           
 
           </div>
 <div className="bg-purple-50 rounded-2xl p-6">
