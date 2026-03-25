@@ -101,21 +101,27 @@ export default function HomePage() {
             </p>
 
           </div>
+<div className="bg-purple-50 rounded-2xl p-6">
+  <h3 className="text-lg font-semibold text-purple-800 mb-3">
+    Be a Part of the Change
+  </h3>
+  <ul className="space-y-3 text-gray-700">
+    <li>🔹 Because sharing multiplies.</li>
+    <li>🔹 Responsibility defines growth for everyone.</li>
+    <li>🔹 Register – Take the first step towards new opportunities and career growth.</li>
+    <li>🔹 Share your knowledge, guide others, and uplift our community.</li>
+    <li>Join us today. Empower lives. Strengthen our community.</li>
+  </ul>
 
-          <div className="bg-purple-50 rounded-2xl p-6">
-            <h3 className="text-lg font-semibold text-purple-800 mb-3">
-              Be a Part of the Change
-            </h3>
-<ul className="space-y-3 text-gray-700">
-   <li> 🔹 Because sharing multiplies.</li> 
-    <li> 🔹Responsibility defines growth for everyone.</li>
-   <li> 🔹 Register – Take the first step towards new opportunities and career growth.</li>
-   <li> 🔹 Volunteer (Button) – Share your knowledge, guide others, and uplift our community.</li>
-   <li>Join us today. Empower lives. Strengthen our community.</li>
-    </ul>
-          </div>
-        </div>
-      </section>
+  <button
+    onClick={() => navigate("/volunteer")}
+    className="mt-5 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-xl transition"
+  >
+    🤝 Volunteer Now
+  </button>
+</div>
+</div>
+</section>
 
       {/* CTA SECTION */}
       <section className="bg-purple-600 py-12 md:py-20">
