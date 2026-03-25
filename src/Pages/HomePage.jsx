@@ -48,8 +48,8 @@ export default function HomePage() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="font-extrabold mb-4 text-center whitespace-nowrap"
-style={{ fontSize: "2.8rem" }}
+         className="font-extrabold mb-4 text-center"
+style={{ fontSize: "clamp(1.5rem, 3.5vw, 3rem)" }}
             >
              Empowering Pattusali Community Together
             </motion.h1>
