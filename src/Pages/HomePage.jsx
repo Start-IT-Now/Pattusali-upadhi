@@ -39,45 +39,47 @@ export default function HomePage() {
   return (
     <div className="space-y-10">
 
-      {/* HERO SECTION */}
-      <section className="bg-[#F7F3FF] py-8 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+ {/* HERO SECTION */}
+<section className="bg-[#F7F3FF] py-8 md:py-12">
+  <div className="max-w-6xl mx-auto px-4">
 
-          {/* Text */}
-          <div className="text-center md:text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-         className="font-extrabold mb-4 text-center"
-style={{ fontSize: "clamp(1.5rem, 3.5vw, 3rem)" }}
-            >
-             Empowering Pattusali Community Together
-            </motion.h1>
+    {/* Heading - full width, single line */}
+    <motion.h1
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="text-4xl font-extrabold mb-8 text-center w-full"
+    >
+      Empowering Pattusali Community Together
+    </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-base md:text-lg text-gray-700"
-            >
-Upadhi Vedika is a Pattusali community-powered, non-profit initiative dedicated to uplifting deserving and economically challenged individuals from the Pattusali community.
-Built on the spirit of “community supporting community,” this platform brings together a strong network of committed Pattusali volunteers who actively mentor, train, guide, and connect individuals students and professionals alike to meaningful opportunities.
-From career direction to real world exposure, Upadhi Vedika empowers individuals to grow with confidence, dignity, and purpose.
-This initiative is enabled and supported by www.startitnow.co.in, providing the platform, structure, and reach to amplify community impact at scale.
-              <br />
+    {/* Grid - text + image */}
+    <div className="grid md:grid-cols-2 gap-10 items-center">
 
-            </motion.p>
-          </div>
+      {/* Text */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-base md:text-lg text-gray-700"
+      >
+        Upadhi Vedika is a Pattusali community-powered, non-profit initiative dedicated to uplifting deserving and economically challenged individuals from the Pattusali community.
+        Built on the spirit of "community supporting community," this platform brings together a strong network of committed Pattusali volunteers who actively mentor, train, guide, and connect individuals students and professionals alike to meaningful opportunities.
+        From career direction to real world exposure, Upadhi Vedika empowers individuals to grow with confidence, dignity, and purpose.
+        This initiative is enabled and supported by www.startitnow.co.in, providing the platform, structure, and reach to amplify community impact at scale.
+        <br />
+      </motion.p>
 
-          {/* Image */}
-          <div className="flex justify-center">
-            <img
-              src={career}
-              alt="Career growth"
-              className="w-full max-w-sm md:max-w-full rounded-2xl shadow-lg"
-            />
-          </div>
-        </div>
-      </section>
+      {/* Image */}
+      <div className="flex justify-center">
+        <img
+          src={career}
+          alt="Career growth"
+          className="w-full max-w-sm md:max-w-full rounded-2xl shadow-lg"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* ABOUT */}
       <section className="bg-white py-12 md:py-20">
