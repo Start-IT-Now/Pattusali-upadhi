@@ -110,7 +110,7 @@ export default function JobCard({ job, onView }) {
     onClick={() => onView(job)}
     className="px-4 py-2 rounded-full bg-[#6C46CF] text-white text-sm font-semibold hover:bg-[#5a38b8] transition"
   >
-    View
+    View Details
   </button>
 
 </div>
