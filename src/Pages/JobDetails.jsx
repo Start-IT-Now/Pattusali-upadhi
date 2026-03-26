@@ -259,13 +259,6 @@ const handleSubmit = async (e) => {
                 </div>
               )}
 
-              {job.email && (
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-gray-600" />
-                  {job.email}
-                </div>
-              )}
-
               {job.url && (
                 <div className="flex items-center gap-2">
                   <Link className="w-4 h-4 text-gray-600" />
