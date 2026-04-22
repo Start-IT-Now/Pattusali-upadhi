@@ -106,12 +106,9 @@ const handleResumeUpload = async (file) => {
   // submit application
 const handleSubmit = async (e) => {
   e.preventDefault();
-
   let resumeUrl = null;
 
   try {
-
-    // Upload resume if file selected
     if (formData.resume) {
       resumeUrl = await handleResumeUpload(formData.resume);
     }
@@ -130,12 +127,10 @@ const handleSubmit = async (e) => {
           job_id: job.id,
           job_title: job.job_title,
           company_name: job.company_name,
-
           applicant_name: formData.name,
           applicant_email: formData.email,
           phone: formData.phone,
           education: formData.education,
-
           purpose_of_application: formData.purpose_of_application,
           interested_field: formData.interested_field,
           present_location: formData.present_location,
@@ -143,20 +138,39 @@ const handleSubmit = async (e) => {
           key_skills: formData.key_skills,
           total_industry_experience: formData.total_industry_experience,
           industry_experience_description: formData.industry_experience_description,
-
-          resume_url: resumeUrl
+          resume_url: resumeUrl,
         }),
       }
     );
 
     if (res.ok) {
+      // Send email notification
+      await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/resend-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+          },
+          body: JSON.stringify({
+            job_title: job.job_title,
+            company_name: job.company_name,
+            hr_email: job.hr_email,
+            applicant_name: formData.name,
+            applicant_email: formData.email,
+          }),
+        }
+      );
+
       localStorage.setItem("applicant_email", formData.email);
       setAlreadyApplied(true);
       setShowApplyForm(false);
       alert("Application submitted successfully!");
+
     } else {
       const error = await res.json();
-
       if (error.code === "23505") {
         alert("You have already applied for this job.");
       } else {
@@ -167,7 +181,7 @@ const handleSubmit = async (e) => {
 
   } catch (err) {
     console.error(err);
-    alert("Resume upload failed.");
+    alert("Something went wrong. Please try again.");
   }
 };
 
