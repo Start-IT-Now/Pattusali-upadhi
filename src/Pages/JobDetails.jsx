@@ -160,6 +160,7 @@ const handleSubmit = async (e) => {
             hr_email: job.hr_email,
             applicant_name: formData.name,
             applicant_email: formData.email,
+             resume_url: resumeUrl,
           }),
         }
       );
